@@ -1,0 +1,14 @@
+form{
+    div.buttons{
+        display: flex;
+        justify-content:flex-end;
+
+        button{
+            width:100px;
+        }
+        button.cancel{
+            margin-right: 10px;
+
+        }
+    }
+}

@@ -1,7 +1,28 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
-const routes: Routes = [];
+
+import { NavbarComponent } from './shared/components/navbar/navbar.component';
+
+const routes: Routes = [
+  {
+    path: 'menu',
+    component: NavbarComponent,
+    children: [
+      {
+        path: 'niveles',
+        loadChildren: () => import('./configuration-hotel/hotel-level/hotel-level-routing.module').then((m) => m.HotelLevelRoutingModule)
+
+      },
+      {
+        path: 'categorias-habitaciones',
+        loadChildren: () => import('./configuration-hotel/room-categories/room-categories-routing.module').then((m) => m.RoomCategoriesRoutingModule)
+
+      },
+
+    ]
+  },
+];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
