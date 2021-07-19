@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms'
 import { Router } from '@angular/router'
 
 import { StateUserService } from 'src/app/shared/services/state-user.service';
+import { AccessData } from '../../shared/interfaces/access.data.interface';
 import { UserModel } from '../models/user.model';
 import { UsersService } from '../services/users.service';
 
@@ -32,8 +33,8 @@ export class LoginComponent implements OnInit {
   loginUser(form: any) {
     const data = new UserModel(this.userData.value.email, this.userData.value.password)
 
-    this.userService.login(data).subscribe(response => {
-      console.log(response)
+    this.userService.login(data).subscribe((response: AccessData) => {
+
       if (response) {
         this.stateUserService.saveUserLocalStorage(response)
         this.router.navigate(['/menu'])

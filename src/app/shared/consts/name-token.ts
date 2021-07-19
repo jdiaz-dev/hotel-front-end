@@ -1,1 +1,3 @@
-export const nameToken = 'nk-token'
+export enum AccessKeys {
+    NAME_TOKEN = 'jdevhotel-token'
+}

@@ -5,7 +5,7 @@ import { Observable } from 'rxjs'
 import { environment } from 'src/environments/environment';
 import { RoomCategoryModel } from '../../ui/models/room-category.model';
 import { StateUserService } from 'src/app/shared/services/state-user.service';
-import { nameToken } from 'src/app/shared/consts/name-token';
+import { AccessKeys } from 'src/app/shared/consts/name-token';
 
 
 @Injectable({
@@ -13,7 +13,7 @@ import { nameToken } from 'src/app/shared/consts/name-token';
 })
 export class RoomCategoriesPersitenceService {
   private serverUrl = environment.serverUrl
-  private headers = new HttpHeaders().set('Content-Type', 'application/json').set(nameToken, this.stateUserService.getToken());
+  private headers = new HttpHeaders().set('Content-Type', 'application/json').set(AccessKeys.NAME_TOKEN, this.stateUserService.getToken());
 
   constructor(
     private http: HttpClient,

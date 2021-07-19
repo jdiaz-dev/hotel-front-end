@@ -16,6 +16,7 @@ export class LevelCollectionComponent implements OnInit {
   }
   loadHotelLevels() {
     this.hotelLevelPersistenceService.getHotelLevels().subscribe((response: any) => {
+      console.log(response)
       this.hotelLevels = response
     })
   }

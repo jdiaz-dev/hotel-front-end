@@ -5,14 +5,15 @@ import { Observable } from 'rxjs'
 import { environment } from 'src/environments/environment';
 import { HotelLevelModel } from '../../ui/models/hotel-level.mode';
 import { StateUserService } from 'src/app/shared/services/state-user.service';
-import { nameToken } from 'src/app/shared/consts/name-token';
+import { AccessKeys } from 'src/app/shared/consts/name-token';
 
 @Injectable({
   providedIn: 'root'
 })
 export class HotelLevelPersistenceService {
   private serverUrl = environment.serverUrl
-  private headers = new HttpHeaders().set('Content-Type', 'application/json').set(nameToken, this.stateUserService.getToken());
+  private headers = new HttpHeaders().set('Content-Type', 'application/json').set(AccessKeys.NAME_TOKEN, this.stateUserService.getToken());
+  private hotelId: number = this.stateUserService.getHotelId()
 
   constructor(
     private http: HttpClient,
@@ -23,7 +24,7 @@ export class HotelLevelPersistenceService {
     return this.http.post(`${this.serverUrl}/jdev/levels/`, body, { headers: this.headers })
   }
   getHotelLevels() {
-    return this.http.get(`${this.serverUrl}/jdev/levels/`, { headers: this.headers })
+    return this.http.get(`${this.serverUrl}/jdev/levels/${this.hotelId}`, { headers: this.headers })
   }
   updateHotelLevel(hotelLevel: HotelLevelModel, hotelLevelId: number) {
     const body = JSON.stringify(hotelLevel);
