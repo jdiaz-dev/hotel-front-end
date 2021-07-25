@@ -2,7 +2,8 @@ import { Component, OnInit, Inject } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms'
 
 import { MAT_DIALOG_DATA } from '@angular/material/dialog'
-import { HotelLevelModel } from '../models/hotel-level.mode';
+import { LevelData } from '../../interfaces/level-data.interface';
+import { LevelModel } from '../models/level.model';
 import { HotelLevelPersistenceService } from './../../out/server/hotel-level-persistence.service';
 
 
@@ -14,38 +15,47 @@ import { HotelLevelPersistenceService } from './../../out/server/hotel-level-per
 export class CreateAndUpdateLevelComponent implements OnInit {
   action: string = 'create'
   hotelLevelData!: FormGroup
-  hotelLevel: HotelLevelModel = new HotelLevelModel('')
+  level: LevelModel = new LevelModel(null, '')
+  levelId: number = NaN
 
   constructor(
     private hotelLevelPersistence: HotelLevelPersistenceService,
     private formBuilder: FormBuilder,
-    @Inject(MAT_DIALOG_DATA) public data: any
+    @Inject(MAT_DIALOG_DATA) public data: LevelData
   ) { }
 
   ngOnInit(): void {
+    this.paramsToUpdateOpener()
+
     this.hotelLevelData = this.formBuilder.group({
+      numberLevel: ['', Validators.required],
       nameLevel: ['', Validators.required],
     })
   }
+  paramsToUpdateOpener() {
+    this.level = this.data !== null ? new LevelModel(this.data.number, this.data.name) : this.level
+    this.levelId = this.data !== null ? this.data.id : this.levelId
+    this.action = this.data !== null ? 'update' : this.action
+  }
   saveHotelLevel(form: any) {
-    const data = new HotelLevelModel(this.hotelLevelData.value.nameLevel)
+    const data = new LevelModel(this.hotelLevelData.value.numberLevel, this.hotelLevelData.value.nameLevel)
 
     if (this.action === 'create') {
-      this.createOpener(data)
+      this.createLevel(data)
     } else if (this.action === 'update') {
-      this.updateOpener(data)
+      this.updateLevel(data)
     }
   }
-  createOpener(data: HotelLevelModel) {
+  createLevel(data: LevelModel) {
     this.hotelLevelPersistence.createHotelLevel(data).subscribe((response: any) => {
 
     }, (error) => {
       console.log(error)
     })
   }
-  updateOpener(data: HotelLevelModel) {
-    this.hotelLevelPersistence.updateHotelLevel(data, 99999999999999999999).subscribe((response: any) => {
-
+  updateLevel(data: LevelModel) {
+    this.hotelLevelPersistence.updateHotelLevel(data, this.levelId).subscribe((response: any) => {
+      console.log(response)
     }, (error) => {
       console.log(error)
     })

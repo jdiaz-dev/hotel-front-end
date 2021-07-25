@@ -1,5 +1,15 @@
-<div class="container-create-opener">
-    <button mat-raised-button (click)="openDialog()">Crear nuevo nivel</button>
-</div>
+<h3 class="title">
+    Niveles
+</h3>
 
-<app-level-collection></app-level-collection>
+<mat-card class="container" class="mat-elevation-z1">
+
+    <mat-card-content>
+        <div class="container-create-opener">
+            <button mat-raised-button color="primary" (click)="openDialog()">Crear nuevo nivel</button>
+        </div>
+
+        <app-level-collection></app-level-collection>
+    </mat-card-content>
+
+</mat-card>

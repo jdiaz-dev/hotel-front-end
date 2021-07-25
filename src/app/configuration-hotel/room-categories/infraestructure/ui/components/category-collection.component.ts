@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { CategoryData } from '../../interfaces/category-data.interface';
 import { RoomCategoriesPersitenceService } from '../../out/server/room-categories-persitence.service';
 
 @Component({
@@ -7,23 +8,25 @@ import { RoomCategoriesPersitenceService } from '../../out/server/room-categorie
   styleUrls: ['./category-collection.component.scss']
 })
 export class CategoryCollectionComponent implements OnInit {
-  roomCategories: any[] = []
+  roomCategories: CategoryData[] = []
+  displayedColumns: string[] = ['N', 'Category', 'EditButton', 'RemoveButton'];
   constructor(private roomCategoriesPersitenceService: RoomCategoriesPersitenceService) { }
 
   ngOnInit(): void {
     this.loadRoomCategories()
   }
   loadRoomCategories() {
-    const mockCategories = [
-      'categoria 1',
-      'categoria 1',
-      'categoria 1',
-      'categoria 1',
-    ]
-    this.roomCategories = mockCategories
-    /* this.roomCategoriesPersitenceService.getRoomCategories().subscribe( (response:any) => {
+
+    this.roomCategoriesPersitenceService.getRoomCategories().subscribe((response: CategoryData[]) => {
+      console.log(response)
       this.roomCategories = response
-    }) */
+    })
+  }
+  editCategoryDiaglog(leveldata: CategoryData) {
+
+  }
+  removeCategoryDialog(categoryId: number) {
+
   }
 
 }

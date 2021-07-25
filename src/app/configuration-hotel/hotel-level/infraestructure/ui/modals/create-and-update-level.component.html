@@ -1,15 +1,25 @@
 <form #formHotelLevel [formGroup]="hotelLevelData" (ngSubmit)="saveHotelLevel(formHotelLevel)" class="form-container">
     <!-- <mat-card-title>Abridor</mat-card-title> -->
 
+    <div class="input">
+        <div class="">
+            <mat-form-field [style.width.%]="100">
+                <textarea formControlName="numberLevel" matInput placeholder="Número del nivel"
+                    [(ngModel)]="level.numberLevel" required></textarea>
+
+            </mat-form-field>
+        </div>
+        <span *ngIf="hotelLevelControl.numberLevel.touched && hotelLevelControl.numberLevel.errors?.required">
+            Ingresa un número para el nivel
+        </span>
+    </div>
 
     <div class="input">
         <div class="">
             <mat-form-field [style.width.%]="100">
-                <textarea formControlName="nameLevel" 
-                matInput placeholder="Nombre del nivel" 
-                [(ngModel)]="hotelLevel.nameLevel"
-                required></textarea>
-                
+                <textarea formControlName="nameLevel" matInput placeholder="Nombre del nivel"
+                    [(ngModel)]="level.nameLevel" required></textarea>
+
             </mat-form-field>
         </div>
         <span *ngIf="hotelLevelControl.nameLevel.touched && hotelLevelControl.nameLevel.errors?.required">
@@ -20,11 +30,8 @@
 
     <div class="buttons">
         <button mat-raised-button mat-dialog-close color="primary" class="cancel">Cancelar</button>
-        <button type="submit"
-        mat-raised-button
-        color="accent" 
-        [disabled]="hotelLevelData.invalid">Guardar</button>
+        <button type="submit" mat-raised-button color="accent" [disabled]="hotelLevelData.invalid">Guardar</button>
     </div>
 
-    
+
 </form>

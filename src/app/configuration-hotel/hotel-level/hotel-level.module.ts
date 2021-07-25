@@ -7,13 +7,15 @@ import { SharedModule } from 'src/app/shared/shared.module';
 import { LevelCollectionComponent } from './infraestructure/ui/components/level-collection.component';
 import { CreateAndUpdateLevelComponent } from './infraestructure/ui/modals/create-and-update-level.component';
 import { HotelLevelContainerComponent } from './infraestructure/ui/components/hotel-level-container.component';
+import { RemoveLevelComponent } from './infraestructure/ui/modals/remove-level.component';
 
 
 @NgModule({
   declarations: [
     HotelLevelContainerComponent,
     CreateAndUpdateLevelComponent,
-    LevelCollectionComponent
+    LevelCollectionComponent,
+    RemoveLevelComponent
   ],
   imports: [
     CommonModule,

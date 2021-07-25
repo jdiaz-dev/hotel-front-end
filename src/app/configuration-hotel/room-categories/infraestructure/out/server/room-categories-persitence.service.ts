@@ -6,6 +6,7 @@ import { environment } from 'src/environments/environment';
 import { RoomCategoryModel } from '../../ui/models/room-category.model';
 import { StateUserService } from 'src/app/shared/services/state-user.service';
 import { AccessKeys } from 'src/app/shared/consts/name-token';
+import { CategoryData } from './../../interfaces/category-data.interface';
 
 
 @Injectable({
@@ -14,6 +15,7 @@ import { AccessKeys } from 'src/app/shared/consts/name-token';
 export class RoomCategoriesPersitenceService {
   private serverUrl = environment.serverUrl
   private headers = new HttpHeaders().set('Content-Type', 'application/json').set(AccessKeys.NAME_TOKEN, this.stateUserService.getToken());
+  private hotelId: number = this.stateUserService.getHotelId()
 
   constructor(
     private http: HttpClient,
@@ -21,14 +23,17 @@ export class RoomCategoriesPersitenceService {
   ) { }
   createRoomCategory(hotelLevel: RoomCategoryModel) {
     const body = JSON.stringify(hotelLevel);
-    return this.http.post(`${this.serverUrl}/social-dynamic/openers/`, body, { headers: this.headers })
+    return this.http.post(`${this.serverUrl}/room-categories/${this.hotelId}`, body, { headers: this.headers })
   }
   getRoomCategories() {
-    return this.http.post(`${this.serverUrl}/social-dynamic/openers/`, { headers: this.headers })
+    return this.http.get<CategoryData[]>(`${this.serverUrl}/room-categories/${this.hotelId}`, { headers: this.headers })
   }
   updateRoomCategory(hotelLevel: RoomCategoryModel, hotelLevelId: number) {
     const body = JSON.stringify(hotelLevel);
 
-    return this.http.put(`${this.serverUrl}/social-dynamic/openers/${hotelLevelId}`, body, { headers: this.headers })
+    return this.http.put(`${this.serverUrl}/room-categories/${this.hotelId}/${hotelLevelId}`, body, { headers: this.headers })
+  }
+  removeRoomCategory(hotelLevelId: number) {
+    return this.http.delete(`${this.serverUrl}/room-categories/${this.hotelId}/${hotelLevelId}`, { headers: this.headers })
   }
 }
