@@ -25,14 +25,14 @@ export class CreateAndUpdateLevelComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.paramsToUpdateOpener()
+    this.paramsToUpdateLevel()
 
     this.hotelLevelData = this.formBuilder.group({
-      numberLevel: ['', Validators.required],
-      nameLevel: ['', Validators.required],
+      numberLevel: ['', [Validators.required, Validators.max(999), Validators.pattern(/^-?(0|[1-9]\d*)?$/)]],
+      nameLevel: ['', [Validators.required, Validators.maxLength(50)]],
     })
   }
-  paramsToUpdateOpener() {
+  paramsToUpdateLevel() {
     this.level = this.data !== null ? new LevelModel(this.data.number, this.data.name) : this.level
     this.levelId = this.data !== null ? this.data.id : this.levelId
     this.action = this.data !== null ? 'update' : this.action

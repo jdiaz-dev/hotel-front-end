@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { RemoveLevelComponent } from './remove-level.component';
+import { RoomCollectionComponent } from './room-collection.component';
 
-describe('RemoveLevelComponent', () => {
-  let component: RemoveLevelComponent;
-  let fixture: ComponentFixture<RemoveLevelComponent>;
+describe('RoomCollectionComponent', () => {
+  let component: RoomCollectionComponent;
+  let fixture: ComponentFixture<RoomCollectionComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ RemoveLevelComponent ]
+      declarations: [ RoomCollectionComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(RemoveLevelComponent);
+    fixture = TestBed.createComponent(RoomCollectionComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

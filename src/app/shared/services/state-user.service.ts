@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { AccessData } from '../interfaces/access.data.interface';
+import { DataUser } from '../interfaces/data-user.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -9,7 +9,7 @@ export class StateUserService {
 
   constructor() { }
   getToken(): string {
-    let user: AccessData = this.getDataUser()
+    let user: DataUser = this.getDataUser()
     if (user) return user.token
     return ''
   }
@@ -24,12 +24,12 @@ export class StateUserService {
     return
   } */
   getHotelId(): number {
-    const user: AccessData = this.getDataUser()
+    const user: DataUser = this.getDataUser()
     if (user) return user.hotelId
     return NaN
   }
   getDataUser() {
-    const user: AccessData = JSON.parse(localStorage.getItem(this.nameUserLocalStorage) || '{}');
+    const user: DataUser = JSON.parse(localStorage.getItem(this.nameUserLocalStorage) || '{}');
     return user
   }
   saveUserLocalStorage(dataUser: object) {

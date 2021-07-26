@@ -2,7 +2,7 @@
 
     <div>
         <ng-container matColumnDef="N">
-            <th mat-header-cell *matHeaderCellDef class="number number-category"> Nivel </th>
+            <th mat-header-cell *matHeaderCellDef class="number number-category"> N° </th>
             <td mat-cell *matCellDef="let element">0</td>
         </ng-container>
 
@@ -12,15 +12,21 @@
 
         </ng-container>
 
+        <ng-container matColumnDef="Price">
+            <th mat-header-cell *matHeaderCellDef class="name-level"> Precio </th>
+            <td mat-cell *matCellDef="let element"> S/. {{element.price}}.00 </td>
+
+        </ng-container>
+
         <ng-container matColumnDef="EditButton">
             <th mat-header-cell *matHeaderCellDef class="edit-buttons"> </th>
-            <td mat-cell *matCellDef="let element" (click)="editCategoryDiaglog(element)"> <button
-                    mat-raised-button>Editar</button> </td>
+            <td mat-cell *matCellDef="let element" (click)="editCategoryDiaglog(element)"> <button mat-raised-button
+                    color="primary">Editar</button> </td>
         </ng-container>
 
         <ng-container matColumnDef="RemoveButton">
             <th mat-header-cell *matHeaderCellDef class="remove-buttons"> </th>
-            <td mat-cell *matCellDef="let element"> <button mat-raised-button
+            <td mat-cell *matCellDef="let element"> <button mat-raised-button color="warn"
                     (click)="removeCategoryDialog(element.id)">Eliminar</button> </td>
         </ng-container>
     </div>

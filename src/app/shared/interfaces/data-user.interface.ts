@@ -1,4 +1,4 @@
-export interface AccessData {
+export interface DataUser {
     hotelId: number
     token: string
 }

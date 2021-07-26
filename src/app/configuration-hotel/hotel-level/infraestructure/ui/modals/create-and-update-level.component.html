@@ -4,8 +4,8 @@
     <div class="input">
         <div class="">
             <mat-form-field [style.width.%]="100">
-                <textarea formControlName="numberLevel" matInput placeholder="Número del nivel"
-                    [(ngModel)]="level.numberLevel" required></textarea>
+                <input formControlName="numberLevel" matInput placeholder="Número del nivel"
+                    [(ngModel)]="level.numberLevel" required>
 
             </mat-form-field>
         </div>
@@ -17,8 +17,8 @@
     <div class="input">
         <div class="">
             <mat-form-field [style.width.%]="100">
-                <textarea formControlName="nameLevel" matInput placeholder="Nombre del nivel"
-                    [(ngModel)]="level.nameLevel" required></textarea>
+                <input formControlName="nameLevel" matInput placeholder="Nombre del nivel" [(ngModel)]="level.nameLevel"
+                    required>
 
             </mat-form-field>
         </div>

@@ -4,6 +4,7 @@ import { environment } from 'src/environments/environment';
 import { UserModel } from '../models/user.model';
 import { StateUserService } from './../../shared/services/state-user.service';
 import { Observable } from 'rxjs';
+import { SERVER } from 'src/app/shared/enums/server.enum';
 
 @Injectable({
   providedIn: 'root'
@@ -21,7 +22,7 @@ export class UsersService {
   }
   login(user?: UserModel): Observable<any> {
     const params = JSON.stringify(user);
-    return this.http.post(`${this.apiUrl}/jdev/users/login`, params, { headers: this.headers })
+    return this.http.post(`${this.apiUrl}/${SERVER.PREFIX}/users/login`, params, { headers: this.headers })
   }
 }
 
