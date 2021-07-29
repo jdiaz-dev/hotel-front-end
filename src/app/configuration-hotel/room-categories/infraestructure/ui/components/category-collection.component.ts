@@ -47,3 +47,4 @@ export class CategoryCollectionComponent implements OnInit {
   }
 
 }
+

@@ -16,7 +16,4 @@ export class RoomCategoriesContainerComponent {
   openDialog() {
     let dialogRef = this.dialog.open(CreateUpdateCategoryComponent, { width: '40%' })
   }
-  removeCategoryDialog() {
-
-  }
 }

@@ -19,7 +19,11 @@ const routes: Routes = [
         loadChildren: () => import('./configuration-hotel/room-categories/room-categories-routing.module').then((m) => m.RoomCategoriesRoutingModule)
 
       },
+      {
+        path: 'habitaciones',
+        loadChildren: () => import('./configuration-hotel/rooms/rooms-routing.module').then((m) => m.RoomsRoutingModule)
 
+      },
     ]
   },
 ];

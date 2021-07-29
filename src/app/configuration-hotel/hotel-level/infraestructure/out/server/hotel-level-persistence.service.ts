@@ -9,9 +9,7 @@ import { AccessKeys } from 'src/app/shared/consts/name-token';
 import { LevelData } from '../../interfaces/level-data.interface';
 import { SERVER } from 'src/app/shared/enums/server.enum';
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable()
 export class HotelLevelPersistenceService {
   private serverUrl = environment.serverUrl
   private headers = new HttpHeaders().set('Content-Type', 'application/json').set(AccessKeys.NAME_TOKEN, this.stateUserService.getToken());

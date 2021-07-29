@@ -7,6 +7,7 @@ import { SharedModule } from 'src/app/shared/shared.module';
 import { LevelCollectionComponent } from './infraestructure/ui/components/level-collection.component';
 import { CreateAndUpdateLevelComponent } from './infraestructure/ui/modals/create-and-update-level.component';
 import { HotelLevelContainerComponent } from './infraestructure/ui/components/hotel-level-container.component';
+import { HotelLevelPersistenceService } from './infraestructure/out/server/hotel-level-persistence.service';
 
 @NgModule({
   declarations: [
@@ -16,10 +17,13 @@ import { HotelLevelContainerComponent } from './infraestructure/ui/components/ho
   ],
   imports: [
     CommonModule,
+    SharedModule,
     FormsModule,
     ReactiveFormsModule,
     HotelLevelRoutingModule,
-    SharedModule
-  ]
+  ],
+  providers: [HotelLevelPersistenceService],
+  //exports: [HotelLevelPersistenceService],
+
 })
 export class HotelLevelModule { }

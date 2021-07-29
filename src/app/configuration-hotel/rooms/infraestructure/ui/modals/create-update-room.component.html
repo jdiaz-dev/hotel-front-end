@@ -1,0 +1,60 @@
+<form #formRoom [formGroup]="roomData" (ngSubmit)="saveRoom(formRoom)" class="form-container">
+    <!-- <mat-card-title>Abridor</mat-card-title> -->
+
+    <div class="input">
+        <div class="">
+            <mat-form-field [style.width.%]="100">
+                <input formControlName="name" matInput placeholder="Nombre de la habitación" [(ngModel)]="room.name"
+                    required>
+
+            </mat-form-field>
+        </div>
+        <span *ngIf="roomControl.name.touched && roomControl.name.errors?.required">
+            Ingresa un nombre para esta habitación
+        </span><br>
+
+        <span *ngIf="roomControl.name.touched && roomControl.name.invalid">
+            Este campo solo permite 20 caracteres
+        </span>
+
+    </div>
+
+    <div class="input">
+        <div class="">
+            <mat-form-field [style.width.%]="100">
+                <input formControlName="price" matInput placeholder="Precio" [(ngModel)]="room.price" required>
+
+            </mat-form-field>
+        </div>
+        <span *ngIf="roomControl.price.touched && roomControl.price.errors?.required">
+            Ingresa un precio para la habitación
+        </span><br>
+
+        <span *ngIf="roomControl.price.touched && roomControl.price.invalid">
+            El precio no puede ser mayor a 4 dígitos
+        </span>
+
+    </div>
+
+    <div class="input">
+        <div class="">
+            <mat-form-field [style.width.%]="100">
+                <input formControlName="details" matInput placeholder="Detalles" [(ngModel)]="room.details" required>
+
+            </mat-form-field>
+        </div>
+        <span *ngIf="roomControl.details.touched && roomControl.details.errors?.required">
+            Ingresa una descripción de la habitación
+        </span><br>
+
+        <span *ngIf="roomControl.details.touched && roomControl.details.invalid">
+            Este campo solo permite máximo 200 caracteres
+        </span>
+
+    </div>
+
+    <div class="buttons">
+        <button mat-raised-button mat-dialog-close color="accent" class="cancel">Cancelar</button>
+        <button type="submit" mat-raised-button color="primary" [disabled]="roomData.invalid">Guardar</button>
+    </div>
+</form>

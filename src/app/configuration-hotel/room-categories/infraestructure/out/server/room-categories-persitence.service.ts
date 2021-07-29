@@ -10,9 +10,7 @@ import { CategoryData } from './../../interfaces/category-data.interface';
 import { SERVER } from 'src/app/shared/enums/server.enum';
 
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable()
 export class RoomCategoriesPersitenceService {
   private serverUrl = environment.serverUrl
   private headers = new HttpHeaders().set('Content-Type', 'application/json').set(AccessKeys.NAME_TOKEN, this.stateUserService.getToken());

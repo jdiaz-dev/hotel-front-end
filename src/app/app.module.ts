@@ -11,15 +11,13 @@ import { SharedModule } from './shared/shared.module';
 import { NavbarComponent } from './shared/components/navbar/navbar.component';
 import { RoomCategoriesModule } from './configuration-hotel/room-categories/room-categories.module';
 import { CoreModule } from './core/core.module';
-import { RoomContainerComponent } from './configuration-hotel/rooms/infraestructure/ui/components/room-container.component';
-import { RoomCollectionComponent } from './configuration-hotel/rooms/infraestructure/ui/components/room-collection.component';
+import { RoomsModule } from './configuration-hotel/rooms/rooms.module';
 
 @NgModule({
   declarations: [
     AppComponent,
     NavbarComponent,
-    RoomContainerComponent,
-    RoomCollectionComponent,
+
   ],
   imports: [
     BrowserModule,
@@ -30,6 +28,7 @@ import { RoomCollectionComponent } from './configuration-hotel/rooms/infraestruc
     BrowserAnimationsModule,
     HotelLevelModule,
     RoomCategoriesModule,
+    RoomsModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

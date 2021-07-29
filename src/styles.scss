@@ -22,3 +22,9 @@ table.table {
     width: 10%;
   }
 }
+
+/* buttons to update and cancel */
+div.buttons {
+  display: flex;
+  justify-content: space-between;
+}
