@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { CreateUpdateRoomComponent } from '../modals/create-update-room.component';
+import { CreateUpdateRoomComponent } from '../modals/create-update-room/create-update-room.component';
 
 @Component({
   selector: 'app-room-container',

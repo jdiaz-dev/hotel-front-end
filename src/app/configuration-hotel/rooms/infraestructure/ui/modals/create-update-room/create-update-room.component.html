@@ -53,6 +53,9 @@
 
     </div>
 
+    <app-list-levels (levelSelected)="addlevelSelected($event)"></app-list-levels>
+    <app-list-categories></app-list-categories>
+
     <div class="buttons">
         <button mat-raised-button mat-dialog-close color="accent" class="cancel">Cancelar</button>
         <button type="submit" mat-raised-button color="primary" [disabled]="roomData.invalid">Guardar</button>

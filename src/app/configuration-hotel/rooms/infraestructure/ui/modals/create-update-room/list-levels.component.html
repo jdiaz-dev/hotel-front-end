@@ -1,0 +1,16 @@
+<!-- <mat-form-field appearance="fill" class="category-field">
+    
+
+</mat-form-field>
+ -->
+
+<mat-label>Nivel de la habitación</mat-label>
+<mat-select #selectLevel [formControl]="controlLevelSelected" (selectionChange)="sendSelected(selectLevel.value)"
+    required>
+    <mat-option *ngFor="let level of levels" [value]="level.id">
+        {{level.number}} {{level.name}}
+    </mat-option>
+</mat-select>
+<span *ngIf="controlLevelSelected.touched && controlLevelSelected.errors?.required">
+    Porfavor, selecciona un nivel para tu esta habitación
+</span>

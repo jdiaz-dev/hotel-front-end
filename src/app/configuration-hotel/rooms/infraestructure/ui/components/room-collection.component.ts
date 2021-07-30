@@ -4,7 +4,7 @@ import { ConfirmRemoveComponent } from 'src/app/shared/modals/confirm-remove.com
 import { CustomMessage } from 'src/app/shared/modals/custom-message.interface';
 import { RoomData } from '../../interfaces/room.data';
 import { RoomsPersistenceService } from '../../out/server/rooms.service';
-import { CreateUpdateRoomComponent } from '../modals/create-update-room.component';
+import { CreateUpdateRoomComponent } from '../modals/create-update-room/create-update-room.component';
 
 @Component({
   selector: 'app-room-collection',

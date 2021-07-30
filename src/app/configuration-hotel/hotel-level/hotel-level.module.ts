@@ -23,7 +23,6 @@ import { HotelLevelPersistenceService } from './infraestructure/out/server/hotel
     HotelLevelRoutingModule,
   ],
   providers: [HotelLevelPersistenceService],
-  //exports: [HotelLevelPersistenceService],
 
 })
 export class HotelLevelModule { }
