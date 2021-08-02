@@ -5,7 +5,7 @@ import { Observable } from 'rxjs'
 import { environment } from 'src/environments/environment';
 import { LevelModel } from '../../ui/models/level.model';
 import { StateUserService } from 'src/app/shared/services/state-user.service';
-import { AccessKeys } from 'src/app/shared/consts/name-token';
+import { AccessKeys } from 'src/app/shared/enums/name-token';
 import { LevelData } from '../../interfaces/level-data.interface';
 import { SERVER } from 'src/app/shared/enums/server.enum';
 

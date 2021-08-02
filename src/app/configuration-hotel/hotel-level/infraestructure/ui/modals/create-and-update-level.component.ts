@@ -5,6 +5,7 @@ import { MAT_DIALOG_DATA } from '@angular/material/dialog'
 import { LevelData } from '../../interfaces/level-data.interface';
 import { LevelModel } from '../models/level.model';
 import { HotelLevelPersistenceService } from './../../out/server/hotel-level-persistence.service';
+import { REG_EXP } from './../../../../../shared/consts/reg-exp.enum';
 
 
 @Component({
@@ -28,8 +29,8 @@ export class CreateAndUpdateLevelComponent implements OnInit {
     this.paramsToUpdateLevel()
 
     this.hotelLevelData = this.formBuilder.group({
-      numberLevel: ['', [Validators.required, Validators.max(999), Validators.pattern(/^-?(0|[1-9]\d*)?$/)]],
-      nameLevel: ['', [Validators.required, Validators.maxLength(50)]],
+      numberLevel: ['', [Validators.required, Validators.maxLength(3), Validators.pattern(REG_EXP.numeric)]],
+      nameLevel: ['', [Validators.required, Validators.maxLength(50), Validators.pattern(REG_EXP.alphanumeric)]],
     })
   }
   paramsToUpdateLevel() {

@@ -9,27 +9,34 @@ import { FormControl, Validators } from '@angular/forms';
   styleUrls: ['./list-levels.component.scss']
 })
 export class ListLevelsComponent implements OnInit {
-  //@Input() name: string;
+  @Input('previousLevel') previousLevel!: LevelData;
   @Output() levelSelected = new EventEmitter<number>();
 
   levels: LevelData[] = []
-  controlLevelSelected = new FormControl('', [Validators.required]);
+  controlLevelSelected!: FormControl
   constructor(
     private readonly hotelLevelPersistenceService: HotelLevelPersistenceService,
   ) { }
 
   ngOnInit(): void {
     this.loadLevels()
-    console.log(this.controlLevelSelected.errors)
+    this.checkIfExistsPreviousLevel()
   }
-  loadLevels() {
+  private checkIfExistsPreviousLevel() {
+    if (this.previousLevel) {
+      this.controlLevelSelected = new FormControl(this.previousLevel.id, [Validators.required]);
+      this.sendLevelSelected(this.previousLevel.id)
+    } else {
+      this.controlLevelSelected = new FormControl('', [Validators.required]);
+    }
+  }
+  private loadLevels() {
     this.hotelLevelPersistenceService.getHotelLevels().subscribe((response: LevelData[]) => {
-      console.log(response)
+      //console.log(response)
       this.levels = response
     })
   }
-  sendSelected(levelId: number) {
-    console.log(this.controlLevelSelected.errors)
+  sendLevelSelected(levelId: number) {
     this.levelSelected.emit(levelId)
   }
 

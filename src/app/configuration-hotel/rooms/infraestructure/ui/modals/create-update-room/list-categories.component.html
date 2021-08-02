@@ -1,1 +1,10 @@
-<p>list-categories works!</p>
+<mat-form-field appearance="fill" class="angular-material-select">
+    <mat-label>Categorías</mat-label>
+    <mat-select #selectLevel [formControl]="controlCategorySelected"
+        (selectionChange)="sendCategorySelected(selectLevel.value)" required>
+        <mat-option *ngFor="let category of categories" [value]="category.id">
+            {{category.category}}
+        </mat-option>
+    </mat-select>
+    <mat-error *ngIf="controlCategorySelected.hasError('required')">Selecciona una categoría</mat-error>
+</mat-form-field>

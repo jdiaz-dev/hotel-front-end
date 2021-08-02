@@ -5,6 +5,7 @@ import { MAT_DIALOG_DATA } from '@angular/material/dialog'
 import { RoomCategoryModel } from '../models/room-category.model';
 import { RoomCategoriesPersitenceService } from '../../out/server/room-categories-persitence.service';
 import { CategoryData } from './../../interfaces/category-data.interface';
+import { REG_EXP } from './../../../../../shared/consts/reg-exp.enum';
 
 @Component({
   selector: 'app-create-update-category',
@@ -27,8 +28,8 @@ export class CreateUpdateCategoryComponent implements OnInit {
     this.paramsToUpdateCategory()
 
     this.roomCategoryData = this.formBuilder.group({
-      nameCategory: ['', [Validators.required, Validators.maxLength(50)]],
-      price: ['', [Validators.required, Validators.pattern(/^-?(0|[1-9]\d*)?$/)]],
+      nameCategory: ['', [Validators.required, Validators.maxLength(50), Validators.pattern(REG_EXP.alphanumeric)]],
+      price: ['', [Validators.required, Validators.maxLength(4), Validators.pattern(REG_EXP.numeric)]],
     })
     this.roomCategoryControl
 

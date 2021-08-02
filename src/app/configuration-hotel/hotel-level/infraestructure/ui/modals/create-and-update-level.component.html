@@ -6,12 +6,24 @@
             <mat-form-field [style.width.%]="100">
                 <input formControlName="numberLevel" matInput placeholder="Número del nivel"
                     [(ngModel)]="level.numberLevel" required>
+                <mat-error
+                    *ngIf="hotelLevelControl.numberLevel.touched && hotelLevelControl.numberLevel.errors?.required">
+                    Ingresa un número para el nivel
+                </mat-error>
 
+                <mat-error
+                    *ngIf="hotelLevelControl.numberLevel.touched && hotelLevelControl.numberLevel.errors?.maxlength">
+                    La cantidad máxima solo puede ser 3 dígitos
+                </mat-error>
+
+                <mat-error
+                    *ngIf="hotelLevelControl.numberLevel.touched && hotelLevelControl.numberLevel.errors?.pattern">
+                    Este campo solo puede ser numérico
+                </mat-error>
             </mat-form-field>
+
         </div>
-        <span *ngIf="hotelLevelControl.numberLevel.touched && hotelLevelControl.numberLevel.errors?.required">
-            Ingresa un número para el nivel
-        </span>
+
     </div>
 
     <div class="input">
@@ -19,12 +31,19 @@
             <mat-form-field [style.width.%]="100">
                 <input formControlName="nameLevel" matInput placeholder="Nombre del nivel" [(ngModel)]="level.nameLevel"
                     required>
+                <mat-error *ngIf="hotelLevelControl.nameLevel.touched && hotelLevelControl.nameLevel.errors?.required">
+                    Ingresa un nombre para el nivel
+                </mat-error>
 
+                <mat-error *ngIf="hotelLevelControl.nameLevel.touched && hotelLevelControl.nameLevel.errors?.maxlength">
+                    La cantidad máxima de caractereses es 50
+                </mat-error>
+
+                <mat-error *ngIf="hotelLevelControl.nameLevel.touched && hotelLevelControl.nameLevel.errors?.pattern">
+                    Este campo solo puede ser alfanumérico
+                </mat-error>
             </mat-form-field>
         </div>
-        <span *ngIf="hotelLevelControl.nameLevel.touched && hotelLevelControl.nameLevel.errors?.required">
-            Ingresa un nombre para el nivel
-        </span>
     </div>
 
 

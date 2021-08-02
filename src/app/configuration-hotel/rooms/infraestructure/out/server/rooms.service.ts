@@ -1,7 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
-import { AccessKeys } from 'src/app/shared/consts/name-token';
+import { AccessKeys } from 'src/app/shared/enums/name-token';
 import { SERVER } from 'src/app/shared/enums/server.enum';
 import { StateUserService } from 'src/app/shared/services/state-user.service';
 import { environment } from 'src/environments/environment';

@@ -12,7 +12,7 @@ import { CreateUpdateRoomComponent } from '../modals/create-update-room/create-u
   styleUrls: ['./room-collection.component.scss']
 })
 export class RoomCollectionComponent implements OnInit {
-  rooms: RoomData[] = []
+  rooms!: RoomData[]
   displayedColumns: string[] = ['N', 'Name', 'Category', 'Price', 'Details', 'EditButton', 'RemoveButton'];
   constructor(
     private dialog: MatDialog,
@@ -29,7 +29,12 @@ export class RoomCollectionComponent implements OnInit {
     })
   }
   editRoomDialog(categorydata: RoomData) {
-    this.dialog.open(CreateUpdateRoomComponent, { data: categorydata, width: '40%' })
+    let dialogRef = this.dialog.open(CreateUpdateRoomComponent, { data: categorydata, width: '40%' })
+    dialogRef.afterClosed().subscribe((result: boolean) => {
+      if (result) {
+        this.ngOnInit()
+      }
+    })
   }
   removeRoomDialog(room: RoomData) {
     const toCompleteDialog: CustomMessage = {

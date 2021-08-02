@@ -1,4 +1,4 @@
-<table mat-table [dataSource]="rooms" class="table">
+<table mat-table *ngIf="rooms" [dataSource]="rooms" class="table">
 
     <div>
         <ng-container matColumnDef="N">

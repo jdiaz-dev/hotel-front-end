@@ -2,7 +2,7 @@ import { Component, Inject, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 
-import { HotelLevelPersistenceService } from 'src/app/configuration-hotel/hotel-level/infraestructure/out/server/hotel-level-persistence.service';
+import { REG_EXP } from 'src/app/shared/consts/reg-exp.enum';
 import { RoomData } from '../../../interfaces/room.data';
 import { RoomsPersistenceService } from '../../../out/server/rooms.service';
 import { RoomModel } from '../../models/room.model';
@@ -29,17 +29,20 @@ export class CreateUpdateRoomComponent implements OnInit {
 
   ngOnInit(): void {
     this.paramsToUpdateLevel()
-
     this.roomData = this.formBuilder.group({
-      name: ['', [Validators.required, Validators.maxLength(20)]],
-      price: ['', [Validators.required, Validators.max(999)]],
-      details: ['', [Validators.required, Validators.maxLength(200)]],
-      levelId: ['', [Validators.required, Validators.max(20)]],
-      categoryId: ['', [Validators.required, Validators.max(20)]]
+      name: ['', [Validators.required, Validators.maxLength(4), Validators.pattern(REG_EXP.numeric)]],
+      price: ['', [Validators.required, Validators.maxLength(4), Validators.pattern(REG_EXP.numeric)]],
+      details: ['', [
+        Validators.required,
+        Validators.maxLength(200),
+        Validators.pattern(REG_EXP.alphanumeric)]],
+      levelId: ['', [Validators.required]],
+      categoryId: ['', [Validators.required]]
     })
   }
-  paramsToUpdateLevel() {
-    this.room = this.data !== null ? new RoomModel(this.data.name, this.data.price, this.data.details, null, null) : this.room
+  private paramsToUpdateLevel() {
+    this.room = this.data !== null ? new RoomModel(this.data.name, this.data.price, this.data.details, this.data.level.id, this.data.category.id) : this.room
+
     this.levelId = this.data !== null ? this.data.level.id : this.roomId
     this.categoryId = this.data !== null ? this.data.category.id : this.roomId
     this.roomId = this.data !== null ? this.data.id : this.roomId
@@ -60,25 +63,30 @@ export class CreateUpdateRoomComponent implements OnInit {
       this.updateRoom(data)
     }
   }
-  createRoom(data: RoomModel) {
-    this.roomsPersistenceService.createRoom(data).subscribe((response: any) => {
-      console.log(response)
-    }, (error) => {
-      console.log(error)
-    })
+
+  addlevelSelected(levelId: any) {
+    this.roomData.get('levelId')?.setValue(levelId)
   }
-  updateRoom(data: RoomModel) {
-    this.roomsPersistenceService.updateRoom(data, this.levelId, this.categoryId, this.roomId).subscribe((response: any) => {
-      console.log(response)
-    }, (error) => {
-      console.log(error)
-    })
+  addCategorySelected(categoryId: number) {
+    this.roomData.get('categoryId')?.setValue(categoryId)
   }
   get roomControl() {
     return this.roomData.controls
   }
-  addlevelSelected(levelId: number) {
-    this.roomData.value.levelId = levelId
-    console.log(this.roomData.value)
+  private createRoom(data: RoomModel) {
+    this.roomsPersistenceService.createRoom(data).subscribe((response: any) => {
+      console.log(response)
+      this.ngOnInit()
+    }, (error) => {
+      console.log(error)
+    })
+  }
+  private updateRoom(data: RoomModel) {
+    this.roomsPersistenceService.updateRoom(data, this.levelId, this.categoryId, this.roomId).subscribe((response: any) => {
+      console.log(response)
+      this.ngOnInit()
+    }, (error) => {
+      console.log(error)
+    })
   }
 }

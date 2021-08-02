@@ -8,16 +8,23 @@
             <mat-form-field [style.width.%]="100">
                 <input formControlName="nameCategory" matInput placeholder="Nombre de la categoría"
                     [(ngModel)]="roomCategory.nameCategory" required>
+                <mat-error
+                    *ngIf="roomCategoryControl.nameCategory.touched && roomCategoryControl.nameCategory.errors?.required">
+                    Ingresa un nombre para esta categoría
+                </mat-error>
 
+                <mat-error
+                    *ngIf="roomCategoryControl.nameCategory.touched && roomCategoryControl.nameCategory.errors?.pattern">
+                    Este campo solo permite caracteres alfanuméricos
+                </mat-error>
+
+                <mat-error
+                    *ngIf="roomCategoryControl.nameCategory.touched && roomCategoryControl.nameCategory.errors?.maxLength">
+                    Este campo solo permite 50 caracteres
+                </mat-error>
             </mat-form-field>
         </div>
-        <span *ngIf="roomCategoryControl.nameCategory.touched && roomCategoryControl.nameCategory.errors?.required">
-            Ingresa un nombre para esta categoría
-        </span><br>
 
-        <span *ngIf="roomCategoryControl.nameCategory.touched && roomCategoryControl.nameCategory.invalid">
-            Este campo solo permite 50 caracteres
-        </span>
 
     </div>
 
@@ -25,16 +32,20 @@
         <div class="">
             <mat-form-field [style.width.%]="100">
                 <input formControlName="price" matInput placeholder="Precio" [(ngModel)]="roomCategory.price" required>
+                <mat-error *ngIf="roomCategoryControl.price.touched && roomCategoryControl.price.errors?.required">
+                    Ingresa un precio para esta categoría
+                </mat-error>
 
+                <mat-error *ngIf="roomCategoryControl.price.touched && roomCategoryControl.price.errors?.pattern">
+                    El precio solo puede ser numérico
+                </mat-error>
+
+                <mat-error *ngIf="roomCategoryControl.price.touched && roomCategoryControl.price.errors?.maxlength">
+                    La candidad máxima de dígitos permitida es 4
+                </mat-error>
             </mat-form-field>
         </div>
-        <span *ngIf="roomCategoryControl.price.touched && roomCategoryControl.price.errors?.required">
-            Ingresa un precio para esta categoría
-        </span><br>
 
-        <span *ngIf="roomCategoryControl.price.touched && roomCategoryControl.price.invalid">
-            El precio solo puede ser numérico
-        </span>
     </div>
 
     <div class="buttons">
