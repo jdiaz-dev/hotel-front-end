@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit, OnChanges } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ConfirmRemoveComponent } from 'src/app/shared/modals/confirm-remove.component';
 import { CustomMessage } from 'src/app/shared/modals/custom-message.interface';
@@ -11,14 +11,17 @@ import { CreateUpdateRoomComponent } from '../modals/create-update-room/create-u
   templateUrl: './room-collection.component.html',
   styleUrls: ['./room-collection.component.scss']
 })
-export class RoomCollectionComponent implements OnInit {
+export class RoomCollectionComponent implements OnInit, OnChanges {
+  @Input('reload') reloadThisComponent!: number
   rooms!: RoomData[]
   displayedColumns: string[] = ['N', 'Name', 'Category', 'Price', 'Details', 'EditButton', 'RemoveButton'];
   constructor(
     private dialog: MatDialog,
     private readonly roomsPersistenceService: RoomsPersistenceService
   ) { }
-
+  ngOnChanges() {
+    if (this.reloadThisComponent) this.loadRooms()
+  }
   ngOnInit(): void {
     this.loadRooms()
   }
@@ -32,7 +35,7 @@ export class RoomCollectionComponent implements OnInit {
     let dialogRef = this.dialog.open(CreateUpdateRoomComponent, { data: categorydata, width: '40%' })
     dialogRef.afterClosed().subscribe((result: boolean) => {
       if (result) {
-        this.ngOnInit()
+        this.loadRooms()
       }
     })
   }
@@ -46,7 +49,7 @@ export class RoomCollectionComponent implements OnInit {
 
       if (result) {
         this.roomsPersistenceService.removeRoom(room.level.id, room.id).subscribe(response => {
-          console.log(response)
+          if (response) this.loadRooms()
         })
       }
     })

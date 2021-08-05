@@ -8,13 +8,19 @@ import { CreateUpdateRoomComponent } from '../modals/create-update-room/create-u
   styleUrls: ['./room-container.component.scss']
 })
 export class RoomContainerComponent implements OnInit {
-
+  reloadRoomCollectionComponent!: number
   constructor(private dialog: MatDialog) { }
 
   ngOnInit(): void {
+    this.reloadRoomCollectionComponent = 0
+    console.log(this.reloadRoomCollectionComponent)
   }
   openDialog() {
     let dialogRef = this.dialog.open(CreateUpdateRoomComponent, { width: '40%' })
-
+    dialogRef.afterClosed().subscribe(response => {
+      if (response) {
+        this.reloadRoomCollectionComponent++
+      }
+    })
   }
 }
