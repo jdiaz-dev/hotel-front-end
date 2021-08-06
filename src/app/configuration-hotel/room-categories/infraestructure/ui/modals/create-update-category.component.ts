@@ -67,7 +67,6 @@ export class CreateUpdateCategoryComponent implements OnInit {
     })
   }
   get roomCategoryControl() {
-    console.log(this.roomCategoryData.controls)
     return this.roomCategoryData.controls
   }
 

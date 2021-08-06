@@ -13,7 +13,6 @@ export class RoomContainerComponent implements OnInit {
 
   ngOnInit(): void {
     this.reloadRoomCollectionComponent = 0
-    console.log(this.reloadRoomCollectionComponent)
   }
   openDialog() {
     let dialogRef = this.dialog.open(CreateUpdateRoomComponent, { width: '40%' })

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit, OnChanges } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 
 import { HotelLevelPersistenceService } from '../../out/server/hotel-level-persistence.service';
@@ -12,7 +12,8 @@ import { CustomMessage } from 'src/app/shared/modals/custom-message.interface';
   templateUrl: './level-collection.component.html',
   styleUrls: ['./level-collection.component.scss']
 })
-export class LevelCollectionComponent implements OnInit {
+export class LevelCollectionComponent implements OnInit, OnChanges {
+  @Input('reload') reloadThisComponent!: number
   hotelLevels: LevelData[] = []
   displayedColumns: string[] = ['Level', 'Name', 'EditButton', 'RemoveButton'];
 
@@ -20,7 +21,9 @@ export class LevelCollectionComponent implements OnInit {
     private dialog: MatDialog,
     private hotelLevelPersistenceService: HotelLevelPersistenceService
   ) { }
-
+  ngOnChanges() {
+    if (this.reloadThisComponent) this.loadHotelLevels()
+  }
   ngOnInit(): void {
     this.loadHotelLevels()
   }
@@ -31,7 +34,10 @@ export class LevelCollectionComponent implements OnInit {
     })
   }
   editLevelDiaglog(leveldata: LevelData) {
-    this.dialog.open(CreateAndUpdateLevelComponent, { data: leveldata, width: '40%' })
+    let dialogRef = this.dialog.open(CreateAndUpdateLevelComponent, { data: leveldata, width: '40%' })
+    dialogRef.afterClosed().subscribe((result: boolean) => {
+      if (result) this.loadHotelLevels()
+    })
   }
   removeLevelDialog(levelId: number) {
     const toCompleteDialog: CustomMessage = {
@@ -43,6 +49,7 @@ export class LevelCollectionComponent implements OnInit {
 
       if (result) {
         this.hotelLevelPersistenceService.removeLevel(levelId).subscribe(response => {
+          if (response) this.loadHotelLevels()
         })
       }
     })

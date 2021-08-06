@@ -19,7 +19,7 @@
                 </mat-error>
 
                 <mat-error
-                    *ngIf="roomCategoryControl.nameCategory.touched && roomCategoryControl.nameCategory.errors?.maxLength">
+                    *ngIf="roomCategoryControl.nameCategory.touched && roomCategoryControl.nameCategory.errors?.maxlength">
                     Este campo solo permite 50 caracteres
                 </mat-error>
             </mat-form-field>
@@ -50,6 +50,7 @@
 
     <div class="buttons">
         <button mat-raised-button mat-dialog-close color="accent" class="cancel">Cancelar</button>
-        <button type="submit" mat-raised-button color="primary" [disabled]="roomCategoryData.invalid">Guardar</button>
+        <button type="submit" mat-raised-button color="primary" [disabled]="roomCategoryData.invalid"
+            [mat-dialog-close]="true">Guardar</button>
     </div>
 </form>

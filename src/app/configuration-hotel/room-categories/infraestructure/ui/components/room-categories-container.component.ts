@@ -8,12 +8,18 @@ import { CreateUpdateCategoryComponent } from '../modals/create-update-category.
   styleUrls: ['./room-categories-container.component.scss']
 })
 export class RoomCategoriesContainerComponent {
+  reloadCategoryCollectionComponent!: number
+  constructor(private dialog: MatDialog) { }
 
-  constructor(
-    private dialog: MatDialog
-  ) { }
+  ngOnInit(): void {
+    this.reloadCategoryCollectionComponent = 0
+  }
 
   openDialog() {
     let dialogRef = this.dialog.open(CreateUpdateCategoryComponent, { width: '40%' })
+    dialogRef.afterClosed().subscribe((result: boolean) => {
+      console.log(result)
+      if (result) this.reloadCategoryCollectionComponent++
+    })
   }
 }

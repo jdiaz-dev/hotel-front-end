@@ -8,13 +8,18 @@ import { CreateAndUpdateLevelComponent } from '../modals/create-and-update-level
   styleUrls: ['./hotel-level-container.component.scss']
 })
 export class HotelLevelContainerComponent {
+  reloadHotelLevelCollectionComponent!: number
+  constructor(private dialog: MatDialog) { }
 
-  constructor(
-    private dialog:MatDialog
-  ) { }
+  ngOnInit(): void {
+    this.reloadHotelLevelCollectionComponent = 0
+  }
 
-  openDialog(){
-    let dialogRef = this.dialog.open(CreateAndUpdateLevelComponent, { width:'40%'})
+  openDialog() {
+    let dialogRef = this.dialog.open(CreateAndUpdateLevelComponent, { width: '40%' })
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) this.reloadHotelLevelCollectionComponent++
+    })
   }
 
 }
