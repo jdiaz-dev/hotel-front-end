@@ -1,4 +1,5 @@
 export interface Menu {
     name: string
-    children: any[]
+    url?: string
+    children?: any[]
 }

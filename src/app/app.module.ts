@@ -12,6 +12,8 @@ import { NavbarComponent } from './shared/components/navbar/navbar.component';
 import { RoomCategoriesModule } from './configuration-hotel/room-categories/room-categories.module';
 import { CoreModule } from './core/core.module';
 import { RoomsModule } from './configuration-hotel/rooms/rooms.module';
+import { HoustingModule } from './housting/housting/housting.module';
+import { ReceptionModule } from './housting/reception/reception.module';
 
 @NgModule({
   declarations: [
@@ -29,6 +31,8 @@ import { RoomsModule } from './configuration-hotel/rooms/rooms.module';
     HotelLevelModule,
     RoomCategoriesModule,
     RoomsModule,
+    HoustingModule,
+    ReceptionModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
