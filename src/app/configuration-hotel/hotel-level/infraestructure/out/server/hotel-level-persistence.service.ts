@@ -8,9 +8,10 @@ import { StateUserService } from 'src/app/shared/services/state-user.service';
 import { AccessKeys } from 'src/app/shared/enums/name-token';
 import { LevelData } from '../../interfaces/level-data.interface';
 import { SERVER } from 'src/app/shared/enums/server.enum';
+import { GetLevelsForReceptionDomain } from 'src/app/housting/reception/application/ports/out/other-domains/get-levels-for-reception-domain.port';
 
 @Injectable()
-export class HotelLevelPersistenceService {
+export class HotelLevelPersistenceService implements GetLevelsForReceptionDomain {
   private serverUrl = environment.serverUrl
   private headers = new HttpHeaders().set('Content-Type', 'application/json').set(AccessKeys.NAME_TOKEN, this.stateUserService.getToken());
   private hotelId: number = this.stateUserService.getHotelId()

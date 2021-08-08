@@ -1,0 +1,41 @@
+.container-rooms {
+  width: 99%;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, 25%);
+  grid-template-rows: 1fr;
+  text-align: center;
+
+  .card {
+    margin: 5px;
+
+    div.room-image {
+      display: inline-flex;
+      height: 85%;
+      flex-direction: row;
+      text-align: center;
+
+      div.bed-svg {
+        width: 65%;
+        svg {
+          width: 100%;
+        }
+      }
+      div.info-room {
+        width: 35%;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+
+        div.number-bed {
+          font-size: 300%;
+          font-weight: bold;
+          margin-bottom: 15px;
+        }
+        div.category-bed {
+          font-weight: 500;
+        }
+      }
+    }
+  }
+}

@@ -1,1 +1,5 @@
-<p>list-levels works!</p>
+<mat-tab-group mat-align-tabs="end">
+    <mat-tab label="{{level.name}}" *ngFor="let level of hotelLevels">
+        <app-list-rooms [levelId]="level.id"></app-list-rooms>
+    </mat-tab>
+</mat-tab-group>

@@ -39,5 +39,7 @@ import { ReceptionModule } from './housting/reception/reception.module';
 })
 export class AppModule { }
 
+//icons-bed-hotel https://icon-sets.iconify.design/ion/bed/
+
 //command to run angular project : npm run nghm -- serve
 

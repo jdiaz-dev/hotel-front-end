@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
-
 import { NavbarComponent } from './shared/components/navbar/navbar.component';
 
 const routes: Routes = [
@@ -9,6 +8,11 @@ const routes: Routes = [
     path: 'menu',
     component: NavbarComponent,
     children: [
+      {
+        path: 'recepcion',
+        loadChildren: () => import('./housting/reception/reception-routing.module').then((m) => m.ReceptionRoutingModule)
+
+      },
       {
         path: 'niveles',
         loadChildren: () => import('./configuration-hotel/hotel-level/hotel-level-routing.module').then((m) => m.HotelLevelRoutingModule)

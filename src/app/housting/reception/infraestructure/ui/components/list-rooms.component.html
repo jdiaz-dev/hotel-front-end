@@ -1,1 +1,31 @@
-<p>list-rooms works!</p>
+<div class="container-rooms">
+    <mat-card class="card" *ngFor="let room of roomList">
+        <!-- <mat-card-header>
+          <div mat-card-avatar class="example-header-image"></div>
+          <mat-card-title>Shiba Inu</mat-card-title>
+          <mat-card-subtitle>Dog Breed</mat-card-subtitle>
+        </mat-card-header> -->
+
+        <!-- <img mat-card-image src="https://material.angular.io/assets/img/examples/shiba2.jpg" alt="Photo of a Shiba Inu"> -->
+        <div class="room-image">
+            <div class="bed-svg">
+                <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true"
+                    role="img" width="11em" height="9em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 512 512">
+                    <path
+                        d="M432 230.7a79.44 79.44 0 0 0-32-6.7H112a79.51 79.51 0 0 0-32 6.69A80.09 80.09 0 0 0 32 304v112a16 16 0 0 0 32 0v-8a8.1 8.1 0 0 1 8-8h368a8.1 8.1 0 0 1 8 8v8a16 16 0 0 0 32 0V304a80.09 80.09 0 0 0-48-73.3z"
+                        fill="currentColor" />
+                    <path
+                        d="M376 80H136a56 56 0 0 0-56 56v72a4 4 0 0 0 5.11 3.84A95.5 95.5 0 0 1 112 208h4.23a4 4 0 0 0 4-3.55A32 32 0 0 1 152 176h56a32 32 0 0 1 31.8 28.45a4 4 0 0 0 4 3.55h24.46a4 4 0 0 0 4-3.55A32 32 0 0 1 304 176h56a32 32 0 0 1 31.8 28.45a4 4 0 0 0 4 3.55h4.2a95.51 95.51 0 0 1 26.89 3.85A4 4 0 0 0 432 208v-72a56 56 0 0 0-56-56z"
+                        fill="currentColor" />
+                </svg>
+            </div>
+            <div class="info-room">
+                <div class="number-bed">{{room.name}}</div>
+                <div class="category-bed">{{room.category.category}}</div>
+            </div>
+        </div>
+        <mat-card-content>
+            {{room.condition.nameCondition}}
+        </mat-card-content>
+    </mat-card>
+</div>

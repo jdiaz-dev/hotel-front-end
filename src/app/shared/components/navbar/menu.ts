@@ -14,13 +14,7 @@ export const MENU: Menu[] = [
   },
   {
     name: 'Recepción',
-    url: '/recepcion',
-    /* children: [
-      {
-        //name: 'Habitaciones',
-        //url: '/recepcion'
-      }
-    ] */
+    url: '/menu/recepcion',
   },
   {
     name: 'Caja',

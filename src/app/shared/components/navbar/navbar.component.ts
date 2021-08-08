@@ -13,7 +13,7 @@ import { MENU } from './menu';
 export class NavbarComponent implements OnInit {
   treeControl = new NestedTreeControl<Menu>(node => node.children);
   dataSource = new MatTreeNestedDataSource<Menu>();
-  menu!:Menu[]
+  menu!: Menu[]
 
   constructor() { }
 
@@ -22,4 +22,8 @@ export class NavbarComponent implements OnInit {
     this.dataSource.data = this.menu
   }
   hasChild = (_: number, node: Menu) => !!node.children && node.children.length > 0;
+
+  checking(data: any) {
+    console.log('--------------data', data)
+  }
 }

@@ -3,7 +3,8 @@
         <mat-tree [dataSource]="dataSource" [treeControl]="treeControl" class="example-tree">
 
             <!-- leaves -->
-            <mat-tree-node class="leaves" *matTreeNodeDef="let node" matTreeNodeToggle routerLink="{{node.url}}">
+            <mat-tree-node class="leaves" *matTreeNodeDef="let node" matTreeNodeToggle routerLink="{{node.url}}"
+                (click)="checking(node)">
                 <!-- <mat-icon class="mat-icon-send">
                     double_arrow
                 </mat-icon> -->
@@ -38,9 +39,8 @@
             </mat-nested-tree-node>
         </mat-tree>
     </mat-drawer>
-    
+
     <mat-drawer-content>
         <router-outlet></router-outlet>
     </mat-drawer-content>
 </mat-drawer-container>
-
