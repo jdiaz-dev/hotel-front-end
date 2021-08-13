@@ -1,5 +1,5 @@
-<mat-tab-group mat-align-tabs="end">
-    <mat-tab label="{{level.name}}" *ngFor="let level of hotelLevels">
-        <app-list-rooms [levelId]="level.id"></app-list-rooms>
-    </mat-tab>
-</mat-tab-group>
+<nav mat-tab-nav-bar mat-align-tabs="end">
+    <a mat-tab-link *ngFor="let level of hotelLevels" (click)="activeLink = level.name"
+        (click)="changeRoomsOfLevel(level.id)" [active]="activeLink == level.name">
+        {{level.name}} </a>
+</nav>

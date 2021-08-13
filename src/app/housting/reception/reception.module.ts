@@ -6,7 +6,7 @@ import { ReceptionContainerComponent } from './infraestructure/ui/components/rec
 import { ListLevelsComponent } from './infraestructure/ui/components/list-levels.component';
 import { ListRoomsComponent } from './infraestructure/ui/components/list-rooms.component';
 import { SharedModule } from 'src/app/shared/shared.module';
-
+import { LevelAndRoomCommunicationService } from './infraestructure/services/level-and-room-communication.service';
 
 @NgModule({
   declarations: [
@@ -18,6 +18,7 @@ import { SharedModule } from 'src/app/shared/shared.module';
     CommonModule,
     ReceptionRoutingModule,
     SharedModule
-  ]
+  ],
+  providers: [LevelAndRoomCommunicationService]
 })
 export class ReceptionModule { }
