@@ -1,6 +1,8 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { RoomData } from 'src/app/configuration-hotel/rooms/infraestructure/interfaces/room.data';
 import { RoomsPersistenceService } from 'src/app/configuration-hotel/rooms/infraestructure/out/server/rooms.service';
+import { HoustingContainerComponent } from 'src/app/housting/housting/infraestructure/ui/components/housting-container.component';
 import { GetRoomsForReceptionDomainPort } from '../../../application/ports/out/other-domains/get-rooms-for-reception-domain.port';
 import { LevelAndRoomCommunicationService } from '../../services/level-and-room-communication.service';
 
@@ -14,6 +16,7 @@ export class ListRoomsComponent implements OnInit {
   roomList: RoomData[] = []
 
   constructor(
+    private dialog: MatDialog,
     private readonly roomsPersistenceService: RoomsPersistenceService,
     private readonly levelAndRoomCommunicationService: LevelAndRoomCommunicationService
   ) {
@@ -32,6 +35,14 @@ export class ListRoomsComponent implements OnInit {
     })
   }
   displayHousting() {
+    let dialogRef = this.dialog.open(HoustingContainerComponent, { data: {}, width: '88%', maxWidth: '1350px' })
+    /* dialogRef.afterClosed().subscribe((result: boolean) => {
 
+      if (result) {
+        this.roomsPersistenceService.removeRoom(room.level.id, room.id).subscribe(response => {
+          if (response) this.loadRooms()
+        })
+      }
+    }) */
   }
 }
