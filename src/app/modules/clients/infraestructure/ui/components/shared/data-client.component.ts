@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { REG_EXP } from 'src/app/shared/consts/reg-exp.enum';
-import { ClientModel } from '../models/client.model';
+import { ClientModel } from '../../models/client.model';
+import { ClientsService } from './../../../out/clients.service';
 
 @Component({
   selector: 'app-data-client',
@@ -13,6 +14,7 @@ export class DataClientComponent implements OnInit {
   client: ClientModel = new ClientModel(null, '', '', '')
   constructor(
     private formBuilder: FormBuilder,
+    private readonly clientsService: ClientsService
   ) { }
 
   ngOnInit(): void {
@@ -25,5 +27,10 @@ export class DataClientComponent implements OnInit {
   }
   get clientControl() {
     return this.clientData.controls
+  }
+  saveClient() {
+    this.clientsService.createClient(this.clientData.value).subscribe(response => {
+      console.log(response)
+    })
   }
 }

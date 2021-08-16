@@ -14,6 +14,7 @@ import { CoreModule } from './core/core.module';
 import { RoomsModule } from './modules/configuration-hotel/rooms/rooms.module';
 import { HoustingModule } from './modules/housting/housting/housting.module';
 import { ReceptionModule } from './modules/housting/reception/reception.module';
+import { ClientsModule } from './modules/clients/clients.module';
 
 @NgModule({
   declarations: [
@@ -33,6 +34,7 @@ import { ReceptionModule } from './modules/housting/reception/reception.module';
     RoomsModule,
     HoustingModule,
     ReceptionModule,
+    ClientsModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
