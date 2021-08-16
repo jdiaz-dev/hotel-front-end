@@ -10,22 +10,22 @@ const routes: Routes = [
     children: [
       {
         path: 'recepcion',
-        loadChildren: () => import('./housting/reception/reception-routing.module').then((m) => m.ReceptionRoutingModule)
+        loadChildren: () => import('./modules/housting/reception/reception-routing.module').then((m) => m.ReceptionRoutingModule)
 
       },
       {
         path: 'niveles',
-        loadChildren: () => import('./configuration-hotel/hotel-level/hotel-level-routing.module').then((m) => m.HotelLevelRoutingModule)
+        loadChildren: () => import('./modules/configuration-hotel/hotel-level/hotel-level-routing.module').then((m) => m.HotelLevelRoutingModule)
 
       },
       {
         path: 'categorias-habitaciones',
-        loadChildren: () => import('./configuration-hotel/room-categories/room-categories-routing.module').then((m) => m.RoomCategoriesRoutingModule)
+        loadChildren: () => import('./modules/configuration-hotel/room-categories/room-categories-routing.module').then((m) => m.RoomCategoriesRoutingModule)
 
       },
       {
         path: 'habitaciones',
-        loadChildren: () => import('./configuration-hotel/rooms/rooms-routing.module').then((m) => m.RoomsRoutingModule)
+        loadChildren: () => import('./modules/configuration-hotel/rooms/rooms-routing.module').then((m) => m.RoomsRoutingModule)
 
       },
     ]

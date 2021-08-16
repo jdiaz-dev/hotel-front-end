@@ -1,0 +1,14 @@
+<app-data-room [roomData]="data"></app-data-room>
+
+<mat-card class="housting-forms">
+    <app-data-client #DATA_CLIENT></app-data-client>
+    <div class="app-data-housting-and-buttons">
+        <app-data-housting #DATA_HOUSTING></app-data-housting>
+
+        <mat-card-actions>
+            <button mat-raised-button color="warn" [mat-dialog-close]>Cancelar</button>
+            <button mat-raised-button color="primary">Crear registro</button>
+        </mat-card-actions>
+
+    </div>
+</mat-card>

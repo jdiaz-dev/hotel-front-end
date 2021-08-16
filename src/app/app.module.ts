@@ -6,14 +6,14 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
-import { HotelLevelModule } from './configuration-hotel/hotel-level/hotel-level.module';
+import { HotelLevelModule } from './modules/configuration-hotel/hotel-level/hotel-level.module';
 import { SharedModule } from './shared/shared.module';
 import { NavbarComponent } from './shared/components/navbar/navbar.component';
-import { RoomCategoriesModule } from './configuration-hotel/room-categories/room-categories.module';
+import { RoomCategoriesModule } from './modules/configuration-hotel/room-categories/room-categories.module';
 import { CoreModule } from './core/core.module';
-import { RoomsModule } from './configuration-hotel/rooms/rooms.module';
-import { HoustingModule } from './housting/housting/housting.module';
-import { ReceptionModule } from './housting/reception/reception.module';
+import { RoomsModule } from './modules/configuration-hotel/rooms/rooms.module';
+import { HoustingModule } from './modules/housting/housting/housting.module';
+import { ReceptionModule } from './modules/housting/reception/reception.module';
 
 @NgModule({
   declarations: [

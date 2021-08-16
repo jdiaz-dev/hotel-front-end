@@ -1,0 +1,57 @@
+<form #formRoom [formGroup]="houstingData" class="form-container">
+    <mat-card-title>Datos de la habitación</mat-card-title>
+
+    <div class="box-input">
+        <mat-form-field [style.width.%]="100">
+            <input formControlName="price" matInput placeholder="Precio" [(ngModel)]="housting.price">
+            <mat-error *ngIf="houstingControl.price.touched && houstingControl.price.errors?.required">
+                El precio es obligatorio.
+            </mat-error>
+            <mat-error *ngIf="houstingControl.price.touched && houstingControl.price.errors?.pattern">
+                El precio solo puede ser numérico.
+            </mat-error>
+            <mat-error *ngIf="houstingControl.price.touched && houstingControl.price.errors?.maxlength">
+                Este campo permite como máximo 4 dígitos.
+            </mat-error>
+
+        </mat-form-field>
+    </div>
+
+    <div class="box-input">
+        <mat-form-field [style.width.%]="100">
+            <input formControlName="moneyPaid" matInput placeholder="Adelanto" [(ngModel)]="housting.moneyPaid"
+                required>
+
+            <mat-error *ngIf="houstingControl.moneyPaid.touched && houstingControl.moneyPaid.errors?.required">
+                El adelanto es obligatorio
+            </mat-error>
+
+            <mat-error *ngIf="houstingControl.moneyPaid.touched && houstingControl.moneyPaid.errors?.pattern">
+                El adelanto solo puede ser numérico.
+            </mat-error>
+
+            <mat-error *ngIf="houstingControl.moneyPaid.touched && houstingControl.moneyPaid.errors?.maxlength">
+                Este campo permite como máximo 4 dígitos.
+            </mat-error>
+        </mat-form-field>
+    </div>
+
+    <div class="box-input">
+        <mat-form-field [style.width.%]="100">
+            <input formControlName="date" matInput placeholder="Fecha" [(ngModel)]="housting.date" readonly>
+
+            <mat-error *ngIf="houstingControl.date.touched && houstingControl.date.errors?.required">
+                Los apellidos son obligatorios.
+            </mat-error>
+
+            <mat-error *ngIf="houstingControl.date.touched && houstingControl.date.errors?.pattern">
+                Los apellidos solo puedeb ser alfabéticos.
+            </mat-error>
+
+            <mat-error *ngIf="houstingControl.date.touched && houstingControl.date.errors?.maxlength">
+                El nombre solo puede ser como máximo 30 caracteres.
+            </mat-error>
+        </mat-form-field>
+    </div>
+
+</form>

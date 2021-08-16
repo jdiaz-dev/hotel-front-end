@@ -1,0 +1,13 @@
+mat-card {
+  div.container-data-room {
+    display: flex;
+    flex-direction: row;
+
+    div.box-data-1 {
+      width: 70%;
+    }
+    div.box-data-2 {
+      width: 30%;
+    }
+  }
+}

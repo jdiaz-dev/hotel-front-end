@@ -1,0 +1,80 @@
+<div class="container-form">
+    <form #formRoom [formGroup]="clientData" class="form-container">
+        <mat-card-title>Datos de la habitación</mat-card-title>
+
+        <div class="box-input">
+            <div class="">
+                <mat-form-field [style.width.%]="100">
+                    <input formControlName="dni" matInput placeholder="DNI" [(ngModel)]="client.dni">
+                    <mat-error *ngIf="clientControl.dni.touched && clientControl.dni.errors?.pattern">
+                        El DNI solo puede ser numérico.
+                    </mat-error>
+                    <mat-error *ngIf="clientControl.dni.touched && clientControl.dni.errors?.maxlength">
+                        El DNI solo puede tener 8 dígitos.
+                    </mat-error>
+
+                </mat-form-field>
+            </div>
+
+        </div>
+
+        <div class="box-input">
+            <div class="">
+                <mat-form-field [style.width.%]="100">
+                    <input formControlName="names" matInput placeholder="Nombres" [(ngModel)]="client.names" required>
+
+                    <mat-error *ngIf="clientControl.names.touched && clientControl.names.errors?.required">
+                        El nombre es obligatorio
+                    </mat-error>
+
+                    <mat-error *ngIf="clientControl.names.touched && clientControl.names.errors?.pattern">
+                        El nombre solo puede ser alfabético.
+                    </mat-error>
+
+                    <mat-error *ngIf="clientControl.names.touched && clientControl.names.errors?.maxlength">
+                        El nombre solo puede tener como máximo 30 caracteres.
+                    </mat-error>
+                </mat-form-field>
+            </div>
+        </div>
+
+        <div class="box-input">
+            <div class="">
+                <mat-form-field [style.width.%]="100">
+                    <input formControlName="surnames" matInput placeholder="Apellidos" [(ngModel)]="client.surnames"
+                        required>
+
+                    <mat-error *ngIf="clientControl.surnames.touched && clientControl.surnames.errors?.required">
+                        Los apellidos son obligatorios.
+                    </mat-error>
+
+                    <mat-error *ngIf="clientControl.surnames.touched && clientControl.surnames.errors?.pattern">
+                        Los apellidos solo puede ser alfabéticos.
+                    </mat-error>
+
+                    <mat-error *ngIf="clientControl.surnames.touched && clientControl.surnames.errors?.maxlength">
+                        El nombre solo puede tener como máximo 30 caracteres.
+                    </mat-error>
+                </mat-form-field>
+            </div>
+        </div>
+
+        <div class="box-input">
+            <div class="">
+                <mat-form-field [style.width.%]="100">
+                    <input formControlName="visitReason" matInput placeholder="Razón de visita"
+                        [(ngModel)]="client.visitReason" required>
+
+                    <mat-error *ngIf="clientControl.visitReason.touched && clientControl.visitReason.errors?.pattern">
+                        Este campo solo puede ser alfanumérico.
+                    </mat-error>
+
+                    <mat-error *ngIf="clientControl.visitReason.touched && clientControl.visitReason.errors?.maxlength">
+                        Este campo solo puede tener como máximo 60 caracteres.
+                    </mat-error>
+                </mat-form-field>
+            </div>
+        </div>
+
+    </form>
+</div>
