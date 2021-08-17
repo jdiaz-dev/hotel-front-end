@@ -8,9 +8,7 @@ import { RoomData } from 'src/app/modules/configuration-hotel/rooms/infraestruct
 })
 export class DataRoomComponent implements OnInit {
   @Input('roomData') roomData!: RoomData
-  constructor() {
-
-  }
+  constructor() { }
 
   ngOnInit(): void { }
 

@@ -4,6 +4,7 @@ import { AccessKeys } from 'src/app/shared/enums/name-token';
 import { SERVER } from 'src/app/shared/enums/server.enum';
 import { StateUserService } from 'src/app/shared/services/state-user.service';
 import { environment } from 'src/environments/environment';
+import { HoustingModel } from '../ui/models/housting.model';
 
 @Injectable({
   providedIn: 'root'
@@ -17,11 +18,11 @@ export class HoustingService {
     private http: HttpClient,
     private stateUserService: StateUserService
   ) { }
-  /* createHousting(hotelLevel: LevelModel) {
+  createHousting(hotelLevel: HoustingModel) {
     const body = JSON.stringify(hotelLevel);
-    return this.http.post(`${this.serverUrl}/${SERVER.PREFIX}/levels/${this.hotelId}`, body, { headers: this.headers })
+    return this.http.post(`${this.serverUrl}/${SERVER.PREFIX}/housting/${this.hotelId}/${'cashId'}/${'clientId'}/${'roomId'}`, body, { headers: this.headers })
   }
-  getHousting() {
+  /* getHousting() {
     return this.http.get<LevelData[]>(`${this.serverUrl}/${SERVER.PREFIX}/levels/${this.hotelId}`, { headers: this.headers })
   }
   updateMoneyPaid(hotelLevel: LevelModel, levelId: number) {

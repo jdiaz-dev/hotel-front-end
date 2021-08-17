@@ -9,7 +9,9 @@
 
         <mat-card-actions>
             <button mat-raised-button color="warn" [mat-dialog-close]>Cancelar</button>
-            <button mat-raised-button color="primary">Crear registro</button>
+            <button mat-raised-button color="primary" (click)="DATA_CLIENT.saveClient()"
+                (click)="DATA_HOUSTING.saveHousting()" [disabled]="!houstingFormValid && !houstingFormValid">Crear
+                registro</button>
         </mat-card-actions>
 
     </div>

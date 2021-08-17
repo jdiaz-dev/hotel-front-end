@@ -27,9 +27,7 @@ export class ListRoomsComponent implements OnInit {
   }
   loadRoomsByLevel() {
     this.levelAndRoomCommunicationService.renderOtherRooms$.subscribe((levelId: number) => {
-      console.log(levelId)
       this.getRoomsForReceptionDomainPort.getRoomsByLevel(levelId).subscribe((response: RoomData[]) => {
-        console.log(response)
         this.roomList = response
       })
     })
