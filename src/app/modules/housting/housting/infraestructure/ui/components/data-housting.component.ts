@@ -9,6 +9,7 @@ import * as dayjs from "dayjs";
 import * as utc from 'dayjs/plugin/utc'
 import * as localizedFormat from 'dayjs/plugin/localizedFormat'
 import { FormsValidForHoustingService } from '../services/communication/forms-valid-for-housting.service';
+import { DateService } from 'src/app/shared/services/date.service';
 dayjs.extend(utc)
 dayjs.extend(localizedFormat)
 
@@ -19,13 +20,14 @@ dayjs.extend(localizedFormat)
 })
 export class DataHoustingComponent implements OnInit, DoCheck {
   houstingData!: FormGroup
-  housting: HoustingModel = new HoustingModel(null, 0, dayjs().utc(true).format('DD/MM/YYYY          LT'))
+  housting: HoustingModel = new HoustingModel(null, 0, this.dateService.getCurrentDateWithSpace())
   allowSaveData!: boolean
 
   constructor(
     private formBuilder: FormBuilder,
     private houstingService: HoustingService,
-    private readonly formsValidForHoustingService: FormsValidForHoustingService
+    private readonly formsValidForHoustingService: FormsValidForHoustingService,
+    private readonly dateService: DateService
   ) { }
 
   ngOnInit(): void {

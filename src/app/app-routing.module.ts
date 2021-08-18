@@ -14,6 +14,11 @@ const routes: Routes = [
 
       },
       {
+        path: 'caja',
+        loadChildren: () => import('./modules/cash/cash-routing.module').then((m) => m.CashRoutingModule)
+
+      },
+      {
         path: 'niveles',
         loadChildren: () => import('./modules/configuration-hotel/hotel-level/hotel-level-routing.module').then((m) => m.HotelLevelRoutingModule)
 

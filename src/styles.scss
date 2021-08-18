@@ -33,3 +33,8 @@ div.buttons {
 .angular-material-select {
   width: 100%;
 }
+
+//to remove space granted by default
+.mat-card-header-text {
+  margin: 0px 0px 0px 0px !important;
+}

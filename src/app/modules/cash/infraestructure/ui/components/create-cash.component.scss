@@ -1,0 +1,12 @@
+mat-card {
+  width: 30%;
+  margin: 0 auto;
+
+  mat-card-header {
+    padding: 0;
+    justify-content: center;
+  }
+  mat-card-content form div.buttons {
+    margin-top: 10px;
+  }
+}

@@ -17,10 +17,10 @@ import { RoomCategoriesPersitenceService } from './infraestructure/out/server/ro
     RoomCategoriesContainerComponent,
   ],
   imports: [
-    FormsModule,
-    ReactiveFormsModule,
     CommonModule,
     RoomCategoriesRoutingModule,
+    FormsModule,
+    ReactiveFormsModule,
     SharedModule
   ],
   providers: [RoomCategoriesPersitenceService]

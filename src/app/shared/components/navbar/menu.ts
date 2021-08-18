@@ -19,8 +19,14 @@ export const MENU: Menu[] = [
   {
     name: 'Caja',
     children: [
-      { name: 'Apertura de caja' },
-      { name: 'Cierre de caja' },
+      {
+        name: 'Apertura de caja',
+        url: '/menu/caja/apertura-caja'
+      },
+      {
+        name: 'Cierre de caja',
+        url: '/menu/caja/cierre-caja'
+      },
     ]
   },
   {
