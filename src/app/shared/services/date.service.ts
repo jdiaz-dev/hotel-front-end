@@ -13,11 +13,11 @@ export class DateService {
 
   constructor() { }
   getCurrentDate() {
-    const currentDate = dayjs().utc(true).format('DD/MM/YYYY          LT')
+    const currentDate = dayjs().utc(true).format('YYYY-MM-DD')
     return currentDate
   }
-  getCurrentDateWithSpace(): string {
-    const currentDate = dayjs().utc(true).format('DD/MM/YYYY          LT')
-    return currentDate
+  getCurrentTime() {
+    const currentTime = dayjs().utc(true).format('HH:mm:ss')
+    return currentTime
   }
 }

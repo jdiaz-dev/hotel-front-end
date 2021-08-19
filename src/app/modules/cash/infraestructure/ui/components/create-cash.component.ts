@@ -13,7 +13,7 @@ import { CashModel } from '../models/cash.model';
 })
 export class CreateCashComponent implements OnInit {
   cashData!: FormGroup
-  cash: CashModel = new CashModel(this.dateService.getCurrentDate(), null)
+  cash: CashModel = new CashModel(null, this.dateService.getCurrentDate(), this.dateService.getCurrentTime())
   constructor(
     private formBuilder: FormBuilder,
     private readonly cashService: CashService,
@@ -21,14 +21,16 @@ export class CreateCashComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    console.log(this.cash)
     this.cashData = this.formBuilder.group({
       openingMoney: ['', [Validators.required, Validators.maxLength(5), Validators.pattern(REG_EXP.numeric)]],
       date: ['', [Validators.required, Validators.maxLength(30)]],
+      time: ['', [Validators.required, Validators.maxLength(30)]],
     })
   }
   saveCash(form: any) {
     this.cashService.createCash(this.cashData.value).subscribe(response => {
-      //console.log(response)
+      console.log(response)
     })
   }
   get cashControl() {

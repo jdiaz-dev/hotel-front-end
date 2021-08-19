@@ -12,9 +12,13 @@
         <form #formCash [formGroup]="cashData" (ngSubmit)="saveCash(formCash)" class="form-container">
 
             <div class="input">
-                <div class="">
-                    <mat-form-field [style.width.%]="100">
-                        <input formControlName="date" matInput placeholder="Fecha" [(ngModel)]="cash.date" required>
+                <div class="date-and-time">
+                    <mat-form-field [style.width.%]="45">
+                        <input formControlName="date" matInput placeholder="Fecha" [(ngModel)]="cash.date" readonly>
+                    </mat-form-field>
+
+                    <mat-form-field class="time" [style.width.%]="45">
+                        <input formControlName="time" matInput placeholder="Hora" [(ngModel)]="cash.time" readonly>
                     </mat-form-field>
                 </div>
 

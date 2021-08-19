@@ -34,7 +34,13 @@ div.buttons {
   width: 100%;
 }
 
-//to remove space granted by default
+/* for date and time input */
+div.date-and-time {
+  display: flex;
+  justify-content: space-between;
+}
+
+//to remove space granted by default in card-header
 .mat-card-header-text {
   margin: 0px 0px 0px 0px !important;
 }

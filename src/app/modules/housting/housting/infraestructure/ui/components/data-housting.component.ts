@@ -20,7 +20,7 @@ dayjs.extend(localizedFormat)
 })
 export class DataHoustingComponent implements OnInit, DoCheck {
   houstingData!: FormGroup
-  housting: HoustingModel = new HoustingModel(null, 0, this.dateService.getCurrentDateWithSpace())
+  housting: HoustingModel = new HoustingModel(null, 0, this.dateService.getCurrentDate())
   allowSaveData!: boolean
 
   constructor(

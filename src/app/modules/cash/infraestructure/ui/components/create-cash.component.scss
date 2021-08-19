@@ -6,7 +6,15 @@ mat-card {
     padding: 0;
     justify-content: center;
   }
+
   mat-card-content form div.buttons {
     margin-top: 10px;
+    justify-content: space-between;
+
+    div.input {
+      div.date-and-time {
+        display: flex;
+      }
+    }
   }
 }
