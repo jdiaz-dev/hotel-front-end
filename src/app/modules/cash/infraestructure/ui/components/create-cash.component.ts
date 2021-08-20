@@ -21,7 +21,7 @@ export class CreateCashComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    console.log(this.cash)
+    this.obtainCashNotClosed()
     this.cashData = this.formBuilder.group({
       openingMoney: ['', [Validators.required, Validators.maxLength(5), Validators.pattern(REG_EXP.numeric)]],
       date: ['', [Validators.required, Validators.maxLength(30)]],
@@ -35,5 +35,10 @@ export class CreateCashComponent implements OnInit {
   }
   get cashControl() {
     return this.cashData.controls
+  }
+  obtainCashNotClosed() {
+    this.cashService.getCashNotClosed().subscribe(response => {
+      console.log(response)
+    })
   }
 }

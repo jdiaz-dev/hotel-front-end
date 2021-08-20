@@ -28,7 +28,7 @@ export class StateUserService {
     if (user) return user.hotelId
     return NaN
   }
-  getDataUser() {
+  private getDataUser() {
     const user: DataUser = JSON.parse(localStorage.getItem(this.nameUserLocalStorage) || '{}');
     return user
   }

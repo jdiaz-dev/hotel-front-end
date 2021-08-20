@@ -22,4 +22,7 @@ export class CashService {
     const body = JSON.stringify(hotelLevel);
     return this.http.post(`${this.serverUrl}/${SERVER.PREFIX}/cash/${this.hotelId}`, body, { headers: this.headers })
   }
+  getCashNotClosed() {
+    return this.http.get(`${this.serverUrl}/${SERVER.PREFIX}/cash/${this.hotelId}`, { headers: this.headers })
+  }
 }
