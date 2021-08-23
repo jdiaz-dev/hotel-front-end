@@ -33,12 +33,13 @@ export class CreateCashComponent implements OnInit {
       console.log(response)
     })
   }
-  get cashControl() {
-    return this.cashData.controls
-  }
   obtainCashNotClosed() {
     this.cashService.getCashNotClosed().subscribe(response => {
       console.log(response)
     })
   }
+  get cashControl() {
+    return this.cashData.controls
+  }
+  
 }
