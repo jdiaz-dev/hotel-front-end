@@ -8,7 +8,6 @@ import { UserModel } from '../../models/user.model';
 import { UsersService } from '../../out/users.service';
 import { StateCashService } from 'src/app/shared/services/state-cash.service';
 
-
 @Component({
   selector: 'app-login-user',
   templateUrl: './login-user.component.html',
@@ -42,7 +41,7 @@ export class LoginUserComponent implements OnInit {
   private async saveDataLoginUser(dataUser: DataUser) {
     if (dataUser !== null) {
       this.stateUserService.saveUserLocalStorage(dataUser)
-      this.stateCashService.loadCash()
+      this.stateCashService.loadCashOpened()
       this.router.navigate(['/menu'])
     }
   }

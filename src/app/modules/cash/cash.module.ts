@@ -6,11 +6,13 @@ import { CashContainerComponent } from './infraestructure/ui/components/cash-con
 import { CreateCashComponent } from './infraestructure/ui/components/create-cash.component';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { ImpossibleCreateCashComponent } from './infraestructure/ui/modals/impossible-create-cash.component';
 
 @NgModule({
   declarations: [
     CashContainerComponent,
-    CreateCashComponent
+    CreateCashComponent,
+    ImpossibleCreateCashComponent
   ],
   imports: [
     CommonModule,

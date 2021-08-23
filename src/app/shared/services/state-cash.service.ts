@@ -16,19 +16,26 @@ export class StateCashService {
   ) {
     this.getCashNotClosedForSharedDomain = cashService
   }
-  async loadCash() {
+  async loadCashOpened() {
     const cashData: CashData = await this.getCashNotClosedForSharedDomain.getCashNotClosed().toPromise()
 
     if (cashData !== null) {
       this.saveCashInLocalStorage(cashData)
     }
   }
+  getCashId() {
+    const cash: CashData = this.getCash()
+    if (cash) return cash.id
+    return NaN
+  }
   private saveCashInLocalStorage(cashData: CashData) {
     localStorage.setItem(this.dataCashLocalStorage, JSON.stringify(cashData));
   }
-  getCashId() {
-
+  private getCash() {
+    const cash: CashData = JSON.parse(localStorage.getItem(this.dataCashLocalStorage) || '{}');
+    return cash
   }
+
 
 
 
