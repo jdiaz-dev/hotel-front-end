@@ -37,21 +37,18 @@
     </div>
 
     <div class="box-input">
-        <mat-form-field [style.width.%]="100">
-            <input formControlName="date" matInput placeholder="Fecha" [(ngModel)]="housting.date" readonly>
+        <div class="date-and-time">
+            <mat-form-field [style.width.%]="45">
+                <input formControlName="entryDate" matInput placeholder="Fecha" [(ngModel)]="housting.entryDate"
+                    readonly>
+            </mat-form-field>
 
-            <mat-error *ngIf="houstingControl.date.touched && houstingControl.date.errors?.required">
-                Los apellidos son obligatorios.
-            </mat-error>
+            <mat-form-field class="time" [style.width.%]="45">
+                <input formControlName="entryTime" matInput placeholder="Hora" [(ngModel)]="housting.entryTime"
+                    readonly>
+            </mat-form-field>
+        </div>
 
-            <mat-error *ngIf="houstingControl.date.touched && houstingControl.date.errors?.pattern">
-                Los apellidos solo puedeb ser alfabéticos.
-            </mat-error>
-
-            <mat-error *ngIf="houstingControl.date.touched && houstingControl.date.errors?.maxlength">
-                El nombre solo puede ser como máximo 30 caracteres.
-            </mat-error>
-        </mat-form-field>
     </div>
 
 </form>

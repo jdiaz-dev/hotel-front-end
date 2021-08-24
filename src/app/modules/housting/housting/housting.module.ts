@@ -5,7 +5,7 @@ import { HoustingRoutingModule } from './housting-routing.module';
 
 import { HoustingContainerComponent } from './infraestructure/ui/components/housting-container.component';
 import { DataRoomComponent } from './infraestructure/ui/components/data-room.component';
-import { DataHoustingComponent } from './infraestructure/ui/components/data-housting.component';
+import { FormHoustingComponent } from './infraestructure/ui/components/form-housting.component';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ClientsModule } from '../../clients/clients.module';
@@ -14,8 +14,7 @@ import { ClientsModule } from '../../clients/clients.module';
 @NgModule({
   declarations: [
     DataRoomComponent,
-
-    DataHoustingComponent,
+    FormHoustingComponent,
     HoustingContainerComponent
   ],
   imports: [

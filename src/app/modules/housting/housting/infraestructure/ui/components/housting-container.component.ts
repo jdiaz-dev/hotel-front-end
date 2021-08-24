@@ -33,5 +33,4 @@ export class HoustingContainerComponent implements OnInit {
       if (full) this.houstingFormValid = true
     })
   }
-
 }

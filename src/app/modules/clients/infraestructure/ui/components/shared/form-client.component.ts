@@ -3,20 +3,22 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { REG_EXP } from 'src/app/shared/consts/reg-exp.enum';
 import { FormsValidForHoustingService } from 'src/app/modules/housting/housting/infraestructure/ui/services/communication/forms-valid-for-housting.service';
 import { ClientModel } from '../../models/client.model';
-import { ClientsService } from './../../../out/clients.service';
+import { ClientsService } from '../../../out/clients.service';
+import { VerifyClientSavedService } from 'src/app/modules/housting/housting/infraestructure/ui/services/communication/verify-client-saved.service';
 
 @Component({
-  selector: 'app-data-client',
-  templateUrl: './data-client.component.html',
-  styleUrls: ['./data-client.component.scss']
+  selector: 'app-form-client',
+  templateUrl: './form-client.component.html',
+  styleUrls: ['./form-client.component.scss']
 })
-export class DataClientComponent implements OnInit, DoCheck {
+export class FormClientComponent implements OnInit, DoCheck {
   clientData!: FormGroup
   client: ClientModel = new ClientModel(null, '', '', '')
   constructor(
     private formBuilder: FormBuilder,
     private readonly clientsService: ClientsService,
-    private readonly formsValidForHoustingService: FormsValidForHoustingService
+    private readonly formsValidForHoustingService: FormsValidForHoustingService,
+    private readonly verifyClientSavedService: VerifyClientSavedService
   ) { }
 
   ngOnInit(): void {
@@ -33,10 +35,9 @@ export class DataClientComponent implements OnInit, DoCheck {
   get clientControl() {
     return this.clientData.controls
   }
-  saveClient() {
-    this.clientsService.createClient(this.clientData.value).subscribe(response => {
-      console.log(response)
-    })
+  async saveClient() {
+    const client: any = await this.clientsService.createClient(this.clientData.value).toPromise()
+    if (client.id) this.verifyClientSavedService.confirmUserSaved(client.id)
   }
   noticeFormClientValid() {
     if (!this.clientData.invalid) this.formsValidForHoustingService.confirmFormClientValid(true)

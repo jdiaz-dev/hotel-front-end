@@ -2,12 +2,12 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { ClientsRoutingModule } from './clients-routing.module';
-import { DataClientComponent } from './infraestructure/ui/components/shared/data-client.component';
+import { FormClientComponent } from './infraestructure/ui/components/shared/form-client.component';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
-  declarations: [DataClientComponent],
+  declarations: [FormClientComponent],
   imports: [
     CommonModule,
     ClientsRoutingModule,
@@ -15,6 +15,6 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     ReactiveFormsModule,
     SharedModule
   ],
-  exports: [DataClientComponent]
+  exports: [FormClientComponent]
 })
 export class ClientsModule { }
