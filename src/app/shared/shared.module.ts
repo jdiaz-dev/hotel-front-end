@@ -4,12 +4,14 @@ import { RouterModule } from '@angular/router';
 
 import { MaterialModule } from './material/material.module';
 import { ConfirmRemoveComponent } from './modals/confirm-remove.component';
+import { OkComponent } from './modals/ok.component';
 
 @NgModule({
   declarations: [
 
 
-    ConfirmRemoveComponent
+    ConfirmRemoveComponent,
+        OkComponent
   ],
   imports: [
     CommonModule,

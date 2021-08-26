@@ -11,6 +11,8 @@ import * as localizedFormat from 'dayjs/plugin/localizedFormat'
 import { FormsValidForHoustingService } from '../services/communication/forms-valid-for-housting.service';
 import { DateService } from 'src/app/shared/services/date.service';
 import { VerifyClientSavedService } from '../services/communication/verify-client-saved.service';
+import { MatDialog } from '@angular/material/dialog';
+import { OkComponent } from 'src/app/shared/modals/ok.component';
 dayjs.extend(utc)
 dayjs.extend(localizedFormat)
 
@@ -30,7 +32,8 @@ export class FormHoustingComponent implements OnInit, DoCheck {
     private houstingService: HoustingService,
     private readonly formsValidForHoustingService: FormsValidForHoustingService,
     private readonly dateService: DateService,
-    private readonly verifyClientSavedService: VerifyClientSavedService
+    private readonly verifyClientSavedService: VerifyClientSavedService,
+    private dialog: MatDialog
   ) { }
 
   ngOnInit(): void {
@@ -48,16 +51,30 @@ export class FormHoustingComponent implements OnInit, DoCheck {
   async saveHousting() {
     console.log('executed save housting')
     this.verifyClientSavedService.userSaved$.subscribe((userId: number) => {
-      console.log(userId)
+      //console.log(userId)
       if (userId) {
+        console.log(userId)
         this.houstingService.createHousting(this.houstingData.value, this.roomId, userId).subscribe(response => {
           console.log(response)
+          this.openDialog()
         })
       }
     })
   }
+  openDialog() {
+    const message = 'Un alojamiento ha sido añadido con éxito'
+    let dialogRef = this.dialog.open(OkComponent, { data: message, width: '25%' })
+    /* dialogRef.afterClosed().subscribe((result: boolean) => {
+      console.log(result)
+      if (result) this.ngOnInit()
+    }) */
+  }
   noticeFormHoustingValid() {
-    if (!this.houstingData.invalid) this.formsValidForHoustingService.confirmFormHoustingValid(true)
+    if (!this.houstingData.invalid) {
+      this.formsValidForHoustingService.confirmFormHoustingValid(true)
+      console.log('entered')
+      this.ngOnInit()
+    }
   }
   get houstingControl() {
     return this.houstingData.controls

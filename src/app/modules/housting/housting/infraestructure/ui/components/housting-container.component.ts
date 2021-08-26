@@ -1,3 +1,4 @@
+import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 import { Component, Inject, OnInit } from '@angular/core';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { RoomData } from 'src/app/modules/configuration-hotel/rooms/infraestructure/interfaces/room.data';
@@ -15,6 +16,7 @@ export class HoustingContainerComponent implements OnInit {
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: RoomData,
     private formsValidForHoustingService: FormsValidForHoustingService,
+
   ) { }
 
   ngOnInit(): void {
@@ -33,4 +35,5 @@ export class HoustingContainerComponent implements OnInit {
       if (full) this.houstingFormValid = true
     })
   }
+
 }
