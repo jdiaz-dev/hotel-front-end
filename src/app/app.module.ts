@@ -12,10 +12,12 @@ import { NavbarComponent } from './shared/components/navbar/navbar.component';
 import { RoomCategoriesModule } from './modules/configuration-hotel/room-categories/room-categories.module';
 import { CoreModule } from './core/core.module';
 import { RoomsModule } from './modules/configuration-hotel/rooms/rooms.module';
-import { HoustingModule } from './modules/housting/housting/housting.module';
+import { HoustingModule } from './modules/housting/input-housting/housting.module';
 import { ReceptionModule } from './modules/housting/reception/reception.module';
 import { ClientsModule } from './modules/clients/clients.module';
 import { CashModule } from './modules/cash/cash.module';
+import { OutputHoustingModule } from './modules/housting/output-housting/output-housting.module';
+import { ProductsModule } from './modules/sales/products/products.module';
 
 @NgModule({
   declarations: [
@@ -37,6 +39,8 @@ import { CashModule } from './modules/cash/cash.module';
     ReceptionModule,
     ClientsModule,
     CashModule,
+    OutputHoustingModule,
+    ProductsModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -1,0 +1,114 @@
+<form #formHotelLevel [formGroup]="productData" (ngSubmit)="saveProduct(formHotelLevel)" class="form-container">
+    <!-- <mat-card-title>Abridor</mat-card-title> -->
+
+    <div class="input">
+        <div class="">
+            <mat-form-field [style.width.%]="100">
+                <input formControlName="code" matInput placeholder="Código" [(ngModel)]="product.code" required>
+                <mat-error *ngIf="productControl.code.touched && productControl.code.errors?.required">
+                    Ingresa un número para el nivel
+                </mat-error>
+
+                <mat-error *ngIf="productControl.code.touched && productControl.code.errors?.maxlength">
+                    La cantidad máxima solo puede ser 5 dígitos
+                </mat-error>
+
+                <mat-error *ngIf="productControl.code.touched && productControl.code.errors?.pattern">
+                    Este campo solo puede ser numérico
+                </mat-error>
+            </mat-form-field>
+
+        </div>
+
+    </div>
+
+    <div class="input">
+        <div class="">
+            <mat-form-field [style.width.%]="100">
+                <input formControlName="name" matInput placeholder="Nombre del producto" [(ngModel)]="product.name"
+                    required>
+
+                <mat-error *ngIf="productControl.name.touched && productControl.name.errors?.required">
+                    Ingresa el nombre el producto
+                </mat-error>
+
+                <mat-error *ngIf="productControl.name.touched && productControl.name.errors?.maxlength">
+                    La cantidad máxima de caractereses es 50
+                </mat-error>
+
+                <mat-error *ngIf="productControl.name.touched && productControl.name.errors?.pattern">
+                    Este campo solo puede ser alfanumérico
+                </mat-error>
+
+            </mat-form-field>
+        </div>
+    </div>
+
+    <div class="input">
+        <div class="">
+            <mat-form-field [style.width.%]="100">
+                <input formControlName="brand" matInput placeholder="Marca" [(ngModel)]="product.brand" required>
+
+                <mat-error *ngIf="productControl.brand.touched && productControl.brand.errors?.required">
+                    Ingresa la marca del producto
+                </mat-error>
+
+                <mat-error *ngIf="productControl.brand.touched && productControl.brand.errors?.maxlength">
+                    La cantidad máxima de caractereses es 50
+                </mat-error>
+
+                <mat-error *ngIf="productControl.brand.touched && productControl.brand.errors?.pattern">
+                    Este campo solo puede ser alfanumérico
+                </mat-error>
+
+            </mat-form-field>
+        </div>
+    </div>
+
+    <div class="input">
+        <div class="">
+            <mat-form-field [style.width.%]="100">
+                <input formControlName="details" matInput placeholder="Detalles" [(ngModel)]="product.details">
+
+                <mat-error *ngIf="productControl.details.touched && productControl.details.errors?.maxlength">
+                    La cantidad máxima de caractereses es 50
+                </mat-error>
+
+                <mat-error *ngIf="productControl.details.touched && productControl.details.errors?.pattern">
+                    Este campo solo puede ser alfanumérico
+                </mat-error>
+
+            </mat-form-field>
+        </div>
+    </div>
+
+    <div class="input">
+        <div class="">
+            <mat-form-field [style.width.%]="100">
+                <input formControlName="price" matInput placeholder="Precio" [(ngModel)]="product.price" required>
+
+                <mat-error *ngIf="productControl.price.touched && productControl.price.errors?.required">
+                    Ingresa el precio del producto
+                </mat-error>
+
+                <mat-error *ngIf="productControl.price.touched && productControl.price.errors?.maxlength">
+                    La cantidad máxima de dígitos es 5
+                </mat-error>
+
+                <mat-error *ngIf="productControl.price.touched && productControl.price.errors?.pattern">
+                    Este campo solo puede ser numérico
+                </mat-error>
+
+            </mat-form-field>
+        </div>
+    </div>
+
+
+    <div class="buttons buttons-dialog">
+        <button mat-raised-button mat-dialog-close color="accent" class="cancel">Cancelar</button>
+        <button type="submit" mat-raised-button color="primary" [mat-dialog-close]="true"
+            [disabled]="productData.invalid">Guardar</button>
+    </div>
+
+
+</form>

@@ -8,10 +8,8 @@ import { OkComponent } from './modals/ok.component';
 
 @NgModule({
   declarations: [
-
-
     ConfirmRemoveComponent,
-        OkComponent
+    OkComponent
   ],
   imports: [
     CommonModule,

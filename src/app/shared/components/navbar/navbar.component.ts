@@ -23,7 +23,4 @@ export class NavbarComponent implements OnInit {
   }
   hasChild = (_: number, node: Menu) => !!node.children && node.children.length > 0;
 
-  checking(data: any) {
-    console.log('--------------data', data)
-  }
 }

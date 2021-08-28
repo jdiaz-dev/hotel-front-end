@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { LevelData } from 'src/app/modules/configuration-hotel/hotel-level/infraestructure/interfaces/level-data.interface';
-import { HotelLevelPersistenceService } from 'src/app/modules/configuration-hotel/hotel-level/infraestructure/out/server/hotel-level-persistence.service';
+import { HotelLevelPersistenceService } from 'src/app/modules/configuration-hotel/hotel-level/infraestructure/out/hotel-level-persistence.service';
 import { GetLevelsForReceptionDomain } from '../../../application/ports/out/other-domains/get-levels-for-reception-domain.port';
-import { LevelAndRoomCommunicationService } from '../../services/level-and-room-communication.service';
+import { LevelAndRoomCommunicationService } from '../services/level-and-room-communication.service';
 
 @Component({
   selector: 'app-list-levels',

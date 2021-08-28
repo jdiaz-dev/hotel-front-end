@@ -8,16 +8,36 @@ const routes: Routes = [
     path: 'menu',
     component: NavbarComponent,
     children: [
+
+      //reception
       {
-        path: 'recepcion',
+        path: 'recepcion/:mode',
         loadChildren: () => import('./modules/housting/reception/reception-routing.module').then((m) => m.ReceptionRoutingModule)
 
       },
+      {
+        path: 'salida/:mode',
+        loadChildren: () => import('./modules/housting/reception/reception-routing.module').then((m) => m.ReceptionRoutingModule)
+
+      },
+
+      //cashes
       {
         path: 'caja',
         loadChildren: () => import('./modules/cash/cash-routing.module').then((m) => m.CashRoutingModule)
 
       },
+
+
+
+      //point of sale
+      {
+        path: 'productos',
+        loadChildren: () => import('./modules/sales/products/products-routing.module').then((m) => m.ProductsRoutingModule)
+
+      },
+
+      //configuration hotel
       {
         path: 'niveles',
         loadChildren: () => import('./modules/configuration-hotel/hotel-level/hotel-level-routing.module').then((m) => m.HotelLevelRoutingModule)

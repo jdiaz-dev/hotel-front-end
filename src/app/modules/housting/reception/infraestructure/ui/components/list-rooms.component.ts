@@ -1,11 +1,13 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { MatDialog } from '@angular/material/dialog';
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Params } from '@angular/router';
+
 import { RoomData } from 'src/app/modules/configuration-hotel/rooms/infraestructure/interfaces/room.data';
-import { RoomsPersistenceService } from 'src/app/modules/configuration-hotel/rooms/infraestructure/out/server/rooms.service';
-import { HoustingContainerComponent } from 'src/app/modules/housting/housting/infraestructure/ui/components/housting-container.component';
+import { RoomsPersistenceService } from 'src/app/modules/configuration-hotel/rooms/infraestructure/out/rooms.service';
 import { OkService } from 'src/app/shared/services/communication/ok.service';
 import { GetRoomsForReceptionDomainPort } from '../../../application/ports/out/other-domains/get-rooms-for-reception-domain.port';
-import { LevelAndRoomCommunicationService } from '../../services/level-and-room-communication.service';
+import { LevelAndRoomCommunicationService } from '../services/level-and-room-communication.service';
+import { ReceptionModeService } from '../services/reception-mode.service';
+
 
 @Component({
   selector: 'app-list-rooms',
@@ -15,17 +17,20 @@ import { LevelAndRoomCommunicationService } from '../../services/level-and-room-
 export class ListRoomsComponent implements OnInit {
   private getRoomsForReceptionDomainPort: GetRoomsForReceptionDomainPort
   roomList: RoomData[] = []
+  receptionMode!: string
 
   constructor(
-    private dialog: MatDialog,
-    private readonly roomsPersistenceService: RoomsPersistenceService,
+    public activatedRoute: ActivatedRoute,
     private readonly levelAndRoomCommunicationService: LevelAndRoomCommunicationService,
-    private okService: OkService
+    private readonly okService: OkService,
+    private readonly receptionModeService: ReceptionModeService,
+    roomsPersistenceService: RoomsPersistenceService,
   ) {
     this.getRoomsForReceptionDomainPort = roomsPersistenceService
   }
   ngOnInit(): void {
     this.loadRoomsByLevel()
+    this.checkModeReception()
   }
   loadRoomsByLevel() {
     this.levelAndRoomCommunicationService.renderOtherRooms$.subscribe((levelId: number) => {
@@ -34,23 +39,18 @@ export class ListRoomsComponent implements OnInit {
       })
     })
   }
-  displayHousting(room: RoomData) {
-    let dialogRef = this.dialog.open(HoustingContainerComponent, { data: room, width: '88%', maxWidth: '100%' })
-
-    /* dialogRef.afterClosed().subscribe((result: boolean) => {
-
-      if (result) {
-        this.roomsPersistenceService.removeRoom(room.level.id, room.id).subscribe(response => {
-          if (response) this.loadRooms()
-        })
-      }
-    }) */
-    this.closeHousting(dialogRef)
+  checkModeReception() {
+    this.activatedRoute.params.subscribe((param: Params) => {
+      this.receptionMode = param.mode
+    });
   }
-  closeHousting(dialogHousting: any) {
+  openModeReception(room: RoomData) {
+    const currentDialog = this.receptionModeService.activateReceptionMode(this.receptionMode, room)
+    this.closeDialogHousting(currentDialog)
+  }
+  closeDialogHousting(currentDialogMode: any) {
     this.okService.activedOkButton$.subscribe((activedOkButton: boolean) => {
-      console.log(activedOkButton)
-      dialogHousting.close()
+      currentDialogMode.close()
       this.ngOnInit()
     })
   }

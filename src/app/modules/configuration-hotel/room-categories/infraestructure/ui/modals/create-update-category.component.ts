@@ -3,9 +3,10 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms'
 
 import { MAT_DIALOG_DATA } from '@angular/material/dialog'
 import { RoomCategoryModel } from '../models/room-category.model';
-import { RoomCategoriesPersitenceService } from '../../out/server/room-categories-persitence.service';
+
 import { CategoryData } from '../../interfaces/category-data.interface';
 import { REG_EXP } from '../../../../../../shared/consts/reg-exp.enum';
+import { RoomCategoriesPersitenceService } from '../../out/room-categories-persitence.service';
 
 @Component({
   selector: 'app-create-update-category',

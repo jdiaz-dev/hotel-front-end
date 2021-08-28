@@ -1,7 +1,8 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
+import { RoomCategoriesPersitenceService } from 'src/app/modules/configuration-hotel/room-categories/infraestructure/out/room-categories-persitence.service';
 
-import { RoomCategoriesPersitenceService } from '../../../../../room-categories/infraestructure/out/server/room-categories-persitence.service';
+
 import { CategoryData } from '../../../../../room-categories/infraestructure/interfaces/category-data.interface';
 
 @Component({

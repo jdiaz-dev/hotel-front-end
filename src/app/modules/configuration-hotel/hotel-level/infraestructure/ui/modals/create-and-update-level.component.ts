@@ -4,7 +4,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms'
 import { MAT_DIALOG_DATA } from '@angular/material/dialog'
 import { LevelData } from '../../interfaces/level-data.interface';
 import { LevelModel } from '../models/level.model';
-import { HotelLevelPersistenceService } from '../../out/server/hotel-level-persistence.service';
+import { HotelLevelPersistenceService } from '../../out/hotel-level-persistence.service';
 import { REG_EXP } from '../../../../../../shared/consts/reg-exp.enum';
 
 

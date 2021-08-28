@@ -40,6 +40,11 @@ div.date-and-time {
   justify-content: space-between;
 }
 
+/* buttons of dialog */
+.buttons-dialog, .buttons-card{
+  margin-top:10px;
+}
+
 //to remove space granted by default in card-header ANGULAR MATERIAL
 .mat-card-header-text {
   margin: 0px 0px 0px 0px !important;

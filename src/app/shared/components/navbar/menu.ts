@@ -3,18 +3,11 @@ import { Menu } from "./menu.interface";
 export const MENU: Menu[] = [
   {
     name: 'Recepción',
-    children: [
-    ]
+    url: '/menu/recepcion/input-housting', //input-housting -> url param
   },
   {
     name: 'Salida',
-    children: [
-
-    ]
-  },
-  {
-    name: 'Recepción',
-    url: '/menu/recepcion',
+    url: '/menu/salida/output-housting', //output-housting -> url param
   },
   {
     name: 'Caja',
@@ -32,8 +25,14 @@ export const MENU: Menu[] = [
   {
     name: 'Punto de venta',
     children: [
-      { name: 'Productos' },
-      { name: 'Ventas' },
+      {
+        name: 'Productos',
+        url: '/menu/productos'
+      },
+      {
+        name: 'Venta',
+        url: '/menu'
+      },
     ]
   },
   {

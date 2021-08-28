@@ -7,7 +7,7 @@ import { CategoryCollectionComponent } from './infraestructure/ui/components/cat
 import { CreateUpdateCategoryComponent } from './infraestructure/ui/modals/create-update-category.component';
 import { RoomCategoriesContainerComponent } from './infraestructure/ui/components/room-categories-container.component';
 import { SharedModule } from 'src/app/shared/shared.module';
-import { RoomCategoriesPersitenceService } from './infraestructure/out/server/room-categories-persitence.service';
+import { RoomCategoriesPersitenceService } from './infraestructure/out/room-categories-persitence.service';
 
 
 @NgModule({

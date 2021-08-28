@@ -17,7 +17,7 @@ export class HotelLevelContainerComponent {
 
   openDialog() {
     let dialogRef = this.dialog.open(CreateAndUpdateLevelComponent, { width: '40%' })
-    dialogRef.afterClosed().subscribe(result => {
+    dialogRef.afterClosed().subscribe((result: boolean) => {
       if (result) this.reloadHotelLevelCollectionComponent++
     })
   }

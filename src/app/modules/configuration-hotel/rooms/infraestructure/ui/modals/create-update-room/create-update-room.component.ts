@@ -4,7 +4,7 @@ import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 
 import { REG_EXP } from 'src/app/shared/consts/reg-exp.enum';
 import { RoomData } from '../../../interfaces/room.data';
-import { RoomsPersistenceService } from '../../../out/server/rooms.service';
+import { RoomsPersistenceService } from '../../../out/rooms.service';
 import { RoomModel } from '../../models/room.model';
 
 @Component({

@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { RoomsPersistenceService } from '../../../out/server/rooms.service';
+import { RoomsPersistenceService } from '../../../out/rooms.service';
 import { RoomModel } from '../../models/room.model';
 
 @Injectable({

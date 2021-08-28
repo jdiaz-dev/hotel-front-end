@@ -1,17 +1,17 @@
-import { Component, DoCheck, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { REG_EXP } from 'src/app/shared/consts/reg-exp.enum';
-import { FormsValidForHoustingService } from 'src/app/modules/housting/housting/infraestructure/ui/services/communication/forms-valid-for-housting.service';
+import { FormsValidForHoustingService } from 'src/app/modules/housting/input-housting/infraestructure/ui/services/communication/forms-valid-for-housting.service';
 import { ClientModel } from '../../models/client.model';
 import { ClientsService } from '../../../out/clients.service';
-import { VerifyClientSavedService } from 'src/app/modules/housting/housting/infraestructure/ui/services/communication/verify-client-saved.service';
+import { VerifyClientSavedService } from 'src/app/modules/housting/input-housting/infraestructure/ui/services/communication/verify-client-saved.service';
 
 @Component({
   selector: 'app-form-client',
   templateUrl: './form-client.component.html',
   styleUrls: ['./form-client.component.scss']
 })
-export class FormClientComponent implements OnInit, DoCheck {
+export class FormClientComponent implements OnInit {
   clientData!: FormGroup
   client: ClientModel = new ClientModel(null, '', '', '')
   constructor(
@@ -28,9 +28,7 @@ export class FormClientComponent implements OnInit, DoCheck {
       surnames: ['', [Validators.required, Validators.maxLength(30), Validators.pattern(REG_EXP.alphabetic)]],
       visitReason: ['', [Validators.maxLength(60), Validators.pattern(REG_EXP.alphanumeric)]],
     })
-  }
-  ngDoCheck() {
-    this.noticeFormClientValid()
+    this.checkIfClientFormIsValid()
   }
   get clientControl() {
     return this.clientData.controls
@@ -39,7 +37,11 @@ export class FormClientComponent implements OnInit, DoCheck {
     const client: any = await this.clientsService.createClient(this.clientData.value).toPromise()
     if (client.id) this.verifyClientSavedService.confirmUserSaved(client.id)
   }
-  noticeFormClientValid() {
-    if (!this.clientData.invalid) this.formsValidForHoustingService.confirmFormClientValid(true)
+  checkIfClientFormIsValid() {
+    this.clientData.statusChanges.subscribe(statusForm => {
+      if (statusForm == 'VALID') {
+        this.formsValidForHoustingService.confirmFormClientValid(true)
+      }
+    })
   }
 }

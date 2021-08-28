@@ -1,0 +1,15 @@
+<h3 class="title">
+    Productos
+</h3>
+
+<mat-card class="container" class="mat-elevation-z1">
+
+    <mat-card-content>
+        <div class="container-create-product">
+            <button mat-raised-button color="primary" (click)="openDialog()">Crear nuevo producto</button>
+        </div>
+
+        <app-product-collection [reload]="reloadProductCollectionComponent"></app-product-collection>
+    </mat-card-content>
+
+</mat-card>

@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { HotelLevelPersistenceService } from '../../../../../hotel-level/infraestructure/out/server/hotel-level-persistence.service';
+import { HotelLevelPersistenceService } from '../../../../../hotel-level/infraestructure/out/hotel-level-persistence.service';
 import { LevelData } from '../../../../../hotel-level/infraestructure/interfaces/level-data.interface';
 import { FormControl, Validators } from '@angular/forms';
 

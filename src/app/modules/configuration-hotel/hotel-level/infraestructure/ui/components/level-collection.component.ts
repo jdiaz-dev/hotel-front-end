@@ -1,7 +1,7 @@
 import { Component, Input, OnInit, OnChanges } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 
-import { HotelLevelPersistenceService } from '../../out/server/hotel-level-persistence.service';
+import { HotelLevelPersistenceService } from '../../out/hotel-level-persistence.service';
 import { LevelData } from '../../interfaces/level-data.interface';
 import { CreateAndUpdateLevelComponent } from '../modals/create-and-update-level.component';
 import { ConfirmRemoveComponent } from 'src/app/shared/modals/confirm-remove.component';

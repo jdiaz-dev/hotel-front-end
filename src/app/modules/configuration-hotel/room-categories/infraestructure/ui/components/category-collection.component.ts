@@ -3,7 +3,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { ConfirmRemoveComponent } from 'src/app/shared/modals/confirm-remove.component';
 import { CustomMessage } from 'src/app/shared/modals/custom-message.interface';
 import { CategoryData } from '../../interfaces/category-data.interface';
-import { RoomCategoriesPersitenceService } from '../../out/server/room-categories-persitence.service';
+import { RoomCategoriesPersitenceService } from '../../out/room-categories-persitence.service';
 import { CreateUpdateCategoryComponent } from '../modals/create-update-category.component';
 
 @Component({
