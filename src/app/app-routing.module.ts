@@ -36,6 +36,11 @@ const routes: Routes = [
         loadChildren: () => import('./modules/sales/products/products-routing.module').then((m) => m.ProductsRoutingModule)
 
       },
+      {
+        path: 'venta',
+        loadChildren: () => import('./modules/sales/product-sales/product-sales-routing.module').then((m) => m.ProductSalesRoutingModule)
+
+      },
 
       //configuration hotel
       {

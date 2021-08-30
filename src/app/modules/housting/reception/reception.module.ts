@@ -7,6 +7,7 @@ import { ListLevelsComponent } from './infraestructure/ui/components/list-levels
 import { ListRoomsComponent } from './infraestructure/ui/components/list-rooms.component';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { LevelAndRoomCommunicationService } from './infraestructure/ui/services/level-and-room-communication.service';
+import { ReceptionModeService } from './infraestructure/ui/services/reception-mode.service';
 
 @NgModule({
   declarations: [
@@ -19,6 +20,7 @@ import { LevelAndRoomCommunicationService } from './infraestructure/ui/services/
     ReceptionRoutingModule,
     SharedModule
   ],
-  providers: [LevelAndRoomCommunicationService]
+  providers: [LevelAndRoomCommunicationService],
+  exports: [ReceptionContainerComponent]
 })
 export class ReceptionModule { }

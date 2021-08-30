@@ -31,7 +31,7 @@ export const MENU: Menu[] = [
       },
       {
         name: 'Venta',
-        url: '/menu'
+        url: '/menu/venta'
       },
     ]
   },

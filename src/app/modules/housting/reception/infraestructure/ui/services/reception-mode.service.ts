@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { RoomData } from 'src/app/modules/configuration-hotel/rooms/infraestructure/interfaces/room.data';
 import { OutputHoustingContainerComponent } from 'src/app/modules/housting/output-housting/infraestructure/ui/components/output-housting-container.component';
-import { InputHoustingContainerComponent } from '../../../../input-housting/infraestructure/ui/components/input-housting-container.component';
+import { InputHoustingContainerComponent } from '../../../../input-housting/infraestructure/ui/modals/input-housting-container.component';
 
 @Injectable()
 export class ReceptionModeService {
