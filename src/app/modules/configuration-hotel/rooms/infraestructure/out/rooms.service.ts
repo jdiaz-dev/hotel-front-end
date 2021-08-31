@@ -28,8 +28,8 @@ export class RoomsPersistenceService implements GetRoomsForReceptionDomainPort {
   getALLRooms() {
     return this.http.get<RoomData[]>(`${this.serverUrl}/${SERVER.PREFIX}/rooms/${this.hotelId}`, { headers: this.headers })
   }
-  getRoomsByLevel(levelId: number) {
-    return this.http.get<RoomData[]>(`${this.serverUrl}/${SERVER.PREFIX}/rooms/${this.hotelId}/${levelId}`, { headers: this.headers })
+  getRoomsByLevel(levelId: number, conditionId: number) {
+    return this.http.get<RoomData[]>(`${this.serverUrl}/${SERVER.PREFIX}/rooms/${this.hotelId}/${levelId}?conditionId=${conditionId}`, { headers: this.headers })
   }
   updateRoom(room: RoomModel, levelId: number, categoryId: number, roomId: number) {
     const body = JSON.stringify(room);

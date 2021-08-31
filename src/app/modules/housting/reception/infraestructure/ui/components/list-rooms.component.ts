@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
 
 import { RoomData } from 'src/app/modules/configuration-hotel/rooms/infraestructure/interfaces/room.data';
@@ -7,6 +7,9 @@ import { OkService } from 'src/app/shared/services/communication/ok.service';
 import { GetRoomsForReceptionDomainPort } from '../../../application/ports/out/other-domains/get-rooms-for-reception-domain.port';
 import { LevelAndRoomCommunicationService } from '../services/level-and-room-communication.service';
 import { ReceptionModeService } from '../services/reception-mode.service';
+import { CONFIG } from 'src/config/config';
+import { Subscription } from 'rxjs';
+import { ListRoomMyxin } from './list-room.myxin';
 
 
 @Component({
@@ -14,10 +17,11 @@ import { ReceptionModeService } from '../services/reception-mode.service';
   templateUrl: './list-rooms.component.html',
   styleUrls: ['./list-rooms.component.scss']
 })
-export class ListRoomsComponent implements OnInit {
+export class ListRoomsComponent extends ListRoomMyxin() implements OnInit, OnDestroy {
   private getRoomsForReceptionDomainPort: GetRoomsForReceptionDomainPort
   roomList: RoomData[] = []
   receptionMode!: string
+  communicationSubscription!: Subscription
 
   constructor(
     public activatedRoute: ActivatedRoute,
@@ -26,20 +30,24 @@ export class ListRoomsComponent implements OnInit {
     private readonly receptionModeService: ReceptionModeService,
     roomsPersistenceService: RoomsPersistenceService,
   ) {
+    super()
     this.getRoomsForReceptionDomainPort = roomsPersistenceService
   }
   ngOnInit(): void {
-    this.loadRoomsByLevel()
     this.checkModeReception()
+    this.loadRoomsByLevel()
   }
-  loadRoomsByLevel() {
-    this.levelAndRoomCommunicationService.renderOtherRooms$.subscribe((levelId: number) => {
-      this.getRoomsForReceptionDomainPort.getRoomsByLevel(levelId).subscribe((response: RoomData[]) => {
+  ngOnDestroy(): void {
+    this.communicationSubscription.unsubscribe()
+  }
+  private loadRoomsByLevel() {
+    this.communicationSubscription = this.levelAndRoomCommunicationService.renderOtherRooms$.subscribe((levelId: number) => {
+      this.getRoomsForReceptionDomainPort.getRoomsByLevel(levelId, this.conditionRooms(this.receptionMode)).subscribe((response: RoomData[]) => {
         this.roomList = response
       })
     })
   }
-  checkModeReception() {
+  private checkModeReception() {
     this.activatedRoute.params.subscribe((param: Params) => {
       this.receptionMode = param.mode
     });
@@ -54,4 +62,5 @@ export class ListRoomsComponent implements OnInit {
       this.ngOnInit()
     })
   }
+
 }

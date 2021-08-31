@@ -1,13 +1,14 @@
 import { Menu } from "./menu.interface";
+import { CONFIG } from 'src/config/config';
 
 export const MENU: Menu[] = [
   {
     name: 'Recepción',
-    url: '/menu/recepcion/input-housting', //input-housting -> url param
+    url: `/menu/recepcion/${CONFIG.RECEPTION_MODE.INPUT_HOUSTING}`, //input-housting -> url param
   },
   {
     name: 'Salida',
-    url: '/menu/salida/output-housting', //output-housting -> url param
+    url: `/menu/salida/${CONFIG.RECEPTION_MODE.OUTPUT_HOUSTING}`, //output-housting -> url param
   },
   {
     name: 'Caja',
@@ -31,7 +32,7 @@ export const MENU: Menu[] = [
       },
       {
         name: 'Venta',
-        url: '/menu/venta'
+        url: `/menu/venta/${CONFIG.RECEPTION_MODE.PRODUCT_SALES}`
       },
     ]
   },

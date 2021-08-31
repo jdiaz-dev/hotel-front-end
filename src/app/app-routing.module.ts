@@ -37,8 +37,8 @@ const routes: Routes = [
 
       },
       {
-        path: 'venta',
-        loadChildren: () => import('./modules/sales/product-sales/product-sales-routing.module').then((m) => m.ProductSalesRoutingModule)
+        path: 'venta/:mode',
+        loadChildren: () => import('./modules/housting/reception/reception-routing.module').then((m) => m.ReceptionRoutingModule)
 
       },
 
