@@ -1,3 +1,8 @@
+interface ICondition {
+    ID: number
+    NAME: string
+}
+
 export interface Iconfig {
     LOCAL_STORAGE: {
         DATA_USER: string,
@@ -11,8 +16,8 @@ export interface Iconfig {
         OUTPUT_HOUSTING: string
         PRODUCT_SALES: string
     },
-    CONDITION_IDS: {
-        CONDITION_FREE_ID: number,
-        CONDITION_BUSY_ID: number,
+    CONDITIONS: {
+        FREE: ICondition
+        BUSY: ICondition
     }
 }

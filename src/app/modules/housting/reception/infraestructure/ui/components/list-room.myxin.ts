@@ -7,9 +7,9 @@ export function ListRoomMyxin<T extends Constructor<{}>>(Base: T = class { } as 
         conditionRooms(receptionMode: string): number {
             let roomCondtion: number
             if (receptionMode == CONFIG.RECEPTION_MODE.INPUT_HOUSTING) {
-                roomCondtion = CONFIG.CONDITION_IDS.CONDITION_FREE_ID
+                roomCondtion = CONFIG.CONDITIONS.FREE.ID
             } else {
-                roomCondtion = CONFIG.CONDITION_IDS.CONDITION_BUSY_ID
+                roomCondtion = CONFIG.CONDITIONS.BUSY.ID
             }
             return roomCondtion
         }

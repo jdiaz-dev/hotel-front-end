@@ -10,6 +10,7 @@ import { ReceptionModeService } from '../services/reception-mode.service';
 import { CONFIG } from 'src/config/config';
 import { Subscription } from 'rxjs';
 import { ListRoomMyxin } from './list-room.myxin';
+import { MatDialogRef } from '@angular/material/dialog';
 
 
 @Component({
@@ -19,9 +20,11 @@ import { ListRoomMyxin } from './list-room.myxin';
 })
 export class ListRoomsComponent extends ListRoomMyxin() implements OnInit, OnDestroy {
   private getRoomsForReceptionDomainPort: GetRoomsForReceptionDomainPort
+  private receptionMode!: string
+  private communicationSubscription!: Subscription
   roomList: RoomData[] = []
-  receptionMode!: string
-  communicationSubscription!: Subscription
+  roomBusy: string = CONFIG.CONDITIONS.BUSY.NAME
+  roomFree: string = CONFIG.CONDITIONS.FREE.NAME
 
   constructor(
     public activatedRoute: ActivatedRoute,
@@ -43,6 +46,7 @@ export class ListRoomsComponent extends ListRoomMyxin() implements OnInit, OnDes
   private loadRoomsByLevel() {
     this.communicationSubscription = this.levelAndRoomCommunicationService.renderOtherRooms$.subscribe((levelId: number) => {
       this.getRoomsForReceptionDomainPort.getRoomsByLevel(levelId, this.conditionRooms(this.receptionMode)).subscribe((response: RoomData[]) => {
+        console.log(response)
         this.roomList = response
       })
     })
@@ -53,8 +57,8 @@ export class ListRoomsComponent extends ListRoomMyxin() implements OnInit, OnDes
     });
   }
   openModeReception(room: RoomData) {
-    const currentDialog = this.receptionModeService.activateReceptionMode(this.receptionMode, room)
-    this.closeDialogHousting(currentDialog)
+    const dialogRef: MatDialogRef<any> | undefined = this.receptionModeService.activateReceptionMode(this.receptionMode, room)
+    if (dialogRef !== undefined) this.closeDialogHousting(dialogRef)
   }
   closeDialogHousting(currentDialogMode: any) {
     this.okService.activedOkButton$.subscribe((activedOkButton: boolean) => {

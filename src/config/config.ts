@@ -13,8 +13,16 @@ export const CONFIG: Iconfig = {
         OUTPUT_HOUSTING: 'output-housting',
         PRODUCT_SALES: 'product_sales',
     },
-    CONDITION_IDS: {
-        CONDITION_FREE_ID: 1,
-        CONDITION_BUSY_ID: 3,
-    }
+    CONDITIONS: {
+        FREE: {
+            ID: 1,
+            NAME: 'libre'
+        },
+        BUSY: {
+            ID: 3,
+            NAME: 'ocupado'
+        },
+
+    },
+
 }

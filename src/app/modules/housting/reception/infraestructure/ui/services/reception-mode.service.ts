@@ -1,10 +1,11 @@
 import { Injectable } from '@angular/core';
-import { MatDialog } from '@angular/material/dialog';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { RoomData } from 'src/app/modules/configuration-hotel/rooms/infraestructure/interfaces/room.data';
 import { OutputHoustingContainerComponent } from 'src/app/modules/housting/output-housting/infraestructure/ui/components/output-housting-container.component';
 import { InputHoustingContainerComponent } from '../../../../input-housting/infraestructure/ui/modals/input-housting-container.component';
 import { CONFIG } from 'src/config/config';
-import { ProductSalesContainerComponent } from './../../../../../sales/product-sales/infraestructure/ui/components/product-sales-container.component';
+
+import { ProductSalesContainerComponent } from 'src/app/modules/sales/product-sales/infraestructure/ui/modals/product-sales-container.component';
 
 @Injectable()
 export class ReceptionModeService {
@@ -12,27 +13,29 @@ export class ReceptionModeService {
   constructor(
     private dialog: MatDialog,
   ) { }
-  private displayinputHousting(room: RoomData) {
-    let dialogRef = this.dialog.open(InputHoustingContainerComponent, { data: room, width: '88%', maxWidth: '100%' })
-    return dialogRef
-  }
-  private displayOutputHousting(room: RoomData) {
-    let dialogRef = this.dialog.open(OutputHoustingContainerComponent, { data: room, width: '88%', maxWidth: '100%' })
-    return dialogRef
-  }
-  private displayProductSales(room: RoomData) {
-    let dialogRef = this.dialog.open(ProductSalesContainerComponent, { data: room, width: '88%', maxWidth: '100%' })
-    return dialogRef
+  private displayDialogReception(room: RoomData, conditionRoom: string, dialogComponent: any) {
+    let modeReceptionDialog: MatDialogRef<any> | undefined
+
+    if (room.condition.nameCondition === conditionRoom) {
+      modeReceptionDialog = this.dialog.open(dialogComponent, { data: room.id, width: '88%', maxWidth: '100%' })
+    }
+    return modeReceptionDialog
   }
   activateReceptionMode(receptionMode: string, room: RoomData) {
-    let dialog
+    let modeReceptionDialog, conditionRoom
     if (receptionMode === CONFIG.RECEPTION_MODE.INPUT_HOUSTING) {
-      dialog = this.displayinputHousting(room)
+      conditionRoom = CONFIG.CONDITIONS.FREE.NAME
+      modeReceptionDialog = this.displayDialogReception(room, conditionRoom, InputHoustingContainerComponent)
+
     } else if (receptionMode === CONFIG.RECEPTION_MODE.OUTPUT_HOUSTING) {
-      dialog = this.displayOutputHousting(room)
+      conditionRoom = CONFIG.CONDITIONS.BUSY.NAME
+      modeReceptionDialog = this.displayDialogReception(room, conditionRoom, OutputHoustingContainerComponent)
+
     } else if (receptionMode === CONFIG.RECEPTION_MODE.PRODUCT_SALES) {
-      dialog = this.displayProductSales(room)
+      conditionRoom = CONFIG.CONDITIONS.BUSY.NAME
+      modeReceptionDialog = this.displayDialogReception(room, conditionRoom, ProductSalesContainerComponent)
+
     }
-    return dialog
+    return modeReceptionDialog
   }
 }
