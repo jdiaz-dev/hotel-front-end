@@ -5,7 +5,6 @@ import { OutputHoustingRoutingModule } from './output-housting-routing.module';
 import { OutputHoustingContainerComponent } from './infraestructure/ui/components/output-housting-container.component';
 import { DataHoustingComponent } from './infraestructure/ui/components/data-housting.component';
 
-
 @NgModule({
   declarations: [
     OutputHoustingContainerComponent,

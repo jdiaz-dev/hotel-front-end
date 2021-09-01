@@ -10,7 +10,7 @@ import { RoomData } from 'src/app/modules/configuration-hotel/rooms/infraestruct
 export class ProductSalesContainerComponent implements OnInit {
 
   constructor(
-    @Inject(MAT_DIALOG_DATA) public roomId: number
+    @Inject(MAT_DIALOG_DATA) public room: RoomData
   ) { }
 
   ngOnInit(): void {

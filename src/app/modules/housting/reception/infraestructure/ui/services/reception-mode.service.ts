@@ -17,7 +17,7 @@ export class ReceptionModeService {
     let modeReceptionDialog: MatDialogRef<any> | undefined
 
     if (room.condition.nameCondition === conditionRoom) {
-      modeReceptionDialog = this.dialog.open(dialogComponent, { data: room.id, width: '88%', maxWidth: '100%' })
+      modeReceptionDialog = this.dialog.open(dialogComponent, { data: room, width: '88%', maxWidth: '100%' })
     }
     return modeReceptionDialog
   }

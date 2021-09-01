@@ -1,1 +1,63 @@
-<p>housting-data works!</p>
+<p>Venta de productos</p>
+<div class="container-data-housting" *ngIf="houstingData">
+  <mat-card class="example-card">
+    <mat-list>
+      <mat-list-item>
+        <div class="item">
+          <p>Nombre de la habitacion</p>
+          <p>{{room.name}}</p>
+
+        </div>
+      </mat-list-item>
+      <mat-divider></mat-divider>
+      <mat-list-item>
+        <div class="item">
+          <p>Tipo de la habitación</p>
+          <p>{{room.category.category}}</p>
+
+        </div>
+      </mat-list-item>
+      <mat-divider></mat-divider>
+      <mat-list-item>
+        <div class="item">
+          <p>Costo de la habitación</p>
+          <p>{{room.price}}</p>
+
+        </div>
+
+      </mat-list-item>
+    </mat-list>
+
+  </mat-card>
+
+  <mat-card class="example-card">
+    <mat-list>
+      <mat-list-item>
+        <div class="item">
+          <p>Nombre del cliente</p>
+          <p>{{houstingData.client.names}} {{houstingData.client.surnames}}</p>
+
+        </div>
+      </mat-list-item>
+      <mat-divider></mat-divider>
+      <mat-list-item>
+        <div class="item">
+          <p>Documento cliente</p>
+          <p>{{houstingData.client.dni}}</p>
+
+        </div>
+
+      </mat-list-item>
+      <mat-divider></mat-divider>
+      <mat-list-item>
+        <div class="item">
+          <div>Fecha entrada</div>
+          <div>{{houstingData.entryDate}}</div>
+        </div>
+
+      </mat-list-item>
+    </mat-list>
+
+  </mat-card>
+
+</div>

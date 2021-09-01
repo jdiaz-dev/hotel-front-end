@@ -33,8 +33,8 @@ export class HoustingService implements GetHoustingForProductSalesDomain {
     return this.http.post(`${this.serverUrl}/${SERVER.PREFIX}/housting/${this.hotelId}/${this.cashId}/${clientId}/${roomId}`, body, { headers: this.headers })
   }
 
-  getHousting() {
-    return this.http.get(`${this.serverUrl}/${SERVER.PREFIX}/housting/${this.hotelId}`, { headers: this.headers })
+  getHousting(roomId: number) {
+    return this.http.get(`${this.serverUrl}/${SERVER.PREFIX}/housting/${this.hotelId}/${this.cashId}/${roomId}`, { headers: this.headers })
   }
   /* updateMoneyPaid(hotelLevel: LevelModel, levelId: number) {
     const body = JSON.stringify(hotelLevel);
