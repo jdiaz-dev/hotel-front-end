@@ -4,6 +4,7 @@ import { AccessKeys } from 'src/app/shared/enums/name-token';
 import { SERVER } from 'src/app/shared/enums/server.enum';
 import { StateUserService } from 'src/app/shared/services/state-user.service';
 import { environment } from 'src/environments/environment';
+import { GetProductsForProductSalesDomainPort } from '../../../product-sales/application/ports/out/other-domains/get-products-for-product-sales-domain.port';
 import { ProductModel } from '../ui/models/product.model';
 import { ProductData } from './../interfaces/product-data';
 
@@ -11,7 +12,7 @@ import { ProductData } from './../interfaces/product-data';
 @Injectable({
   providedIn: 'root'
 })
-export class ProductsService {
+export class ProductsService implements GetProductsForProductSalesDomainPort {
   private serverUrl = environment.serverUrl
   private headers!: HttpHeaders
   private hotelId!: number

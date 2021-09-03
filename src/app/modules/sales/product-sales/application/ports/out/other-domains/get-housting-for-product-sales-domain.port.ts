@@ -1,5 +1,5 @@
 import { Observable } from 'rxjs';
 
-export interface GetHoustingForProductSalesDomain {
+export interface GetHoustingForProductSalesDomainPort {
   getHousting(roomId: number): Observable<any>
 }

@@ -5,7 +5,8 @@ import { OutputHoustingContainerComponent } from 'src/app/modules/housting/outpu
 import { InputHoustingContainerComponent } from '../../../../input-housting/infraestructure/ui/modals/input-housting-container.component';
 import { CONFIG } from 'src/config/config';
 
-import { ProductSalesContainerComponent } from 'src/app/modules/sales/product-sales/infraestructure/ui/modals/product-sales-container.component';
+import { ProductSalesContainerComponent } from 'src/app/modules/sales/product-sales/infraestructure/ui/modals/product-sales/product-sales-container.component';
+import { IConfigDialog } from '../interfaces/config-dialog';
 
 @Injectable()
 export class ReceptionModeService {
@@ -13,27 +14,30 @@ export class ReceptionModeService {
   constructor(
     private dialog: MatDialog,
   ) { }
-  private displayDialogReception(room: RoomData, conditionRoom: string, dialogComponent: any) {
+  private displayDialogReception(room: RoomData, conditionRoom: string, dialogComponent: any, configDialog: IConfigDialog) {
     let modeReceptionDialog: MatDialogRef<any> | undefined
 
     if (room.condition.nameCondition === conditionRoom) {
-      modeReceptionDialog = this.dialog.open(dialogComponent, { data: room, width: '88%', maxWidth: '100%' })
+      modeReceptionDialog = this.dialog.open(dialogComponent, { data: room, width: configDialog.width, maxWidth: '100%' })
     }
     return modeReceptionDialog
   }
   activateReceptionMode(receptionMode: string, room: RoomData) {
-    let modeReceptionDialog, conditionRoom
+    let modeReceptionDialog, conditionRoom, configDialog: IConfigDialog
     if (receptionMode === CONFIG.RECEPTION_MODE.INPUT_HOUSTING) {
+      configDialog = { width: '86%' }
       conditionRoom = CONFIG.CONDITIONS.FREE.NAME
-      modeReceptionDialog = this.displayDialogReception(room, conditionRoom, InputHoustingContainerComponent)
+      modeReceptionDialog = this.displayDialogReception(room, conditionRoom, InputHoustingContainerComponent, configDialog)
 
     } else if (receptionMode === CONFIG.RECEPTION_MODE.OUTPUT_HOUSTING) {
+      configDialog = { width: '86%' }
       conditionRoom = CONFIG.CONDITIONS.BUSY.NAME
-      modeReceptionDialog = this.displayDialogReception(room, conditionRoom, OutputHoustingContainerComponent)
+      modeReceptionDialog = this.displayDialogReception(room, conditionRoom, OutputHoustingContainerComponent, configDialog)
 
     } else if (receptionMode === CONFIG.RECEPTION_MODE.PRODUCT_SALES) {
+      configDialog = { width: '75%' }
       conditionRoom = CONFIG.CONDITIONS.BUSY.NAME
-      modeReceptionDialog = this.displayDialogReception(room, conditionRoom, ProductSalesContainerComponent)
+      modeReceptionDialog = this.displayDialogReception(room, conditionRoom, ProductSalesContainerComponent, configDialog)
 
     }
     return modeReceptionDialog

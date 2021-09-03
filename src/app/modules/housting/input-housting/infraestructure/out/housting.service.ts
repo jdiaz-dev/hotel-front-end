@@ -7,12 +7,12 @@ import { environment } from 'src/environments/environment';
 import { GetCashIdForHoustingDomain } from '../../application/ports/out/other-domain/get-cash-id-for-housting-domain';
 import { HoustingModel } from '../ui/models/housting.model';
 import { StateCashService } from 'src/app/shared/services/state-cash.service';
-import { GetHoustingForProductSalesDomain } from 'src/app/modules/sales/product-sales/application/ports/out/other-domains/get-housting-for-product-sales-domain.port';
+import { GetHoustingForProductSalesDomainPort } from 'src/app/modules/sales/product-sales/application/ports/out/other-domains/get-housting-for-product-sales-domain.port';
 
 @Injectable({
   providedIn: 'root'
 })
-export class HoustingService implements GetHoustingForProductSalesDomain {
+export class HoustingService implements GetHoustingForProductSalesDomainPort {
   private getCashIdForHoustingDomain: GetCashIdForHoustingDomain
   private serverUrl = environment.serverUrl
   private headers = new HttpHeaders().set('Content-Type', 'application/json').set(AccessKeys.NAME_TOKEN, this.stateUserService.getToken());
@@ -36,14 +36,6 @@ export class HoustingService implements GetHoustingForProductSalesDomain {
   getHousting(roomId: number) {
     return this.http.get(`${this.serverUrl}/${SERVER.PREFIX}/housting/${this.hotelId}/${this.cashId}/${roomId}`, { headers: this.headers })
   }
-  /* updateMoneyPaid(hotelLevel: LevelModel, levelId: number) {
-    const body = JSON.stringify(hotelLevel);
-
-    return this.http.put(`${this.serverUrl}/${SERVER.PREFIX}/levels/${this.hotelId}/${levelId}`, body, { headers: this.headers })
-  }
-  updateFinish(levelId: number) {
-    return this.http.delete(`${this.serverUrl}/${SERVER.PREFIX}/levels/${this.hotelId}/${levelId}`, { headers: this.headers })
-  } */
   private loadRequiredParamsForPath() {
     this.hotelId = this.stateUserService.getHotelId()
     this.cashId = this.getCashIdForHoustingDomain.getCashId()
