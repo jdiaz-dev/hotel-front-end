@@ -6,14 +6,14 @@ import { ProductSalesContainerComponent } from './infraestructure/ui/modals/prod
 
 import { SharedModule } from 'src/app/shared/shared.module';
 import { HoustingDataComponent } from './infraestructure/ui/modals/product-sales/housting-data.component';
-import { ProductListContainerComponent } from './infraestructure/ui/modals/product-list/product-list-container.component';
+import { AvailableProductsComponent } from './infraestructure/ui/modals/product-list/available-products.component';
 import { ProductsAddedComponent } from './infraestructure/ui/modals/product-sales/products-added.component';
 
 @NgModule({
   declarations: [
     ProductSalesContainerComponent,
     HoustingDataComponent,
-    ProductListContainerComponent,
+    AvailableProductsComponent,
     ProductsAddedComponent
   ],
   imports: [

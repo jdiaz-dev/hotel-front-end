@@ -6,7 +6,7 @@ import { StateUserService } from 'src/app/shared/services/state-user.service';
 import { environment } from 'src/environments/environment';
 import { GetProductsForProductSalesDomainPort } from '../../../product-sales/application/ports/out/other-domains/get-products-for-product-sales-domain.port';
 import { ProductModel } from '../ui/models/product.model';
-import { ProductData } from './../interfaces/product-data';
+import { ProductData } from '../../../../../shared/interfaces/product-data';
 
 
 @Injectable({

@@ -1,0 +1,29 @@
+table.table {
+  width: 100%;
+  .code {
+    width: 20%;
+  }
+  .name-product {
+    width: 20%;
+  }
+  .amount {
+    width: 20%;
+    
+  }
+  //input amount
+  mat-form-field.input-amount-container{
+    width:65%;
+    input{
+    
+    }
+  }
+
+
+  .price {
+    width: 20%;
+  }
+  .aggregate-button{
+    width: 20%;
+
+  }
+}

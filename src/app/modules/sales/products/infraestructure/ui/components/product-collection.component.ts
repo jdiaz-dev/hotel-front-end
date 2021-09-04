@@ -3,7 +3,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { ConfirmRemoveComponent } from 'src/app/shared/modals/confirm-remove.component';
 import { CustomMessage } from 'src/app/shared/modals/custom-message.interface';
 import { ProductsService } from '../../out/products.service';
-import { ProductData } from './../../interfaces/product-data';
+import { ProductData } from '../../../../../../shared/interfaces/product-data';
 import { CreateUpdateProductComponent } from './../modals/create-update-product.component';
 
 @Component({

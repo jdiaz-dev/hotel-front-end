@@ -3,7 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { ProductModel } from '../models/product.model';
 import { ProductsService } from './../../out/products.service';
-import { ProductData } from './../../interfaces/product-data';
+import { ProductData } from '../../../../../../shared/interfaces/product-data';
 import { REG_EXP } from 'src/app/shared/consts/reg-exp.enum';
 
 @Component({
