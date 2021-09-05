@@ -18,10 +18,10 @@ export class ProductsAddedComponent implements OnInit {
   }
   openDialog() {
     let modeReceptionDialog = this.dialog.open(AvailableProductsComponent, { width: '63%', maxWidth: '100%' })
-    modeReceptionDialog.componentInstance.productAdded.subscribe((productData: ProductData) => {
+    /* modeReceptionDialog.componentInstance.productAdded.subscribe((productData: ProductData) => {
       console.log(productData)
       this.addProduct(productData)
-    })
+    }) */
   }
   addProduct(productData: ProductData) {
     //let productAdded = new ProductAddedDescription()

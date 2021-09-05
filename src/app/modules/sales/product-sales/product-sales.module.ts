@@ -8,6 +8,7 @@ import { SharedModule } from 'src/app/shared/shared.module';
 import { HoustingDataComponent } from './infraestructure/ui/modals/product-sales/housting-data.component';
 import { AvailableProductsComponent } from './infraestructure/ui/modals/product-list/available-products.component';
 import { ProductsAddedComponent } from './infraestructure/ui/modals/product-sales/products-added.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -19,6 +20,8 @@ import { ProductsAddedComponent } from './infraestructure/ui/modals/product-sale
   imports: [
     CommonModule,
     ProductSalesRoutingModule,
+    FormsModule,
+    ReactiveFormsModule,
     SharedModule
   ]
 })
