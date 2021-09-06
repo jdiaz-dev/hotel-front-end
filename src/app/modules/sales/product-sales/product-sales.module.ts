@@ -6,7 +6,7 @@ import { ProductSalesContainerComponent } from './infraestructure/ui/modals/prod
 
 import { SharedModule } from 'src/app/shared/shared.module';
 import { HoustingDataComponent } from './infraestructure/ui/modals/product-sales/housting-data.component';
-import { AvailableProductsComponent } from './infraestructure/ui/modals/product-list/available-products.component';
+import { AvailableProductsComponent } from './infraestructure/ui/modals/available-products/available-products.component';
 import { ProductsAddedComponent } from './infraestructure/ui/modals/product-sales/products-added.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
@@ -15,14 +15,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     ProductSalesContainerComponent,
     HoustingDataComponent,
     AvailableProductsComponent,
-    ProductsAddedComponent
+    ProductsAddedComponent,
   ],
-  imports: [
-    CommonModule,
-    ProductSalesRoutingModule,
-    FormsModule,
-    ReactiveFormsModule,
-    SharedModule
-  ]
+  imports: [CommonModule, ProductSalesRoutingModule, FormsModule, ReactiveFormsModule, SharedModule],
 })
-export class ProductSalesModule { }
+export class ProductSalesModule {}

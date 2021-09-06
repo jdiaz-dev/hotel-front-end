@@ -1,6 +1,7 @@
 import { Observable } from 'rxjs';
-import { ProductData } from 'src/app/shared/interfaces/product-data';
+import { GetProductsResponse } from 'src/app/shared/interfaces/product/get-product-response';
+import { IQueries } from 'src/app/shared/interfaces/queries/queries.interface';
 
 export interface GetProductsForProductSalesDomainPort {
-  getProducts(): Observable<ProductData[]>
+  getProducts(queries: IQueries): Observable<GetProductsResponse>;
 }

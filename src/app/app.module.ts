@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { HttpClientModule } from '@angular/common/http'
+import { HttpClientModule } from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -20,13 +20,8 @@ import { OutputHoustingModule } from './modules/housting/output-housting/output-
 import { ProductsModule } from './modules/sales/products/products.module';
 import { ProductSalesModule } from './modules/sales/product-sales/product-sales.module';
 
-
 @NgModule({
-  declarations: [
-    AppComponent,
-    NavbarComponent,
-
-  ],
+  declarations: [AppComponent, NavbarComponent],
   imports: [
     BrowserModule,
     HttpClientModule,
@@ -46,11 +41,10 @@ import { ProductSalesModule } from './modules/sales/product-sales/product-sales.
     ProductSalesModule,
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}
 
 //icons-bed-hotel https://icon-sets.iconify.design/ion/bed/
 
 //command to run angular project : npm run nghm -- serve
-
