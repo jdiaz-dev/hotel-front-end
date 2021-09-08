@@ -5,6 +5,7 @@ export interface ProductData {
   brand: string;
   details: string;
   price: number;
+  amount: number; //property added manually to help product sales domain,  check available-products.myxin
 }
 export interface GetProductsResponse {
   count: number;

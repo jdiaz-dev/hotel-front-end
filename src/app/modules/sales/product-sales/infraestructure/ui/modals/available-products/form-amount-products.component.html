@@ -1,0 +1,9 @@
+<mat-form-field appearance="fill" class="input-amount-container">
+  <input matInput [(ngModel)]="amountProducts.amount" [formControl]="amountProducstAdded" (keyup)="updateAmountProducts()">
+  <mat-error *ngIf="amountProducstAdded.touched && amountProducstAdded.errors?.pattern">
+    Este campo solo puede ser numérico
+  </mat-error>
+  <mat-error *ngIf="amountProducstAdded.touched && amountProducstAdded.errors?.maxlength">
+    La dígitos máximo permitidos es 3
+  </mat-error>
+</mat-form-field>

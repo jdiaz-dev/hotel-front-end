@@ -1,29 +1,35 @@
-import { Component, EventEmitter, OnInit, Output, ViewChild, OnDestroy } from '@angular/core';
-import { MatPaginator, PageEvent } from '@angular/material/paginator';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+// import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
+import { FormControl, Validators } from '@angular/forms';
 
 import { GetProductsResponse, ProductData } from 'src/app/shared/interfaces/product/get-product-response';
 
 import { GetProductsForProductSalesDomainPort } from '../../../../application/ports/out/other-domains/get-products-for-product-sales-domain.port';
 import { ProductsService } from '../../../../../products/infraestructure/out/products.service';
-import { ProductAddedDescription } from '../../classes/product-added-description';
+import { ProductAddedData } from '../../classes/product-added-data';
 import { IQueries } from '../../../../../../../shared/interfaces/queries/queries.interface';
+import { AvailableProductsMyxin } from './available-products.myxin';
+import { REG_EXP } from 'src/app/shared/consts/reg-exp.enum';
+import { IAmountProduct } from '../../../interfaces/amount-product.interface';
 
 @Component({
   selector: 'app-available-products-container',
   templateUrl: './available-products.component.html',
   styleUrls: ['./available-products.component.scss'],
 })
-export class AvailableProductsComponent implements OnInit {
-  @Output() productAdded = new EventEmitter<ProductData>();
+export class AvailableProductsComponent extends AvailableProductsMyxin() implements OnInit {
+  @Output() productAdded = new EventEmitter<ProductAddedData>();
   //@ViewChild(MatPaginator) paginator!: MatPaginator;
   private getProductsForProductSalesDomainPort: GetProductsForProductSalesDomainPort;
 
   displayedColumns: string[] = ['Code', 'Name', 'Amount', 'Price', 'AggregateButton'];
   totalProducts!: number;
+  amountProducstAdded = new FormControl('', Validators.pattern(REG_EXP.numeric));
 
   productList!: MatTableDataSource<ProductData>;
   constructor(productsService: ProductsService) {
+    super();
     this.getProductsForProductSalesDomainPort = productsService;
   }
 
@@ -37,19 +43,27 @@ export class AvailableProductsComponent implements OnInit {
     };
 
     this.getProductsForProductSalesDomainPort.getProducts(queries).subscribe((response: GetProductsResponse) => {
-      this.productList = new MatTableDataSource<ProductData>(response.rows);
+      this.productList = new MatTableDataSource<ProductData>(this.addTotalToProductData(response.rows));
+      // this.addTotalToProductData(response.rows);
       this.totalProducts = response.count;
       //this.productList.paginator = this.paginator;
     });
   }
-  aggregateProduct(product: ProductData, indexForInput: number) {
-    //let productAdded = new ProductAddedDescription()
-    console.log(indexForInput);
-    let input = document.querySelector(`.input-${indexForInput}`);
-    console.log(input);
-    this.productAdded.emit(product);
+  aggregateProduct(product: ProductData) {
+    let strAmount = String(product.amount).length;
+    console.log(strAmount);
+    if (product.amount > 0 && strAmount == 3) {
+      let productAdded = new ProductAddedData(product.name, product.details, product.price, 0, product.amount);
+      console.log(product);
+      this.productAdded.emit(productAdded);
+    }
   }
   loadNextProducts(offset: any) {
     this.loadProducts(offset);
+  }
+  receiveTotalProducts(event: IAmountProduct) {
+    this.productList = new MatTableDataSource<ProductData>(
+      this.updateAmountProducts(this.productList.filteredData, event),
+    );
   }
 }

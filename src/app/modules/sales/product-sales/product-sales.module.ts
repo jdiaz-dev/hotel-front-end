@@ -9,6 +9,7 @@ import { HoustingDataComponent } from './infraestructure/ui/modals/product-sales
 import { AvailableProductsComponent } from './infraestructure/ui/modals/available-products/available-products.component';
 import { ProductsAddedComponent } from './infraestructure/ui/modals/product-sales/products-added.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FormAmountProductsComponent } from './infraestructure/ui/modals/available-products/form-amount-products.component';
 
 @NgModule({
   declarations: [
@@ -16,6 +17,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     HoustingDataComponent,
     AvailableProductsComponent,
     ProductsAddedComponent,
+    FormAmountProductsComponent,
   ],
   imports: [CommonModule, ProductSalesRoutingModule, FormsModule, ReactiveFormsModule, SharedModule],
 })

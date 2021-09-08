@@ -1,3 +1,6 @@
 <div class="container-add-product">
   <button mat-raised-button color="primary" (click)="openDialog()">Agregar productos</button>
 </div>
+<div *ngFor="let product of productsAdded">
+  {{product.price}} - {{product.amount}}
+</div>

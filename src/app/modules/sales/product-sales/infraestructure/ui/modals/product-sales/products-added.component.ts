@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { ProductData } from 'src/app/shared/interfaces/product/get-product-response';
-import { ProductAddedDescription } from '../../classes/product-added-description';
+import { ProductAddedData } from '../../classes/product-added-data';
 import { AvailableProductsComponent } from '../available-products/available-products.component';
 
 @Component({
@@ -10,7 +9,7 @@ import { AvailableProductsComponent } from '../available-products/available-prod
   styleUrls: ['./products-added.component.scss'],
 })
 export class ProductsAddedComponent implements OnInit {
-  productsAdded: ProductAddedDescription[] = [];
+  productsAdded: ProductAddedData[] = [];
 
   constructor(private dialog: MatDialog) {}
 
@@ -20,12 +19,13 @@ export class ProductsAddedComponent implements OnInit {
       width: '63%',
       maxWidth: '100%',
     });
-    /* modeReceptionDialog.componentInstance.productAdded.subscribe((productData: ProductData) => {
-      console.log(productData)
-      this.addProduct(productData)
-    }) */
+    modeReceptionDialog.componentInstance.productAdded.subscribe((productData: ProductAddedData) => {
+      console.log(productData);
+      this.productsAdded.push(productData);
+      this.addProduct(productData);
+    });
   }
-  addProduct(productData: ProductData) {
+  addProduct(productData: ProductAddedData) {
     //let productAdded = new ProductAddedDescription()
   }
 }
