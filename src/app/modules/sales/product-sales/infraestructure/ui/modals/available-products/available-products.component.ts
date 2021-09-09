@@ -44,26 +44,18 @@ export class AvailableProductsComponent extends AvailableProductsMyxin() impleme
 
     this.getProductsForProductSalesDomainPort.getProducts(queries).subscribe((response: GetProductsResponse) => {
       this.productList = new MatTableDataSource<ProductData>(this.addTotalToProductData(response.rows));
-      // this.addTotalToProductData(response.rows);
       this.totalProducts = response.count;
-      //this.productList.paginator = this.paginator;
     });
-  }
-  aggregateProduct(product: ProductData) {
-    let strAmount = String(product.amount).length;
-    console.log(strAmount);
-    if (product.amount > 0 && strAmount == 3) {
-      let productAdded = new ProductAddedData(product.name, product.details, product.price, 0, product.amount);
-      console.log(product);
-      this.productAdded.emit(productAdded);
-    }
   }
   loadNextProducts(offset: any) {
     this.loadProducts(offset);
   }
-  receiveTotalProducts(event: IAmountProduct) {
-    this.productList = new MatTableDataSource<ProductData>(
-      this.updateAmountProducts(this.productList.filteredData, event),
-    );
+  aggregateProduct(event: IAmountProduct) {
+    let indexProductId = event.id - 1;
+    let product = this.productList.filteredData[indexProductId];
+
+    let productAdded = new ProductAddedData(product.name, product.details, product.price, 0, event.amount);
+    console.log(product);
+    this.productAdded.emit(productAdded);
   }
 }

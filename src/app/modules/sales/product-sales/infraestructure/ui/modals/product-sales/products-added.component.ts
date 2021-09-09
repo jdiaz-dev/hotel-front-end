@@ -16,7 +16,7 @@ export class ProductsAddedComponent implements OnInit {
   ngOnInit(): void {}
   openDialog() {
     let modeReceptionDialog = this.dialog.open(AvailableProductsComponent, {
-      width: '63%',
+      width: '58%',
       maxWidth: '100%',
     });
     modeReceptionDialog.componentInstance.productAdded.subscribe((productData: ProductAddedData) => {

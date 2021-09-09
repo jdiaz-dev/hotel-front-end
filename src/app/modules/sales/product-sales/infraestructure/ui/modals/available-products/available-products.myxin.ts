@@ -11,7 +11,7 @@ export function AvailableProductsMyxin<T extends Constructor<{}>>(Base: T = clas
       });
       return productData;
     }
-    updateAmountProducts(productData: ProductData[], amountProductsUpdated: IAmountProduct) {
+    /* updateAmountProducts(productData: ProductData[], amountProductsUpdated: IAmountProduct) {
       productData.map((obj: ProductData | any) => {
         if (obj['id'] === amountProductsUpdated.id) {
           obj.amount = amountProductsUpdated.amount;
@@ -19,6 +19,6 @@ export function AvailableProductsMyxin<T extends Constructor<{}>>(Base: T = clas
         return obj;
       });
       return productData;
-    }
+    } */
   };
 }
