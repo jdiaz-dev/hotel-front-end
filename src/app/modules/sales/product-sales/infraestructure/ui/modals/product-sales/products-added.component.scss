@@ -1,0 +1,24 @@
+.container-add-product {
+  display: flex;
+  // justify-content: space-between;
+  height: 38px;
+  padding: 8px;
+  background-color: green;
+
+  .input-state-sale {
+    margin-left: 2%;
+    margin-right: 50%;
+    // width: 50%;
+    /* mat-form-field {
+      border: 1px solid blue;
+      height: 30px;
+      mat-select {
+        mat-option {
+          border: 1px solid green;
+          height: 1px !important;
+          color: red;
+        }
+      }
+    } */
+  }
+}

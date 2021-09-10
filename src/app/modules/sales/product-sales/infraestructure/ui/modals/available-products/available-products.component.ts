@@ -54,8 +54,7 @@ export class AvailableProductsComponent extends AvailableProductsMyxin() impleme
     let indexProductId = event.id - 1;
     let product = this.productList.filteredData[indexProductId];
 
-    let productAdded = new ProductAddedData(product.name, product.details, product.price, 0, event.amount);
-    console.log(product);
+    let productAdded = new ProductAddedData(event.amount, product.name, product.details, product.price, 0);
     this.productAdded.emit(productAdded);
   }
 }
