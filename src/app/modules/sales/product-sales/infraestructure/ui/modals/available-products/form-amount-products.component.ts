@@ -17,7 +17,11 @@ export class FormAmountProductsComponent implements OnChanges {
   ngOnInit() {}
   ngOnChanges() {}
   sendAmountProducts() {
-    let ammountProduct: IAmountProduct = { id: this.amountProduct.id, amount: this.amountProducstAdded.value };
+    let ammountProduct: IAmountProduct = {
+      id: this.amountProduct.id,
+      amount: this.amountProducstAdded.value,
+      indexArray: this.amountProduct.indexArray,
+    };
     this.addAmountProductsService.addAmountProduct(ammountProduct);
   }
 }

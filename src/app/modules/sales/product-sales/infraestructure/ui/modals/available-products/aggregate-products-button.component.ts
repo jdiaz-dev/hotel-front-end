@@ -16,8 +16,10 @@ export class AggregateProductsButtonComponent implements OnInit {
   ngOnInit() {
     this.addAmountProductsService.addAmountProduct$.subscribe((amountProduct: IAmountProduct) => {
       //checking if ids of aggregate products button and form amount are equals
+
       if (this.amountProducts.id === amountProduct.id) {
         this.amountProducts.amount = amountProduct.amount;
+        console.log(amountProduct);
       }
     });
   }

@@ -4,5 +4,6 @@
   "tabWidth": 2,
   "trailingComma": "all",
   "singleQuote": true,
-  "semicolons": true
+  "semicolons": true,
+  "arrowParens": "always"
 }

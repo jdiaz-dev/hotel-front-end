@@ -51,11 +51,18 @@ div.date-and-time {
   margin: 0px 0px 0px 0px !important;
 }
 
+/* ====================================== start customizing mat-form for products added component */
 //reduce height of select angular material
-div.mat-form-field-flex {
-  height: 20px;
-}
-div.mat-form-field-wrapper {
+div.input-state-sale div.mat-form-field-wrapper {
   background-color: #ffffff;
   height: 18px;
 }
+div.input-state-sale div.mat-form-field-flex {
+  margin-top: -8px;
+}
+//customizing outline input
+div.input-state-sale div.mat-form-field-wrapper div.mat-form-field-underline {
+  position: relative !important;
+  margin-top: 11px !important;
+}
+/* ====================================== end customizing mat-form for products added component */

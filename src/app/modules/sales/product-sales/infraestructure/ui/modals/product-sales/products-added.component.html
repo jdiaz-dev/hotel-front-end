@@ -3,7 +3,7 @@
 
   <div class="input-state-sale">
     <mat-form-field appearance="fill" style=" height:20px;">
-      <mat-label >Select</mat-label>
+      <mat-label >Estado de venta</mat-label>
       <mat-select >
         <mat-option value="one" style="border:1px solid purple; height:20px;">First option</mat-option>
         <mat-option value="two" style="border:1px solid purple; height:20px;">Second option</mat-option>
@@ -36,13 +36,13 @@
 
       <ng-container matColumnDef="Price">
           <th mat-header-cell *matHeaderCellDef class="price"> Precio </th>
-          <td mat-cell *matCellDef="let element"> S/. {{element.price}}.00 </td>
+          <td mat-cell *matCellDef="let element"> S/. {{element.price}}</td>
 
       </ng-container>
 
-      <ng-container matColumnDef="Details">
-          <th mat-header-cell *matHeaderCellDef class="details"> Detalles </th>
-          <td mat-cell *matCellDef="let element">{{element.details}} </td>
+      <ng-container matColumnDef="TotalPrice">
+          <th mat-header-cell *matHeaderCellDef class="details"> Precio total </th>
+          <td mat-cell *matCellDef="let element">{{element.amount * element.price}} </td>
 
       </ng-container>
 
@@ -50,7 +50,7 @@
       <ng-container matColumnDef="RemoveButton">
           <th mat-header-cell *matHeaderCellDef class="remove-buttons"> </th>
           <td mat-cell *matCellDef="let element"> <button mat-raised-button color="warn"
-                  (click)="removeProductAdded(element)">Eliminar</button> </td>
+                  (click)="removeProductAdded(element.id)">Eliminar</button> </td>
       </ng-container>
 
   </div>
@@ -58,3 +58,11 @@
   <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
   <tr class="rowOpenerCategories" mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
 </table>
+
+
+<div class="total-price-container" *ngIf="totalPrice > 0">
+  <div class="total-title">Total</div>
+  <div class="total-number">S/. {{totalPrice}}</div>
+</div>
+
+

@@ -7,7 +7,7 @@ import { GetProductsResponse, ProductData } from 'src/app/shared/interfaces/prod
 
 import { GetProductsForProductSalesDomainPort } from '../../../../application/ports/out/other-domains/get-products-for-product-sales-domain.port';
 import { ProductsService } from '../../../../../products/infraestructure/out/products.service';
-import { ProductAddedData } from '../../classes/product-added-data';
+import { ProductAddedData } from '../../models/product-added-data';
 import { IQueries } from '../../../../../../../shared/interfaces/queries/queries.interface';
 import { AvailableProductsMyxin } from './available-products.myxin';
 import { REG_EXP } from 'src/app/shared/consts/reg-exp.enum';
@@ -45,16 +45,23 @@ export class AvailableProductsComponent extends AvailableProductsMyxin() impleme
     this.getProductsForProductSalesDomainPort.getProducts(queries).subscribe((response: GetProductsResponse) => {
       this.productList = new MatTableDataSource<ProductData>(this.addTotalToProductData(response.rows));
       this.totalProducts = response.count;
+      console.log(this.productList.filteredData);
     });
   }
   loadNextProducts(offset: any) {
     this.loadProducts(offset);
   }
   aggregateProduct(event: IAmountProduct) {
-    let indexProductId = event.id - 1;
-    let product = this.productList.filteredData[indexProductId];
+    let product = this.productList.filteredData[event.indexArray];
 
-    let productAdded = new ProductAddedData(event.amount, product.name, product.details, product.price, 0);
+    let productAdded = new ProductAddedData(
+      event.id,
+      event.amount,
+      product.name,
+      product.details,
+      product.price,
+      event.amount * product.price,
+    );
     this.productAdded.emit(productAdded);
   }
 }

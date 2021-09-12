@@ -1,24 +1,23 @@
 .container-add-product {
   display: flex;
-  // justify-content: space-between;
+  justify-content: space-between;
   height: 38px;
   padding: 8px;
-  background-color: green;
+  background-color: rgb(11, 11, 100);
+  border-radius: 3px;
 
   .input-state-sale {
     margin-left: 2%;
-    margin-right: 50%;
-    // width: 50%;
-    /* mat-form-field {
-      border: 1px solid blue;
-      height: 30px;
-      mat-select {
-        mat-option {
-          border: 1px solid green;
-          height: 1px !important;
-          color: red;
-        }
-      }
-    } */
+    margin-right: 44%;
+  }
+}
+div.total-price-container {
+  display: flex;
+
+  div.total-title {
+    margin-left: 54%;
+  }
+  div.total-number {
+    margin-left: 6%;
   }
 }
