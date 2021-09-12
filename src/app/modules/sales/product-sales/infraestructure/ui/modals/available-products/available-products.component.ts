@@ -7,11 +7,12 @@ import { GetProductsResponse, ProductData } from 'src/app/shared/interfaces/prod
 
 import { GetProductsForProductSalesDomainPort } from '../../../../application/ports/out/other-domains/get-products-for-product-sales-domain.port';
 import { ProductsService } from '../../../../../products/infraestructure/out/products.service';
-import { ProductAddedData } from '../../models/product-added-data';
+import { ProductAddedModel } from '../../models/product-added.model';
 import { IQueries } from '../../../../../../../shared/interfaces/queries/queries.interface';
 import { AvailableProductsMyxin } from './available-products.myxin';
 import { REG_EXP } from 'src/app/shared/consts/reg-exp.enum';
 import { IAmountProduct } from '../../../interfaces/amount-product.interface';
+import { DateService } from './../../../../../../../shared/services/date.service';
 
 @Component({
   selector: 'app-available-products-container',
@@ -19,7 +20,7 @@ import { IAmountProduct } from '../../../interfaces/amount-product.interface';
   styleUrls: ['./available-products.component.scss'],
 })
 export class AvailableProductsComponent extends AvailableProductsMyxin() implements OnInit {
-  @Output() productAdded = new EventEmitter<ProductAddedData>();
+  @Output() productAdded = new EventEmitter<ProductAddedModel>();
   //@ViewChild(MatPaginator) paginator!: MatPaginator;
   private getProductsForProductSalesDomainPort: GetProductsForProductSalesDomainPort;
 
@@ -28,7 +29,7 @@ export class AvailableProductsComponent extends AvailableProductsMyxin() impleme
   amountProducstAdded = new FormControl('', Validators.pattern(REG_EXP.numeric));
 
   productList!: MatTableDataSource<ProductData>;
-  constructor(productsService: ProductsService) {
+  constructor(private readonly dateService: DateService, productsService: ProductsService) {
     super();
     this.getProductsForProductSalesDomainPort = productsService;
   }
@@ -45,7 +46,7 @@ export class AvailableProductsComponent extends AvailableProductsMyxin() impleme
     this.getProductsForProductSalesDomainPort.getProducts(queries).subscribe((response: GetProductsResponse) => {
       this.productList = new MatTableDataSource<ProductData>(this.addTotalToProductData(response.rows));
       this.totalProducts = response.count;
-      console.log(this.productList.filteredData);
+      // console.log(this.productList.filteredData);
     });
   }
   loadNextProducts(offset: any) {
@@ -54,13 +55,15 @@ export class AvailableProductsComponent extends AvailableProductsMyxin() impleme
   aggregateProduct(event: IAmountProduct) {
     let product = this.productList.filteredData[event.indexArray];
 
-    let productAdded = new ProductAddedData(
+    let productAdded = new ProductAddedModel(
       event.id,
       event.amount,
-      product.name,
-      product.details,
-      product.price,
       event.amount * product.price,
+      this.dateService.getCurrentDate(),
+      this.dateService.getCurrentTime(),
+      0,
+      product.price,
+      product.name,
     );
     this.productAdded.emit(productAdded);
   }

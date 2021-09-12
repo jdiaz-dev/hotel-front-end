@@ -1,11 +1,31 @@
-<mat-card class="example-card">
 
-    <mat-card-content>
-        <p>
-            {{data}}
-        </p>
-    </mat-card-content>
-    <mat-card-actions>
-        <button mat-raised-button mat-dialog-close (click)="okButtonActived()" color="primary">OK</button>
-    </mat-card-actions>
-</mat-card>
+
+<ng-container *ngIf="data.useMethodsOkComponent; then WITH_METHODS else WITHOUT_METHODS"></ng-container>
+
+<ng-template #WITH_METHODS>
+    <mat-card class="example-card">
+
+        <mat-card-content>
+            <p>
+                {{data.message}}
+            </p>
+        </mat-card-content>
+        <mat-card-actions>
+            <button mat-raised-button mat-dialog-close (click)="okButtonActived()" color="primary">OK</button>
+        </mat-card-actions>
+    </mat-card>
+</ng-template>
+
+<ng-template #WITHOUT_METHODS>
+    <mat-card class="example-card">
+
+        <mat-card-content>
+            <p>
+                {{data.message}}
+            </p>
+        </mat-card-content>
+        <mat-card-actions>
+            <button mat-raised-button mat-dialog-close color="primary">OK</button>
+        </mat-card-actions>
+    </mat-card>
+</ng-template>

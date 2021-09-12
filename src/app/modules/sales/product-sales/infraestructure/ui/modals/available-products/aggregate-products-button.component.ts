@@ -19,7 +19,6 @@ export class AggregateProductsButtonComponent implements OnInit {
 
       if (this.amountProducts.id === amountProduct.id) {
         this.amountProducts.amount = amountProduct.amount;
-        console.log(amountProduct);
       }
     });
   }

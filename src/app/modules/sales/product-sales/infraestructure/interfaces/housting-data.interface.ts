@@ -1,8 +1,9 @@
 export interface IhoustingData {
-  entryDate: string
+  id: number;
+  entryDate: string;
   client: {
-    dni: number
-    names: string
-    surnames: string
-  }
+    dni: number;
+    names: string;
+    surnames: string;
+  };
 }
