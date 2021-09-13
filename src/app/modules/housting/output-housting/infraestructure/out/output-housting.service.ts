@@ -5,13 +5,12 @@ import { SERVER } from 'src/app/shared/enums/server.enum';
 import { StateCashService } from 'src/app/shared/services/state-cash.service';
 import { StateUserService } from 'src/app/shared/services/state-user.service';
 import { environment } from 'src/environments/environment';
-import { ProductAddedModel } from '../ui/models/product-added.model';
-import { GetCashIdForHoustingDomain } from './../../../../housting/input-housting/application/ports/out/other-domain/get-cash-id-for-housting-domain';
+import { GetCashIdForHoustingDomain } from '../../../input-housting/application/ports/out/other-domain/get-cash-id-for-housting-domain';
 
 @Injectable({
   providedIn: 'root',
 })
-export class ProductSalesService {
+export class OutputHoustingService {
   private getCashIdForHoustingDomain: GetCashIdForHoustingDomain;
   private serverUrl = environment.serverUrl;
   private headers = new HttpHeaders()
@@ -27,12 +26,10 @@ export class ProductSalesService {
   ) {
     this.getCashIdForHoustingDomain = stateCashService;
   }
-  createProductSale(productSaled: ProductAddedModel, houstingId: number) {
+  getHoustingReport(houstingId: number) {
     this.loadRequiredParamsForPath();
-    const body = JSON.stringify(productSaled);
-    return this.http.post(
-      `${this.serverUrl}/${SERVER.PREFIX}/product-sales/${this.hotelId}/${this.cashId}/${houstingId}/${productSaled.productId}`,
-      body,
+    return this.http.get(
+      `${this.serverUrl}/${SERVER.PREFIX}/housting-report/${this.hotelId}/${this.cashId}/${houstingId}`,
       {
         headers: this.headers,
       },

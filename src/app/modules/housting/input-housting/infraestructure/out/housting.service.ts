@@ -8,36 +8,47 @@ import { GetCashIdForHoustingDomain } from '../../application/ports/out/other-do
 import { HoustingModel } from '../ui/models/housting.model';
 import { StateCashService } from 'src/app/shared/services/state-cash.service';
 import { GetHoustingForProductSalesDomainPort } from 'src/app/modules/sales/product-sales/application/ports/out/other-domains/get-housting-for-product-sales-domain.port';
+import { GetHoustingForOutputHoustingDomainPort } from '../../../output-housting/application/ports/out/other-domain/get-housting-for-output-housting-domain.port';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
-export class HoustingService implements GetHoustingForProductSalesDomainPort {
-  private getCashIdForHoustingDomain: GetCashIdForHoustingDomain
-  private serverUrl = environment.serverUrl
-  private headers = new HttpHeaders().set('Content-Type', 'application/json').set(AccessKeys.NAME_TOKEN, this.stateUserService.getToken());
-  private hotelId!: number
-  private cashId!: number
+export class HoustingService
+  implements GetHoustingForProductSalesDomainPort, GetHoustingForOutputHoustingDomainPort
+{
+  private getCashIdForHoustingDomain: GetCashIdForHoustingDomain;
+  private serverUrl = environment.serverUrl;
+  private headers = new HttpHeaders()
+    .set('Content-Type', 'application/json')
+    .set(AccessKeys.NAME_TOKEN, this.stateUserService.getToken());
+  private hotelId!: number;
+  private cashId!: number;
 
   constructor(
     private http: HttpClient,
     private stateUserService: StateUserService,
-    stateCashService: StateCashService
+    stateCashService: StateCashService,
   ) {
-    this.getCashIdForHoustingDomain = stateCashService
+    this.getCashIdForHoustingDomain = stateCashService;
   }
   createHousting(hotelLevel: HoustingModel, roomId: number, clientId: number) {
-    this.loadRequiredParamsForPath()
+    this.loadRequiredParamsForPath();
     const body = JSON.stringify(hotelLevel);
 
-    return this.http.post(`${this.serverUrl}/${SERVER.PREFIX}/housting/${this.hotelId}/${this.cashId}/${clientId}/${roomId}`, body, { headers: this.headers })
+    return this.http.post(
+      `${this.serverUrl}/${SERVER.PREFIX}/housting/${this.hotelId}/${this.cashId}/${clientId}/${roomId}`,
+      body,
+      { headers: this.headers },
+    );
   }
 
   getHousting(roomId: number) {
-    return this.http.get(`${this.serverUrl}/${SERVER.PREFIX}/housting/${this.hotelId}/${this.cashId}/${roomId}`, { headers: this.headers })
+    return this.http.get(`${this.serverUrl}/${SERVER.PREFIX}/housting/${this.hotelId}/${this.cashId}/${roomId}`, {
+      headers: this.headers,
+    });
   }
   private loadRequiredParamsForPath() {
-    this.hotelId = this.stateUserService.getHotelId()
-    this.cashId = this.getCashIdForHoustingDomain.getCashId()
+    this.hotelId = this.stateUserService.getHotelId();
+    this.cashId = this.getCashIdForHoustingDomain.getCashId();
   }
 }
