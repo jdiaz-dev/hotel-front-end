@@ -64,7 +64,6 @@ export class ListRoomsComponent extends ListRoomMyxin() implements OnInit, OnDes
       this.receptionMode,
       room,
     );
-    console.log(dialogRef);
     if (dialogRef !== undefined) this.closeDialogHousting(dialogRef);
   }
   closeDialogHousting(currentDialogMode: any) {

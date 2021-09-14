@@ -1,13 +1,16 @@
 mat-card {
-  div.container-data-room {
-    display: flex;
-    flex-direction: row;
+    div.container-data-room {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        padding-left: 20px;
+        padding-right: 20px;
 
-    div.box-data-1 {
-      width: 70%;
+        /* div.box-data-1 {
+            width: 70%;
+        }
+        div.box-data-2 {
+            width: 30%;
+        } */
     }
-    div.box-data-2 {
-      width: 30%;
-    }
-  }
 }

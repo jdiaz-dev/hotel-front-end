@@ -1,18 +1,24 @@
-<app-data-room [roomData]="data"></app-data-room>
+<div class="container-mode-reception">
+    <app-data-room [roomData]="data"></app-data-room>
 
-<mat-card class="housting-forms">
+    <mat-card class="housting-forms">
+        <!-- component shared from clients module -->
+        <app-form-client #DATA_CLIENT></app-form-client>
+        <div class="app-data-housting-and-buttons">
+            <app-form-input-housting [roomId]="data.id" #DATA_HOUSTING></app-form-input-housting>
 
-    <!-- component shared from clients module -->
-    <app-form-client #DATA_CLIENT></app-form-client>
-    <div class="app-data-housting-and-buttons">
-        <app-form-input-housting [roomId]="data.id" #DATA_HOUSTING></app-form-input-housting>
-
-        <mat-card-actions>
-            <button mat-raised-button color="warn" [mat-dialog-close]>Cancelar</button>
-            <button mat-raised-button color="primary" (click)="DATA_CLIENT.saveClient()"
-                (click)="DATA_HOUSTING.saveHousting()" [disabled]="!houstingFormValid && !houstingFormValid">Crear
-                registro</button>
-        </mat-card-actions>
-
-    </div>
-</mat-card>
+            <mat-card-actions>
+                <button mat-raised-button color="warn" [mat-dialog-close]>Cancelar</button>
+                <button
+                    mat-raised-button
+                    color="primary"
+                    (click)="DATA_CLIENT.saveClient()"
+                    (click)="DATA_HOUSTING.saveHousting()"
+                    [disabled]="!houstingFormValid && !houstingFormValid"
+                >
+                    Crear registro
+                </button>
+            </mat-card-actions>
+        </div>
+    </mat-card>
+</div>

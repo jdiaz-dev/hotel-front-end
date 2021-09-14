@@ -1,3 +1,4 @@
 export interface IConfigDialog {
-  width: string
+  width: string;
+  height: string;
 }

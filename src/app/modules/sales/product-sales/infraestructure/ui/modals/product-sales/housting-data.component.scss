@@ -1,19 +1,18 @@
-div.container-data-housting{
-  display: flex;
-  justify-content: space-between;
-  
-  mat-card{
-    width:38%;
+div.container-data-housting {
+    display: flex;
+    justify-content: space-between;
 
-    mat-list{
-      mat-list-item{
-        div.item{
-          display: flex; 
-          width: 100%;
-          justify-content: space-between; 
+    mat-card {
+        width: 38%;
+
+        mat-list {
+            mat-list-item {
+                div.item {
+                    display: flex;
+                    width: 100%;
+                    justify-content: space-between;
+                }
+            }
         }
-        
-      }
     }
-  }
 }

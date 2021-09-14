@@ -11,56 +11,56 @@ import { IConfigDialog } from '../interfaces/config-dialog';
 
 @Injectable()
 export class ReceptionModeService {
-  constructor(private dialog: MatDialog, private overlay: Overlay) {}
-  private displayDialogReception(
-    room: RoomData,
-    conditionRoom: string,
-    dialogComponent: any,
-    configDialog: IConfigDialog,
-  ) {
-    let modeReceptionDialog: MatDialogRef<any> | undefined;
+    constructor(private dialog: MatDialog, private overlay: Overlay) {}
+    private displayDialogReception(
+        room: RoomData,
+        conditionRoom: string,
+        dialogComponent: any,
+        configDialog: IConfigDialog,
+    ) {
+        let modeReceptionDialog: MatDialogRef<any> | undefined;
 
-    if (room.condition.nameCondition === conditionRoom) {
-      modeReceptionDialog = this.dialog.open(dialogComponent, {
-        data: room,
-        width: configDialog.width,
-        height: '420px',
-        maxWidth: '100%',
-        // scrollStrategy: this.overlay.scrollStrategies.noop(),
-      });
+        if (room.condition.nameCondition === conditionRoom) {
+            modeReceptionDialog = this.dialog.open(dialogComponent, {
+                data: room,
+                width: configDialog.width,
+                height: configDialog.height,
+                maxWidth: '100%',
+                // scrollStrategy: this.overlay.scrollStrategies.noop(),
+            });
+        }
+        return modeReceptionDialog;
     }
-    return modeReceptionDialog;
-  }
-  activateReceptionMode(receptionMode: string, room: RoomData) {
-    let modeReceptionDialog, conditionRoom, configDialog: IConfigDialog;
-    if (receptionMode === CONFIG.RECEPTION_MODE.INPUT_HOUSTING) {
-      configDialog = { width: '86%' };
-      conditionRoom = CONFIG.CONDITIONS.FREE.NAME;
-      modeReceptionDialog = this.displayDialogReception(
-        room,
-        conditionRoom,
-        InputHoustingContainerComponent,
-        configDialog,
-      );
-    } else if (receptionMode === CONFIG.RECEPTION_MODE.OUTPUT_HOUSTING) {
-      configDialog = { width: '86%' };
-      conditionRoom = CONFIG.CONDITIONS.BUSY.NAME;
-      modeReceptionDialog = this.displayDialogReception(
-        room,
-        conditionRoom,
-        OutputHoustingContainerComponent,
-        configDialog,
-      );
-    } else if (receptionMode === CONFIG.RECEPTION_MODE.PRODUCT_SALES) {
-      configDialog = { width: '75%' };
-      conditionRoom = CONFIG.CONDITIONS.BUSY.NAME;
-      modeReceptionDialog = this.displayDialogReception(
-        room,
-        conditionRoom,
-        ProductSalesContainerComponent,
-        configDialog,
-      );
+    activateReceptionMode(receptionMode: string, room: RoomData) {
+        let modeReceptionDialog, conditionRoom, configDialog: IConfigDialog;
+        if (receptionMode === CONFIG.RECEPTION_MODE.INPUT_HOUSTING) {
+            configDialog = { width: '75%', height: '470px' };
+            conditionRoom = CONFIG.CONDITIONS.FREE.NAME;
+            modeReceptionDialog = this.displayDialogReception(
+                room,
+                conditionRoom,
+                InputHoustingContainerComponent,
+                configDialog,
+            );
+        } else if (receptionMode === CONFIG.RECEPTION_MODE.OUTPUT_HOUSTING) {
+            configDialog = { width: '86%', height: '500px' };
+            conditionRoom = CONFIG.CONDITIONS.BUSY.NAME;
+            modeReceptionDialog = this.displayDialogReception(
+                room,
+                conditionRoom,
+                OutputHoustingContainerComponent,
+                configDialog,
+            );
+        } else if (receptionMode === CONFIG.RECEPTION_MODE.PRODUCT_SALES) {
+            configDialog = { width: '75%', height: '420px' };
+            conditionRoom = CONFIG.CONDITIONS.BUSY.NAME;
+            modeReceptionDialog = this.displayDialogReception(
+                room,
+                conditionRoom,
+                ProductSalesContainerComponent,
+                configDialog,
+            );
+        }
+        return modeReceptionDialog;
     }
-    return modeReceptionDialog;
-  }
 }
