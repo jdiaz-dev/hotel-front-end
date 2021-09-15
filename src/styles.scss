@@ -34,8 +34,9 @@ div.buttons {
     width: 100%;
 }
 
-/* for date and time input */
-div.date-and-time {
+/* separation between inputs, for date and time input, discount-and-price */
+div.date-and-time,
+div.discount-and-price {
     display: flex;
     justify-content: space-between;
 }

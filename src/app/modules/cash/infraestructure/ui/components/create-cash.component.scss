@@ -1,19 +1,13 @@
 mat-card {
-  width: 30%;
-  margin: 0 auto;
+    width: 30%;
+    margin: 0 auto;
 
-  mat-card-header {
-    padding: 0;
-    justify-content: center;
-  }
-
-  mat-card-content form div.buttons {
-    justify-content: space-between;
-
-    div.input {
-      div.date-and-time {
-        display: flex;
-      }
+    mat-card-header {
+        padding: 0;
+        justify-content: center;
     }
-  }
+
+    mat-card-content form div.buttons {
+        justify-content: space-between;
+    }
 }

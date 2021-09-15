@@ -34,7 +34,7 @@ export class ReceptionModeService {
     activateReceptionMode(receptionMode: string, room: RoomData) {
         let modeReceptionDialog, conditionRoom, configDialog: IConfigDialog;
         if (receptionMode === CONFIG.RECEPTION_MODE.INPUT_HOUSTING) {
-            configDialog = { width: '75%', height: '470px' };
+            configDialog = { width: '72%', height: '470px' };
             conditionRoom = CONFIG.CONDITIONS.FREE.NAME;
             modeReceptionDialog = this.displayDialogReception(
                 room,

@@ -13,63 +13,68 @@ import { ListRoomMyxin } from './list-room.myxin';
 import { MatDialogRef } from '@angular/material/dialog';
 
 @Component({
-  selector: 'app-list-rooms',
-  templateUrl: './list-rooms.component.html',
-  styleUrls: ['./list-rooms.component.scss'],
+    selector: 'app-list-rooms',
+    templateUrl: './list-rooms.component.html',
+    styleUrls: ['./list-rooms.component.scss'],
 })
 export class ListRoomsComponent extends ListRoomMyxin() implements OnInit, OnDestroy {
-  private getRoomsForReceptionDomainPort: GetRoomsForReceptionDomainPort;
-  private receptionMode!: string;
-  private communicationSubscription!: Subscription;
-  roomList: RoomData[] = [];
-  roomBusy: string = CONFIG.CONDITIONS.BUSY.NAME;
-  roomFree: string = CONFIG.CONDITIONS.FREE.NAME;
+    private getRoomsForReceptionDomainPort: GetRoomsForReceptionDomainPort;
+    private receptionMode!: string;
+    private communicationSubscription!: Subscription;
+    private currentLevel!: number;
+    roomList: RoomData[] = [];
+    roomBusy: string = CONFIG.CONDITIONS.BUSY.NAME;
+    roomFree: string = CONFIG.CONDITIONS.FREE.NAME;
 
-  constructor(
-    public activatedRoute: ActivatedRoute,
-    private readonly levelAndRoomCommunicationService: LevelAndRoomCommunicationService,
-    private readonly okService: OkService,
-    private readonly receptionModeService: ReceptionModeService,
-    roomsPersistenceService: RoomsPersistenceService,
-  ) {
-    super();
-    this.getRoomsForReceptionDomainPort = roomsPersistenceService;
-  }
-  ngOnInit(): void {
-    this.checkModeReception();
-    this.loadRoomsByLevel();
-  }
-  ngOnDestroy(): void {
-    this.communicationSubscription.unsubscribe();
-  }
-  private loadRoomsByLevel() {
-    this.communicationSubscription = this.levelAndRoomCommunicationService.renderOtherRooms$.subscribe(
-      (levelId: number) => {
+    constructor(
+        public activatedRoute: ActivatedRoute,
+        private readonly levelAndRoomCommunicationService: LevelAndRoomCommunicationService,
+        private readonly okService: OkService,
+        private readonly receptionModeService: ReceptionModeService,
+        roomsPersistenceService: RoomsPersistenceService,
+    ) {
+        super();
+        this.getRoomsForReceptionDomainPort = roomsPersistenceService;
+    }
+    ngOnInit(): void {
+        this.checkModeReception();
+        this.loadCurrentLevel();
+    }
+    ngOnDestroy(): void {
+        this.communicationSubscription.unsubscribe();
+    }
+    private loadCurrentLevel() {
+        this.communicationSubscription = this.levelAndRoomCommunicationService.renderOtherRooms$.subscribe(
+            (levelId: number) => {
+                this.currentLevel = levelId;
+                this.loadRooms();
+            },
+        );
+    }
+    private loadRooms() {
         this.getRoomsForReceptionDomainPort
-          .getRoomsByLevel(levelId, this.conditionRooms(this.receptionMode))
-          .subscribe((response: RoomData[]) => {
-            console.log(response);
-            this.roomList = response;
-          });
-      },
-    );
-  }
-  private checkModeReception() {
-    this.activatedRoute.params.subscribe((param: Params) => {
-      this.receptionMode = param.mode;
-    });
-  }
-  openModeReception(room: RoomData) {
-    const dialogRef: MatDialogRef<any> | undefined = this.receptionModeService.activateReceptionMode(
-      this.receptionMode,
-      room,
-    );
-    if (dialogRef !== undefined) this.closeDialogHousting(dialogRef);
-  }
-  closeDialogHousting(currentDialogMode: any) {
-    this.okService.activedOkButton$.subscribe((activedOkButton: boolean) => {
-      currentDialogMode.close();
-      this.ngOnInit();
-    });
-  }
+            .getRoomsByLevel(this.currentLevel, this.conditionRooms(this.receptionMode))
+            .subscribe((response: RoomData[]) => {
+                this.roomList = response;
+            });
+    }
+    private checkModeReception() {
+        this.activatedRoute.params.subscribe((param: Params) => {
+            this.receptionMode = param.mode;
+        });
+    }
+    openModeReception(room: RoomData) {
+        const dialogRef: MatDialogRef<any> | undefined = this.receptionModeService.activateReceptionMode(
+            this.receptionMode,
+            room,
+        );
+        if (dialogRef !== undefined) this.closeDialogHousting(dialogRef);
+    }
+    closeDialogHousting(currentDialogMode: any) {
+        this.okService.activedOkButton$.subscribe((activedOkButton: boolean) => {
+            console.log(activedOkButton);
+            currentDialogMode.close();
+            this.loadRooms();
+        });
+    }
 }
