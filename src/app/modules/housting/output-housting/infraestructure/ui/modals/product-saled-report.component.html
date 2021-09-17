@@ -1,0 +1,31 @@
+<div>Productos vendidos</div>
+<table mat-table [dataSource]="productsSaled" class="table">
+    <div>
+        <ng-container matColumnDef="NameProduct">
+            <th mat-header-cell *matHeaderCellDef class="number number-room">N. producto</th>
+            <td mat-cell *matCellDef="let element">{{ element.product.name }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="Price">
+            <th mat-header-cell *matHeaderCellDef class="name-room">Price</th>
+            <td mat-cell *matCellDef="let element">{{ element.product.price }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="Amount">
+            <th mat-header-cell *matHeaderCellDef class="category">Amount</th>
+            <td mat-cell *matCellDef="let element">{{ element.amount }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="State">
+            <th mat-header-cell *matHeaderCellDef class="price">Estado</th>
+            <td mat-cell *matCellDef="let element">S/. {{ element.payed }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="TotalPrice">
+            <th mat-header-cell *matHeaderCellDef class="details">/</th>
+            <td mat-cell *matCellDef="let element">S/. {{ element.totalPrice }}</td>
+        </ng-container>
+    </div>
+    <tr mat-header-row *matHeaderRowDef="columnsProductsSaled"></tr>
+    <tr class="rowOpenerCategories" mat-row *matRowDef="let row; columns: columnsProductsSaled"></tr>
+</table>

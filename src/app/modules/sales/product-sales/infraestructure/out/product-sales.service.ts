@@ -6,6 +6,7 @@ import { SERVER } from 'src/app/shared/enums/server.enum';
 import { StateCashService } from 'src/app/shared/services/state-cash.service';
 import { StateUserService } from 'src/app/shared/services/state-user.service';
 import { environment } from 'src/environments/environment';
+import { IProductsSaled } from '../interfaces/products-saled.interface';
 import { ProductAddedModel } from '../ui/models/product-added.model';
 import { GetCashIdForHoustingDomain } from './../../../../housting/input-housting/application/ports/out/other-domain/get-cash-id-for-housting-domain';
 
@@ -42,9 +43,12 @@ export class ProductSalesService implements GetProductSalesForOutputHoustingDoma
     getProductSales(houstingId: number) {
         console.log(houstingId);
         this.loadRequiredParamsForPath();
-        return this.http.get(`${this.serverUrl}/${SERVER.PREFIX}/product-sales/${this.hotelId}/${houstingId}`, {
-            headers: this.headers,
-        });
+        return this.http.get<IProductsSaled[]>(
+            `${this.serverUrl}/${SERVER.PREFIX}/product-sales/${this.hotelId}/${houstingId}`,
+            {
+                headers: this.headers,
+            },
+        );
     }
     private loadRequiredParamsForPath() {
         this.hotelId = this.stateUserService.getHotelId();

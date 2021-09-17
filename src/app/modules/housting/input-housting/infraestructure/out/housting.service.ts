@@ -9,6 +9,7 @@ import { HoustingModel } from '../ui/models/housting.model';
 import { StateCashService } from 'src/app/shared/services/state-cash.service';
 import { GetHoustingForProductSalesDomainPort } from 'src/app/modules/sales/product-sales/application/ports/out/other-domains/get-housting-for-product-sales-domain.port';
 import { GetHoustingForOutputHoustingDomainPort } from '../../../output-housting/application/ports/out/other-domain/get-housting-for-output-housting-domain.port';
+import { IHoustingResponse } from '../interfaces/housting-response.interface';
 
 @Injectable({
     providedIn: 'root',
@@ -42,9 +43,12 @@ export class HoustingService implements GetHoustingForProductSalesDomainPort, Ge
 
     getHousting(roomId: number) {
         this.loadRequiredParamsForPath();
-        return this.http.get(`${this.serverUrl}/${SERVER.PREFIX}/housting/${this.hotelId}/${this.cashId}/${roomId}`, {
-            headers: this.headers,
-        });
+        return this.http.get<IHoustingResponse>(
+            `${this.serverUrl}/${SERVER.PREFIX}/housting/${this.hotelId}/${this.cashId}/${roomId}`,
+            {
+                headers: this.headers,
+            },
+        );
     }
     private loadRequiredParamsForPath() {
         this.hotelId = this.stateUserService.getHotelId();
