@@ -1,0 +1,10 @@
+<mat-form-field appearance="fill" class="input-amount-container">
+    <input matInput [formControl]="lateAppliedData" [(ngModel)]="late" (keyup)="sendLateApplied()" value="0" />
+    <mat-error *ngIf="lateAppliedData.touched && lateAppliedData.errors?.required"> Este campo es requerido </mat-error>
+    <mat-error *ngIf="lateAppliedData.touched && lateAppliedData.errors?.pattern">
+        Este campo solo puede ser numérico
+    </mat-error>
+    <mat-error *ngIf="lateAppliedData.touched && lateAppliedData.errors?.maxlength">
+        La dígitos máximo permitidos es 4
+    </mat-error>
+</mat-form-field>

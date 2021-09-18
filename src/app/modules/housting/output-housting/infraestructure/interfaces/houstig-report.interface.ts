@@ -6,5 +6,6 @@ interface ISaleReport {
 
 export interface IHoustingReport {
     id: number;
+    total: number;
     saleReport: ISaleReport;
 }
