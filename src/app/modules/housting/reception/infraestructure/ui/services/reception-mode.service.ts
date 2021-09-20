@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { Overlay } from '@angular/cdk/overlay';
 import { RoomData } from 'src/app/modules/configuration-hotel/rooms/infraestructure/interfaces/room.data';
-import { OutputHoustingContainerComponent } from 'src/app/modules/housting/output-housting/infraestructure/ui/modals/output-housting-container.component';
+import { OutputHoustingContainerComponent } from 'src/app/modules/housting/output-housting/infraestructure/ui/modals/output-housting/output-housting-container.component';
 import { InputHoustingContainerComponent } from '../../../../input-housting/infraestructure/ui/modals/input-housting-container.component';
 import { CONFIG } from 'src/config/config';
 

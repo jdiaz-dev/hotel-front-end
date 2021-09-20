@@ -21,27 +21,27 @@ import { ProductsModule } from './modules/sales/products/products.module';
 import { ProductSalesModule } from './modules/sales/product-sales/product-sales.module';
 
 @NgModule({
-  declarations: [AppComponent, NavbarComponent],
-  imports: [
-    BrowserModule,
-    HttpClientModule,
-    AppRoutingModule,
-    CoreModule,
-    SharedModule,
-    BrowserAnimationsModule,
-    HotelLevelModule,
-    RoomCategoriesModule,
-    RoomsModule,
-    HoustingModule,
-    ReceptionModule,
-    ClientsModule,
-    CashModule,
-    OutputHoustingModule,
-    ProductsModule,
-    ProductSalesModule,
-  ],
-  providers: [],
-  bootstrap: [AppComponent],
+    declarations: [AppComponent, NavbarComponent],
+    imports: [
+        BrowserModule,
+        HttpClientModule,
+        AppRoutingModule,
+        CoreModule,
+        SharedModule,
+        BrowserAnimationsModule,
+        HotelLevelModule,
+        RoomCategoriesModule,
+        RoomsModule,
+        HoustingModule,
+        ReceptionModule,
+        ClientsModule,
+        CashModule,
+        OutputHoustingModule,
+        ProductsModule,
+        ProductSalesModule,
+    ],
+    providers: [],
+    bootstrap: [AppComponent],
 })
 export class AppModule {}
 

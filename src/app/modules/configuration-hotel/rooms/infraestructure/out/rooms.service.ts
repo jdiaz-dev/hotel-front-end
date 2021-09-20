@@ -10,33 +10,45 @@ import { RoomModel } from '../ui/models/room.model';
 import { GetRoomsForReceptionDomainPort } from 'src/app/modules/housting/reception/application/ports/out/other-domains/get-rooms-for-reception-domain.port';
 
 @Injectable({
-  providedIn: 'root'
+    providedIn: 'root',
 })
 export class RoomsPersistenceService implements GetRoomsForReceptionDomainPort {
-  private serverUrl = environment.serverUrl
-  private headers = new HttpHeaders().set('Content-Type', 'application/json').set(AccessKeys.NAME_TOKEN, this.stateUserService.getToken());
-  private hotelId: number = this.stateUserService.getHotelId()
+    private serverUrl = environment.serverUrl;
+    private headers = new HttpHeaders()
+        .set('Content-Type', 'application/json')
+        .set(AccessKeys.NAME_TOKEN, this.stateUserService.getToken());
+    private hotelId: number = this.stateUserService.getHotelId();
 
-  constructor(
-    private http: HttpClient,
-    private stateUserService: StateUserService,
-  ) { }
-  createRoom(room: RoomModel) {
-    const body = JSON.stringify(room);
-    return this.http.post(`${this.serverUrl}/${SERVER.PREFIX}/rooms/${this.hotelId}`, body, { headers: this.headers })
-  }
-  getALLRooms() {
-    return this.http.get<RoomData[]>(`${this.serverUrl}/${SERVER.PREFIX}/rooms/${this.hotelId}`, { headers: this.headers })
-  }
-  getRoomsByLevel(levelId: number, conditionId: number) {
-    return this.http.get<RoomData[]>(`${this.serverUrl}/${SERVER.PREFIX}/rooms/${this.hotelId}/${levelId}?conditionId=${conditionId}`, { headers: this.headers })
-  }
-  updateRoom(room: RoomModel, levelId: number, categoryId: number, roomId: number) {
-    const body = JSON.stringify(room);
+    constructor(private http: HttpClient, private stateUserService: StateUserService) {}
+    createRoom(room: RoomModel) {
+        const body = JSON.stringify(room);
+        return this.http.post(`${this.serverUrl}/${SERVER.PREFIX}/rooms/${this.hotelId}`, body, {
+            headers: this.headers,
+        });
+    }
+    getALLRooms() {
+        return this.http.get<RoomData[]>(`${this.serverUrl}/${SERVER.PREFIX}/rooms/${this.hotelId}`, {
+            headers: this.headers,
+        });
+    }
+    getRoomsByLevel(levelId: number, conditionId: number) {
+        return this.http.get<RoomData[]>(
+            `${this.serverUrl}/${SERVER.PREFIX}/rooms/${this.hotelId}/${levelId}?conditionId=${conditionId}`,
+            { headers: this.headers },
+        );
+    }
+    updateRoom(room: RoomModel, levelId: number, categoryId: number, roomId: number) {
+        const body = JSON.stringify(room);
 
-    return this.http.put(`${this.serverUrl}/${SERVER.PREFIX}/rooms/${this.hotelId}/${levelId}/${categoryId}/${roomId}`, body, { headers: this.headers })
-  }
-  removeRoom(levelId: number, roomId: number) {
-    return this.http.delete(`${this.serverUrl}/${SERVER.PREFIX}/rooms/${this.hotelId}/${levelId}/${roomId}`, { headers: this.headers })
-  }
+        return this.http.put(
+            `${this.serverUrl}/${SERVER.PREFIX}/rooms/${this.hotelId}/${levelId}/${categoryId}/${roomId}`,
+            body,
+            { headers: this.headers },
+        );
+    }
+    removeRoom(levelId: number, roomId: number) {
+        return this.http.delete(`${this.serverUrl}/${SERVER.PREFIX}/rooms/${this.hotelId}/${levelId}/${roomId}`, {
+            headers: this.headers,
+        });
+    }
 }

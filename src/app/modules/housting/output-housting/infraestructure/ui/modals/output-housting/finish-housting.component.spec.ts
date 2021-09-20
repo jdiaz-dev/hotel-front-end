@@ -1,19 +1,19 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { TotalHoustingReportComponent } from './total-housting-report.component';
+import { FinishHoustingComponent } from './finish-housting.component';
 
-describe('TotalHoustingReportComponent', () => {
-    let component: TotalHoustingReportComponent;
-    let fixture: ComponentFixture<TotalHoustingReportComponent>;
+describe('FinishHoustingComponent', () => {
+    let component: FinishHoustingComponent;
+    let fixture: ComponentFixture<FinishHoustingComponent>;
 
     beforeEach(async () => {
         await TestBed.configureTestingModule({
-            declarations: [TotalHoustingReportComponent],
+            declarations: [FinishHoustingComponent],
         }).compileComponents();
     });
 
     beforeEach(() => {
-        fixture = TestBed.createComponent(TotalHoustingReportComponent);
+        fixture = TestBed.createComponent(FinishHoustingComponent);
         component = fixture.componentInstance;
         fixture.detectChanges();
     });

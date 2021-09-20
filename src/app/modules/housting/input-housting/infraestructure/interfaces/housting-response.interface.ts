@@ -6,6 +6,7 @@ export interface IHoustingResponse {
     entryTime: string;
     finished: boolean;
     client: {
+        id: number;
         dni: number;
         names: string;
         surnames: string;

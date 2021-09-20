@@ -1,0 +1,25 @@
+<div *ngIf="housting">
+    <mat-card>
+        <div class="container-data-room">
+            <div class="box-data-1">
+                <p>Nombre: {{ room.name }}</p>
+                <p>Categoría: {{ room.category.category }}</p>
+            </div>
+            <div class="box-data-2">
+                <p>Detalles: {{ room.details }}</p>
+                <p>Condición: {{ room.condition.nameCondition }}</p>
+            </div>
+
+            <div>
+                <div>Precio: S/. {{ room.price }}</div>
+            </div>
+        </div>
+    </mat-card>
+
+    <app-cost-housting [roomId]="room.id" [housting]="housting"></app-cost-housting>
+
+    <div>
+        <app-product-saled-report [houstingId]="housting.id"></app-product-saled-report>
+        <app-finish-housting [houstingId]="housting.id"></app-finish-housting>
+    </div>
+</div>

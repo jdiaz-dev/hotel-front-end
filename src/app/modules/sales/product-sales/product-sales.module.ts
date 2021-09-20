@@ -13,14 +13,14 @@ import { FormAmountProductsComponent } from './infraestructure/ui/modals/availab
 import { AggregateProductsButtonComponent } from './infraestructure/ui/modals/available-products/aggregate-products-button.component';
 
 @NgModule({
-  declarations: [
-    ProductSalesContainerComponent,
-    HoustingDataComponent,
-    AvailableProductsComponent,
-    ProductsAddedComponent,
-    FormAmountProductsComponent,
-    AggregateProductsButtonComponent,
-  ],
-  imports: [CommonModule, ProductSalesRoutingModule, FormsModule, ReactiveFormsModule, SharedModule],
+    declarations: [
+        ProductSalesContainerComponent,
+        HoustingDataComponent,
+        AvailableProductsComponent,
+        ProductsAddedComponent,
+        FormAmountProductsComponent,
+        AggregateProductsButtonComponent,
+    ],
+    imports: [CommonModule, ProductSalesRoutingModule, FormsModule, ReactiveFormsModule, SharedModule],
 })
 export class ProductSalesModule {}

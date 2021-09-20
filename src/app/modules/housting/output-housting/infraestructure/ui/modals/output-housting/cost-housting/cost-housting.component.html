@@ -1,0 +1,33 @@
+<div>
+    <div>Costo del alojamiento</div>
+
+    <!-- [housting]: converting housting to array-->
+    <table mat-table [dataSource]="[housting]" class="table">
+        <div>
+            <ng-container matColumnDef="TotalPrice">
+                <th mat-header-cell *matHeaderCellDef class="number number-room">Costo calculado</th>
+                <td mat-cell *matCellDef="let element">S/. {{ element.price }}</td>
+            </ng-container>
+
+            <ng-container matColumnDef="MoneyPaid">
+                <th mat-header-cell *matHeaderCellDef class="category">Dinero pagado</th>
+                <td mat-cell *matCellDef="let element">S/. {{ element.moneyPaid }}</td>
+            </ng-container>
+
+            <ng-container matColumnDef="LateApplied">
+                <th mat-header-cell *matHeaderCellDef class="category">Tardanza aplicada</th>
+                <td mat-cell *matCellDef="let element">
+                    <app-input-late-applied (lateApplied)="obtainLateApplied($event)"></app-input-late-applied>
+                </td>
+            </ng-container>
+            CompletePayment
+
+            <ng-container matColumnDef="CompletePayment">
+                <th mat-header-cell *matHeaderCellDef class="category">/</th>
+                <td mat-cell *matCellDef="let element">S/. {{ paymentToComplete }}</td>
+            </ng-container>
+        </div>
+        <tr mat-header-row *matHeaderRowDef="columnsHousting"></tr>
+        <tr class="rowOpenerCategories" mat-row *matRowDef="let row; columns: columnsHousting"></tr>
+    </table>
+</div>

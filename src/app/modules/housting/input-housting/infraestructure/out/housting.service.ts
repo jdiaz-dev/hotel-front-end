@@ -10,11 +10,17 @@ import { StateCashService } from 'src/app/shared/services/state-cash.service';
 import { GetHoustingForProductSalesDomainPort } from 'src/app/modules/sales/product-sales/application/ports/out/other-domains/get-housting-for-product-sales-domain.port';
 import { GetHoustingForOutputHoustingDomainPort } from '../../../output-housting/application/ports/out/other-domain/get-housting-for-output-housting-domain.port';
 import { IHoustingResponse } from '../interfaces/housting-response.interface';
+import { ICompleteHoustingPaymentPort } from '../../../output-housting/application/ports/out/other-domain/complete-housting-payment';
 
 @Injectable({
     providedIn: 'root',
 })
-export class HoustingService implements GetHoustingForProductSalesDomainPort, GetHoustingForOutputHoustingDomainPort {
+export class HoustingService
+    implements
+        GetHoustingForProductSalesDomainPort,
+        GetHoustingForOutputHoustingDomainPort,
+        ICompleteHoustingPaymentPort
+{
     private getCashIdForHoustingDomain: GetCashIdForHoustingDomain;
     private serverUrl = environment.serverUrl;
     private headers = new HttpHeaders()
@@ -50,6 +56,30 @@ export class HoustingService implements GetHoustingForProductSalesDomainPort, Ge
             },
         );
     }
+    updateMoneyPaid(houstingId: number, clientId: number, roomId: number, moneyToAdd: number) {
+        this.loadRequiredParamsForPath();
+        const body = JSON.stringify({ moneyToAdd });
+        console.log(this.headers);
+        return this.http.put(
+            `${this.serverUrl}/${SERVER.PREFIX}/housting/${this.hotelId}/${this.cashId}/${houstingId}/${clientId}/${roomId}`,
+            body,
+            {
+                headers: this.headers,
+            },
+        );
+    }
+    finishHousting(houstingId: number, clientId: number, roomId: number) {
+        this.loadRequiredParamsForPath();
+
+        return this.http.put(
+            `${this.serverUrl}/${SERVER.PREFIX}/housting/finish/${this.hotelId}/${this.cashId}/${houstingId}/${clientId}/${roomId}`,
+            '',
+            {
+                headers: this.headers,
+            },
+        );
+    }
+
     private loadRequiredParamsForPath() {
         this.hotelId = this.stateUserService.getHotelId();
         this.cashId = this.getCashIdForHoustingDomain.getCashId();

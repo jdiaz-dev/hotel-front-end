@@ -1,17 +1,24 @@
 import { Component, Input, OnChanges, OnDestroy, OnInit } from '@angular/core';
-import { IHoustingReport } from './../../interfaces/houstig-report.interface';
-import { CompletePaymentService } from './complete-payment.service';
-import { OutputHoustingService } from './../../out/output-housting.service';
-import { IProductsSaled } from './../../../../../sales/product-sales/infraestructure/interfaces/products-saled.interface';
+import { IHoustingReport } from '../../../interfaces/houstig-report.interface';
+import { CompletePaymentService } from './../output-housting/complete-payment.service';
+import { OutputHoustingService } from '../../../out/output-housting.service';
+import { IProductsSaled } from '../../../../../../sales/product-sales/infraestructure/interfaces/products-saled.interface';
 import { Subscription } from 'rxjs';
+import { IPaymentHoustingToCompletePID } from './interfaces-pid/payment-housting-to-complete';
+import { IPaymentProductSaledToCompletePID } from './interfaces-pid/payment-product-saled-to-complete';
+import { ISavePaymentsPID } from './interfaces-pid/save-payments';
 
 @Component({
-    selector: 'app-total-housting-report',
-    templateUrl: './total-housting-report.component.html',
-    styleUrls: ['./total-housting-report.component.scss'],
+    selector: 'app-finish-housting',
+    templateUrl: './finish-housting.component.html',
+    styleUrls: ['./finish-housting.component.scss'],
 })
-export class TotalHoustingReportComponent implements OnChanges, OnInit, OnDestroy {
+export class FinishHoustingComponent implements OnChanges, OnInit, OnDestroy {
     @Input('houstingId') houstingId!: number;
+    private paymentHoustingToComplete: IPaymentHoustingToCompletePID;
+    private paymentProductSaledToComplete: IPaymentProductSaledToCompletePID;
+    private savePayments: ISavePaymentsPID;
+
     columnsHoustingReport: string[] = ['TotalPrice', 'MoneyPaid', 'LateApplied', 'CompletePayment'];
     houstingReport!: IHoustingReport;
     subcriptionHousting!: Subscription;
@@ -20,10 +27,11 @@ export class TotalHoustingReportComponent implements OnChanges, OnInit, OnDestro
     houstingPayment!: number;
     productsSaledPayment!: number;
 
-    constructor(
-        private completePaymentService: CompletePaymentService,
-        private outputHoustingService: OutputHoustingService,
-    ) {}
+    constructor(completePaymentService: CompletePaymentService, private outputHoustingService: OutputHoustingService) {
+        this.paymentHoustingToComplete = completePaymentService;
+        this.paymentProductSaledToComplete = completePaymentService;
+        this.savePayments = completePaymentService;
+    }
 
     ngOnInit(): void {
         this.obtainPaymentHoustingToComplete();
@@ -36,14 +44,8 @@ export class TotalHoustingReportComponent implements OnChanges, OnInit, OnDestro
         this.subcriptionHousting.unsubscribe();
         this.subscritpionProductsSaled.unsubscribe();
     }
-    /* loadOutputHousting() {
-        this.outputHoustingService.getHoustingReport(this.houstingId).subscribe((response: IHoustingReport) => {
-            //console.log(response);
-            this.houstingReport = response;
-        });
-    } */
     private obtainPaymentHoustingToComplete() {
-        this.subcriptionHousting = this.completePaymentService.paymentHoustingToComplete$.subscribe(
+        this.subcriptionHousting = this.paymentHoustingToComplete.paymentHoustingToComplete$.subscribe(
             (houstingPayment: number) => {
                 // console.log(houstingPayment);
                 this.houstingPayment = houstingPayment;
@@ -52,7 +54,7 @@ export class TotalHoustingReportComponent implements OnChanges, OnInit, OnDestro
         );
     }
     private obtainPaymentProductSaledToComplete() {
-        this.subscritpionProductsSaled = this.completePaymentService.paymentProductSalesToCompleteSource$.subscribe(
+        this.subscritpionProductsSaled = this.paymentProductSaledToComplete.paymentProductSalesToComplete$.subscribe(
             (products: IProductsSaled[]) => {
                 // console.log(products);
                 this.calculatePaymentProductsSaled(products);
@@ -64,12 +66,15 @@ export class TotalHoustingReportComponent implements OnChanges, OnInit, OnDestro
     private calculatePaymentProductsSaled(products: IProductsSaled[]) {
         this.productsSaledPayment = products.reduce((total, product: IProductsSaled) => {
             let _total = total;
-            if (!product.payed) _total + product.totalPrice;
+            if (!product.payed) _total += product.totalPrice;
 
             return _total;
         }, 0);
     }
     private calculatePaymentToComplete() {
         this.paymentToComplete = this.houstingPayment + this.productsSaledPayment;
+    }
+    finishHousting() {
+        this.savePayments.savePayment(true);
     }
 }

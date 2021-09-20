@@ -1,6 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { GetProductSalesForOutputHoustingDomainPort } from 'src/app/modules/housting/output-housting/application/ports/out/other-domain/get-product-sales-for-output-housting-domain.port';
+import { ICompleteProductSaledPaymentPort } from 'src/app/modules/housting/output-housting/application/ports/out/other-domain/complete-product-saled-payment';
 import { AccessKeys } from 'src/app/shared/enums/name-token';
 import { SERVER } from 'src/app/shared/enums/server.enum';
 import { StateCashService } from 'src/app/shared/services/state-cash.service';
@@ -13,7 +14,9 @@ import { GetCashIdForHoustingDomain } from './../../../../housting/input-houstin
 @Injectable({
     providedIn: 'root',
 })
-export class ProductSalesService implements GetProductSalesForOutputHoustingDomainPort {
+export class ProductSaledService
+    implements GetProductSalesForOutputHoustingDomainPort, ICompleteProductSaledPaymentPort
+{
     private getCashIdForHoustingDomain: GetCashIdForHoustingDomain;
     private serverUrl = environment.serverUrl;
     private headers = new HttpHeaders()
@@ -29,22 +32,31 @@ export class ProductSalesService implements GetProductSalesForOutputHoustingDoma
     ) {
         this.getCashIdForHoustingDomain = stateCashService;
     }
-    createProductSale(productSaled: ProductAddedModel, houstingId: number) {
+    createProductSaled(productSaled: ProductAddedModel, houstingId: number) {
         this.loadRequiredParamsForPath();
         const body = JSON.stringify(productSaled);
         return this.http.post(
-            `${this.serverUrl}/${SERVER.PREFIX}/product-sales/${this.hotelId}/${this.cashId}/${houstingId}/${productSaled.productId}`,
+            `${this.serverUrl}/${SERVER.PREFIX}/product-saled/${this.hotelId}/${this.cashId}/${houstingId}/${productSaled.productId}`,
             body,
             {
                 headers: this.headers,
             },
         );
     }
-    getProductSales(houstingId: number) {
-        console.log(houstingId);
+    getProductSaled(houstingId: number) {
         this.loadRequiredParamsForPath();
         return this.http.get<IProductsSaled[]>(
-            `${this.serverUrl}/${SERVER.PREFIX}/product-sales/${this.hotelId}/${houstingId}`,
+            `${this.serverUrl}/${SERVER.PREFIX}/product-saled/${this.hotelId}/${houstingId}`,
+            {
+                headers: this.headers,
+            },
+        );
+    }
+    completeProductSaledPayment(houstingId: number, productSaledId: number) {
+        this.loadRequiredParamsForPath();
+        return this.http.put(
+            `${this.serverUrl}/${SERVER.PREFIX}/product-saled/finish-payment/${this.hotelId}/${this.cashId}/${houstingId}/${productSaledId}`,
+            '',
             {
                 headers: this.headers,
             },
