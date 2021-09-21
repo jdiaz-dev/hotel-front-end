@@ -38,7 +38,6 @@ export class CostHoustingComponent implements OnChanges, OnInit, DoCheck {
         }
     }
     ngOnInit(): void {
-        console.log(this.housting);
         this.completeHoustingPayment();
     }
     ngDoCheck(): void {

@@ -1,19 +1,24 @@
 import { Component, Input, OnChanges, OnDestroy, OnInit } from '@angular/core';
 import { IHoustingReport } from '../../../interfaces/houstig-report.interface';
-import { CompletePaymentService } from './../output-housting/complete-payment.service';
+import { CompletePaymentService } from './complete-payment.service';
 import { OutputHoustingService } from '../../../out/output-housting.service';
 import { IProductsSaled } from '../../../../../../sales/product-sales/infraestructure/interfaces/products-saled.interface';
 import { Subscription } from 'rxjs';
 import { IPaymentHoustingToCompletePID } from './interfaces-pid/payment-housting-to-complete';
 import { IPaymentProductSaledToCompletePID } from './interfaces-pid/payment-product-saled-to-complete';
 import { ISavePaymentsPID } from './interfaces-pid/save-payments';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { CustomMessage } from 'src/app/shared/modals/custom-message.interface';
+import { ConfirmRemoveComponent } from 'src/app/shared/modals/confirm-remove.component';
+import { ReloadRoomsService } from 'src/app/modules/housting/reception/infraestructure/ui/services/reload-rooms.service';
+import { OutputHoustingContainerComponent } from './output-housting-container.component';
 
 @Component({
-    selector: 'app-finish-housting',
-    templateUrl: './finish-housting.component.html',
-    styleUrls: ['./finish-housting.component.scss'],
+    selector: 'app-button-finish-housting',
+    templateUrl: './button-finish-housting.component.html',
+    styleUrls: ['./button-finish-housting.component.scss'],
 })
-export class FinishHoustingComponent implements OnChanges, OnInit, OnDestroy {
+export class ButtonFinishHoustingComponent implements OnChanges, OnInit, OnDestroy {
     @Input('houstingId') houstingId!: number;
     private paymentHoustingToComplete: IPaymentHoustingToCompletePID;
     private paymentProductSaledToComplete: IPaymentProductSaledToCompletePID;
@@ -27,7 +32,13 @@ export class FinishHoustingComponent implements OnChanges, OnInit, OnDestroy {
     houstingPayment!: number;
     productsSaledPayment!: number;
 
-    constructor(completePaymentService: CompletePaymentService, private outputHoustingService: OutputHoustingService) {
+    constructor(
+        completePaymentService: CompletePaymentService,
+        private outputHoustingService: OutputHoustingService,
+        private reloadRoomsService: ReloadRoomsService,
+        public dialogRef: MatDialogRef<OutputHoustingContainerComponent>,
+        private dialog: MatDialog,
+    ) {
         this.paymentHoustingToComplete = completePaymentService;
         this.paymentProductSaledToComplete = completePaymentService;
         this.savePayments = completePaymentService;
@@ -36,6 +47,7 @@ export class FinishHoustingComponent implements OnChanges, OnInit, OnDestroy {
     ngOnInit(): void {
         this.obtainPaymentHoustingToComplete();
         this.obtainPaymentProductSaledToComplete();
+        this.reloadRoomsService.reloadRooms(false);
     }
     ngOnChanges(): void {
         //this.loadOutputHousting();
@@ -75,6 +87,17 @@ export class FinishHoustingComponent implements OnChanges, OnInit, OnDestroy {
         this.paymentToComplete = this.houstingPayment + this.productsSaledPayment;
     }
     finishHousting() {
-        this.savePayments.savePayment(true);
+        //this.savePayments.savePayment(true);
+        const toCompleteDialog: CustomMessage = {
+            title: 'Finalizar hospedamiento',
+            toCompleteDescription: 'finalizar este hospedamiento',
+        };
+        let dialogRef = this.dialog.open(ConfirmRemoveComponent, { data: toCompleteDialog, width: '40%' });
+        dialogRef.afterClosed().subscribe((result: boolean) => {
+            if (result) {
+                this.reloadRoomsService.reloadRooms(true);
+                this.dialogRef.close();
+            }
+        });
     }
 }

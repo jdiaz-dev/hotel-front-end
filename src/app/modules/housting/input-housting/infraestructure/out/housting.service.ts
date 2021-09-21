@@ -59,7 +59,7 @@ export class HoustingService
     updateMoneyPaid(houstingId: number, clientId: number, roomId: number, moneyToAdd: number) {
         this.loadRequiredParamsForPath();
         const body = JSON.stringify({ moneyToAdd });
-        console.log(this.headers);
+
         return this.http.put(
             `${this.serverUrl}/${SERVER.PREFIX}/housting/${this.hotelId}/${this.cashId}/${houstingId}/${clientId}/${roomId}`,
             body,

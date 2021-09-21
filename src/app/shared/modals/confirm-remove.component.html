@@ -1,9 +1,10 @@
-<h2 mat-dialog-title>{{customMessage.title}}</h2>
+<h2 mat-dialog-title>{{ customMessage.title }}</h2>
 <mat-dialog-content class="mat-typography">
-    <h3>¿Estás seguro de eliminar {{customMessage.toCompleteDescription}}?</h3>
-
+    <h3>¿Estás seguro de {{ customMessage.toCompleteDescription }}?</h3>
 </mat-dialog-content>
 <mat-dialog-actions align="end">
-    <button mat-raised-button color="primary" [mat-dialog-close]="false">CANCELAR</button>
-    <button mat-raised-button color="accent" [mat-dialog-close]="true" cdkFocusInitial>ELIMINAR</button>
+    <div class="buttons-confirm-component">
+        <button mat-raised-button color="primary" [mat-dialog-close]="false">CANCELAR</button>
+        <button mat-raised-button color="accent" [mat-dialog-close]="true" cdkFocusInitial>ACEPTAR</button>
+    </div>
 </mat-dialog-actions>

@@ -11,6 +11,7 @@ import { CONFIG } from 'src/config/config';
 import { Subscription } from 'rxjs';
 import { ListRoomMyxin } from './list-room.myxin';
 import { MatDialogRef } from '@angular/material/dialog';
+import { ReloadRoomsService } from '../services/reload-rooms.service';
 
 @Component({
     selector: 'app-list-rooms',
@@ -22,15 +23,17 @@ export class ListRoomsComponent extends ListRoomMyxin() implements OnInit, OnDes
     private receptionMode!: string;
     private communicationSubscription!: Subscription;
     private currentLevel!: number;
+    private subscriptionReloadRooms!: Subscription;
     roomList: RoomData[] = [];
     roomBusy: string = CONFIG.CONDITIONS.BUSY.NAME;
     roomFree: string = CONFIG.CONDITIONS.FREE.NAME;
 
     constructor(
-        public activatedRoute: ActivatedRoute,
         private readonly levelAndRoomCommunicationService: LevelAndRoomCommunicationService,
         private readonly okService: OkService,
         private readonly receptionModeService: ReceptionModeService,
+        private readonly reloadRoomsService: ReloadRoomsService,
+        public activatedRoute: ActivatedRoute,
         roomsPersistenceService: RoomsPersistenceService,
     ) {
         super();
@@ -39,9 +42,16 @@ export class ListRoomsComponent extends ListRoomMyxin() implements OnInit, OnDes
     ngOnInit(): void {
         this.checkModeReception();
         this.loadCurrentLevel();
+        this.reloadRooms();
     }
     ngOnDestroy(): void {
         this.communicationSubscription.unsubscribe();
+        this.subscriptionReloadRooms.unsubscribe();
+    }
+    private reloadRooms() {
+        this.subscriptionReloadRooms = this.reloadRoomsService.reloadRooms$.subscribe((result: boolean) => {
+            if (result) this.loadRooms();
+        });
     }
     private loadCurrentLevel() {
         this.communicationSubscription = this.levelAndRoomCommunicationService.renderOtherRooms$.subscribe(
@@ -55,6 +65,7 @@ export class ListRoomsComponent extends ListRoomMyxin() implements OnInit, OnDes
         this.getRoomsForReceptionDomainPort
             .getRoomsByLevel(this.currentLevel, this.conditionRooms(this.receptionMode))
             .subscribe((response: RoomData[]) => {
+                // console.log(response);
                 this.roomList = response;
             });
     }
@@ -70,6 +81,7 @@ export class ListRoomsComponent extends ListRoomMyxin() implements OnInit, OnDes
         );
         if (dialogRef !== undefined) this.closeDialogHousting(dialogRef);
     }
+
     closeDialogHousting(currentDialogMode: any) {
         this.okService.activedOkButton$.subscribe((activedOkButton: boolean) => {
             console.log(activedOkButton);

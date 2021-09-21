@@ -24,7 +24,8 @@ table.table {
 }
 
 /* buttons to update and cancel */
-div.buttons {
+div.buttons,
+mat-dialog-actions div.buttons-confirm-component {
     display: flex;
     justify-content: space-between;
 }

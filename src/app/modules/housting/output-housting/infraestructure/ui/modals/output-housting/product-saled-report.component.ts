@@ -41,7 +41,7 @@ export class ProductSaledReportComponent implements OnChanges, OnInit, DoCheck {
         this.getProductSalesForOutputHoustingDomainPort
             .getProductSaled(this.houstingId)
             .subscribe((response: IProductsSaled[]) => {
-                console.log(response);
+                // console.log(response);
                 this.productsSaled = response;
             });
     }

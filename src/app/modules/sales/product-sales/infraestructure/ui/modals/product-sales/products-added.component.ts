@@ -65,7 +65,7 @@ export class ProductsAddedComponent implements OnInit {
                 product.payed = this.productPayed;
 
                 this.productSaledService.createProductSaled(product, this.houstingId).subscribe((response) => {
-                    console.log(response);
+                    // console.log(response);
                 });
                 return product;
             });

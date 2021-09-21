@@ -1,19 +1,19 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { FinishHoustingComponent } from './finish-housting.component';
+import { ButtonFinishHoustingComponent } from './button-finish-housting.component';
 
-describe('FinishHoustingComponent', () => {
-    let component: FinishHoustingComponent;
-    let fixture: ComponentFixture<FinishHoustingComponent>;
+describe('ButtonFinishHoustingComponent', () => {
+    let component: ButtonFinishHoustingComponent;
+    let fixture: ComponentFixture<ButtonFinishHoustingComponent>;
 
     beforeEach(async () => {
         await TestBed.configureTestingModule({
-            declarations: [FinishHoustingComponent],
+            declarations: [ButtonFinishHoustingComponent],
         }).compileComponents();
     });
 
     beforeEach(() => {
-        fixture = TestBed.createComponent(FinishHoustingComponent);
+        fixture = TestBed.createComponent(ButtonFinishHoustingComponent);
         component = fixture.componentInstance;
         fixture.detectChanges();
     });
