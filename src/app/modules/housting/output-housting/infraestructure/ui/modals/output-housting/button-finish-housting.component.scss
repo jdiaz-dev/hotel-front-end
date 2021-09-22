@@ -1,0 +1,21 @@
+div.total-payment-container {
+    display: flex;
+    width: 100%;
+
+    div.total {
+        width: 66%;
+        text-align: end;
+        padding-right: 14%;
+        font-weight: bold;
+    }
+    div.payment {
+        width: 20%;
+    }
+}
+
+div.container-buttons {
+    margin-top: 20px;
+    display: flex;
+    flex-basis: 100%;
+    justify-content: space-between;
+}

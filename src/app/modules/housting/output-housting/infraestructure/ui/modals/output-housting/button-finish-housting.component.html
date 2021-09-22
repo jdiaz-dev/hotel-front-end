@@ -1,6 +1,9 @@
-<div>
-    <div>Total</div>
-    <div>S/. {{ paymentToComplete }}</div>
+<div class="total-payment-container">
+    <div class="total">Total</div>
+    <div class="payment">S/. {{ paymentToComplete }}</div>
 </div>
 
-<button mat-raised-button mat-button color="primary" (click)="finishHousting()">Finalizar hospedamiento</button>
+<div class="container-buttons">
+    <button mat-raised-button mat-button color="accent" mat-dialog-close>Cancelar</button>
+    <button mat-raised-button mat-button color="primary" (click)="finishHousting()">Finalizar</button>
+</div>

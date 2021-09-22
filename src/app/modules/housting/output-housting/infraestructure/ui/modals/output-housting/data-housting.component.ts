@@ -31,7 +31,7 @@ export class DataHoustingComponent implements OnInit {
         this.getHoustingForOutputHoustingDomainPort
             .getHousting(this.room.id)
             .subscribe((response: IHoustingResponse) => {
-                //console.log(response);
+                console.log(response);
                 this.housting = response;
             });
     }

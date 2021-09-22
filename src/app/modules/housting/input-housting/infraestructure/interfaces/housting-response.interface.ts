@@ -10,5 +10,6 @@ export interface IHoustingResponse {
         dni: number;
         names: string;
         surnames: string;
+        visitReason: string;
     };
 }

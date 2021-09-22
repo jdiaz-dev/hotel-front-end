@@ -5,17 +5,17 @@
     <table mat-table [dataSource]="[housting]" class="table">
         <div>
             <ng-container matColumnDef="TotalPrice">
-                <th mat-header-cell *matHeaderCellDef class="number number-room">Costo calculado</th>
+                <th mat-header-cell *matHeaderCellDef class="price-housting">Costo calculado</th>
                 <td mat-cell *matCellDef="let element">S/. {{ element.price }}</td>
             </ng-container>
 
             <ng-container matColumnDef="MoneyPaid">
-                <th mat-header-cell *matHeaderCellDef class="category">Dinero pagado</th>
+                <th mat-header-cell *matHeaderCellDef class="money-paid">Dinero pagado</th>
                 <td mat-cell *matCellDef="let element">S/. {{ element.moneyPaid }}</td>
             </ng-container>
 
             <ng-container matColumnDef="LateApplied">
-                <th mat-header-cell *matHeaderCellDef class="category">Tardanza aplicada</th>
+                <th mat-header-cell *matHeaderCellDef class="late-applied">Tardanza aplicada</th>
                 <td mat-cell *matCellDef="let element">
                     <app-input-late-applied (lateApplied)="obtainLateApplied($event)"></app-input-late-applied>
                 </td>
@@ -23,7 +23,7 @@
             CompletePayment
 
             <ng-container matColumnDef="CompletePayment">
-                <th mat-header-cell *matHeaderCellDef class="category">/</th>
+                <th mat-header-cell *matHeaderCellDef class="payment-to-complete">/</th>
                 <td mat-cell *matCellDef="let element">S/. {{ paymentToComplete }}</td>
             </ng-container>
         </div>

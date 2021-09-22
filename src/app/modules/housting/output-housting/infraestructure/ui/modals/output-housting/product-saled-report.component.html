@@ -2,22 +2,22 @@
 <table mat-table [dataSource]="productsSaled" class="table">
     <div>
         <ng-container matColumnDef="NameProduct">
-            <th mat-header-cell *matHeaderCellDef class="number number-room">N. producto</th>
+            <th mat-header-cell *matHeaderCellDef class="name-product">N. producto</th>
             <td mat-cell *matCellDef="let element">{{ element.product.name }}</td>
         </ng-container>
 
         <ng-container matColumnDef="Price">
-            <th mat-header-cell *matHeaderCellDef class="name-room">Price</th>
-            <td mat-cell *matCellDef="let element">{{ element.product.price }}</td>
+            <th mat-header-cell *matHeaderCellDef class="price">Price unitario</th>
+            <td mat-cell *matCellDef="let element">S/. {{ element.product.price }}</td>
         </ng-container>
 
         <ng-container matColumnDef="Amount">
-            <th mat-header-cell *matHeaderCellDef class="category">Amount</th>
+            <th mat-header-cell *matHeaderCellDef class="amount">Amount</th>
             <td mat-cell *matCellDef="let element">{{ element.amount }}</td>
         </ng-container>
 
         <ng-container matColumnDef="State">
-            <th mat-header-cell *matHeaderCellDef class="price">Estado</th>
+            <th mat-header-cell *matHeaderCellDef class="state">Estado</th>
             <td mat-cell *matCellDef="let element">
                 <div *ngIf="element.payed">PAGADO</div>
                 <div *ngIf="!element.payed">SIN PAGAR</div>
@@ -25,7 +25,7 @@
         </ng-container>
 
         <ng-container matColumnDef="TotalPrice">
-            <th mat-header-cell *matHeaderCellDef class="details">/</th>
+            <th mat-header-cell *matHeaderCellDef class="total-price">/</th>
             <td mat-cell *matCellDef="let element">
                 <div *ngIf="!element.payed">S/. {{ element.totalPrice }}</div>
                 <div *ngIf="element.payed">S/. 0</div>

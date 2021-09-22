@@ -43,7 +43,7 @@ export class ReceptionModeService {
                 configDialog,
             );
         } else if (receptionMode === CONFIG.RECEPTION_MODE.OUTPUT_HOUSTING) {
-            configDialog = { width: '86%', height: '500px' };
+            configDialog = { width: '80%', height: '500px' };
             conditionRoom = CONFIG.CONDITIONS.BUSY.NAME;
             modeReceptionDialog = this.displayDialogReception(
                 room,

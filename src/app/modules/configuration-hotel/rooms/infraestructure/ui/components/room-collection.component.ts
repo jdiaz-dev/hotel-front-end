@@ -24,7 +24,7 @@ export class RoomCollectionComponent implements OnInit, OnChanges {
     }
     loadRooms() {
         this.roomsPersistenceService.getALLRooms().subscribe((response: RoomData[]) => {
-            console.log(response);
+            // console.log(response);
             this.rooms = response;
         });
     }

@@ -1,4 +1,4 @@
-<mat-form-field appearance="fill" class="input-amount-container">
+<mat-form-field [style.width.%]="27">
     <input matInput [formControl]="lateAppliedData" [(ngModel)]="late" (keyup)="sendLateApplied()" value="0" />
     <mat-error *ngIf="lateAppliedData.touched && lateAppliedData.errors?.required"> Este campo es requerido </mat-error>
     <mat-error *ngIf="lateAppliedData.touched && lateAppliedData.errors?.pattern">
