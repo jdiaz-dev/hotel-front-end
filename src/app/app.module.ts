@@ -21,7 +21,7 @@ import { ProductsModule } from './modules/sales/products/products.module';
 import { ProductSalesModule } from './modules/sales/product-sales/product-sales.module';
 
 @NgModule({
-    declarations: [AppComponent, NavbarComponent],
+    declarations: [AppComponent],
     imports: [
         BrowserModule,
         HttpClientModule,

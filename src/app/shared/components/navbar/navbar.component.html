@@ -1,23 +1,20 @@
 <mat-drawer-container class="example-container">
     <mat-drawer mode="side" opened>
+        <div [innerHtml]="iconHotel | safeHtml"></div>
         <mat-tree [dataSource]="dataSource" [treeControl]="treeControl" class="example-tree">
-
             <!-- leaves -->
-            <mat-tree-node class="leaves" *matTreeNodeDef="let node" matTreeNodeToggle routerLink="{{node.url}}">
-                <!-- <mat-icon class="mat-icon-send">
-                    double_arrow
-                </mat-icon> -->
-                {{node.name}}
+            <mat-tree-node class="leaves" *matTreeNodeDef="let node" matTreeNodeToggle routerLink="{{ node.url }}">
+                <!-- checking if leave is a node -->
+                <mat-icon *ngIf="node.icon" class="mat-icon-send" [innerHtml]="node.icon | safeHtml"> </mat-icon>
+                {{ node.name }}
             </mat-tree-node>
 
             <!-- This is the tree node template for expandable nodes -->
             <mat-nested-tree-node *matTreeNodeDef="let node; when: hasChild">
                 <div class="mat-tree-node" matTreeNodeToggle>
-                    <mat-icon class="mat-icon-send">
-                        double_arrow
-                    </mat-icon>
+                    <mat-icon class="mat-icon-send" [innerHtml]="node.icon | safeHtml"> </mat-icon>
                     <div class="node-name">
-                        {{node.name}}
+                        {{ node.name }}
                     </div>
 
                     <!-- <button mat-icon-button  >
@@ -26,7 +23,7 @@
                     </button> -->
 
                     <mat-icon class="mat-icon-rtl-mirror">
-                        {{treeControl.isExpanded(node) ? 'expand_more' : 'chevron_left'}}
+                        {{ treeControl.isExpanded(node) ? 'expand_more' : 'chevron_left' }}
                     </mat-icon>
                 </div>
 
