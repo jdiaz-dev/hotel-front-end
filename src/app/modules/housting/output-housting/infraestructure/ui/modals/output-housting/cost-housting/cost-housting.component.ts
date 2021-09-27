@@ -52,6 +52,7 @@ export class CostHoustingComponent implements OnChanges, OnInit, DoCheck {
     }
     completeHoustingPayment() {
         this.savePayment.savePayment$.subscribe((save: boolean) => {
+            //complete and finish housting
             if (save) {
                 this.completeHoustingPaymentPort
                     .updateMoneyPaid(this.housting.id, this.housting.client.id, this.roomId, this.paymentToComplete)
