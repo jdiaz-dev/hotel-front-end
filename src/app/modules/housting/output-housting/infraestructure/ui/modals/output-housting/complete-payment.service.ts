@@ -4,12 +4,17 @@ import { IProductsSaled } from 'src/app/modules/sales/product-sales/infraestruct
 import { IPaymentHoustingToCompletePID } from './interfaces-pid/payment-housting-to-complete';
 import { IPaymentProductSaledToCompletePID } from './interfaces-pid/payment-product-saled-to-complete';
 import { ISavePaymentsPID } from './interfaces-pid/save-payments';
+import { IFinishProductsPaymentPID } from './interfaces-pid/finish-products-payment';
 
 @Injectable({
     providedIn: 'root',
 })
 export class CompletePaymentService
-    implements IPaymentHoustingToCompletePID, IPaymentProductSaledToCompletePID, ISavePaymentsPID
+    implements
+        IPaymentHoustingToCompletePID,
+        IPaymentProductSaledToCompletePID,
+        ISavePaymentsPID,
+        IFinishProductsPaymentPID
 {
     private paymentHoustingToCompleteSource = new Subject<number>();
     paymentHoustingToComplete$: Observable<number> = this.paymentHoustingToCompleteSource.asObservable();
@@ -18,16 +23,23 @@ export class CompletePaymentService
     paymentProductSalesToComplete$: Observable<IProductsSaled[]> =
         this.paymentProductSaledToCompleteSource.asObservable();
 
-    private savePaymentSource = new Subject<boolean>();
-    savePayment$: Observable<boolean> = this.savePaymentSource.asObservable();
+    private saveHoustingPaymentSource = new Subject<boolean>();
+    saveHoustingPayment$: Observable<boolean> = this.saveHoustingPaymentSource.asObservable();
 
-    sendPaymentHoustingToComplete(payment: number) {
+    private finishProductsPaymentSource = new Subject<boolean>();
+    finishProductsPayment$: Observable<boolean> = this.finishProductsPaymentSource.asObservable();
+
+    sendPaymentHoustingToComplete(payment: number): void {
         this.paymentHoustingToCompleteSource.next(payment);
     }
-    sendPaymentProductSaledToComplet(products: IProductsSaled[]) {
+    sendPaymentProductSaledToComplet(products: IProductsSaled[]): void {
         this.paymentProductSaledToCompleteSource.next(products);
     }
-    savePayment(save: boolean) {
-        this.savePaymentSource.next(save);
+    saveHoustingPayment(save: boolean): void {
+        this.saveHoustingPaymentSource.next(save);
+    }
+
+    finishProductsPayment(save: boolean): void {
+        this.finishProductsPaymentSource.next(save);
     }
 }

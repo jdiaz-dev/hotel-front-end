@@ -6,6 +6,7 @@ import { ICompleteProductSaledPaymentPort } from '../../../../application/ports/
 import { CompletePaymentService } from './../output-housting/complete-payment.service';
 import { IPaymentProductSaledToCompletePID } from './interfaces-pid/payment-product-saled-to-complete';
 import { ISavePaymentsPID } from './interfaces-pid/save-payments';
+import { IFinishProductsPaymentPID } from './interfaces-pid/finish-products-payment';
 
 @Component({
     selector: 'app-product-saled-report',
@@ -17,7 +18,7 @@ export class ProductSaledReportComponent implements OnChanges, OnInit, DoCheck {
     private getProductSalesForOutputHoustingDomainPort: GetProductSalesForOutputHoustingDomainPort;
     private completeProductSaledPaymentPort: ICompleteProductSaledPaymentPort;
     private paymentProductSaledToComplete: IPaymentProductSaledToCompletePID;
-    private savePayment: ISavePaymentsPID;
+    private finishProductsPayment: IFinishProductsPaymentPID;
 
     columnsProductsSaled: string[] = ['NameProduct', 'Price', 'Amount', 'State', 'TotalPrice'];
     productsSaled!: IProductsSaled[];
@@ -26,7 +27,7 @@ export class ProductSaledReportComponent implements OnChanges, OnInit, DoCheck {
         this.getProductSalesForOutputHoustingDomainPort = productSaledService;
         this.completeProductSaledPaymentPort = productSaledService;
         this.paymentProductSaledToComplete = completePaymentService;
-        this.savePayment = completePaymentService;
+        this.finishProductsPayment = completePaymentService;
     }
     ngOnChanges() {
         this.loadProductsSaled();
@@ -50,17 +51,15 @@ export class ProductSaledReportComponent implements OnChanges, OnInit, DoCheck {
             this.paymentProductSaledToComplete.sendPaymentProductSaledToComplet(this.productsSaled);
     }
     completeProductSaledPayment() {
-        this.savePayment.savePayment$.subscribe((save: boolean) => {
-            if (save) {
-                this.productsSaled.forEach((productSaled: IProductsSaled) => {
-                    if (!productSaled.payed) {
-                        this.completeProductSaledPaymentPort
-                            .completeProductSaledPayment(this.houstingId, productSaled.id)
-                            .subscribe((response) => {
-                                //console.log(response);
-                            });
-                    }
-                });
+        this.finishProductsPayment.finishProductsPayment$.subscribe((save: boolean) => {
+            if (save && !this.productsSaled[0].payed) {
+                const productsSaledIds = this.productsSaled.map((productSaled) => productSaled.id);
+
+                this.completeProductSaledPaymentPort
+                    .completeProductSaledPayment(this.houstingId, productsSaledIds)
+                    .subscribe((response) => {
+                        console.log('-----------------complemente payment products saled', response);
+                    });
             }
         });
     }

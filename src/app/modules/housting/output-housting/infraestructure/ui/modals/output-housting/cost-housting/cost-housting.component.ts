@@ -5,6 +5,7 @@ import { ICompleteHoustingPaymentPort } from 'src/app/modules/housting/output-ho
 import { CompletePaymentService } from '../complete-payment.service';
 import { IPaymentHoustingToCompletePID } from '../interfaces-pid/payment-housting-to-complete';
 import { ISavePaymentsPID } from './../interfaces-pid/save-payments';
+import { IFinishProductsPaymentPID } from './../interfaces-pid/finish-products-payment';
 
 @Component({
     selector: 'app-cost-housting',
@@ -18,6 +19,7 @@ export class CostHoustingComponent implements OnChanges, OnInit, DoCheck {
     private completeHoustingPaymentPort: ICompleteHoustingPaymentPort;
     private paymentHoustingToComplete: IPaymentHoustingToCompletePID;
     private savePayment: ISavePaymentsPID;
+    private finishProductsPayment: IFinishProductsPaymentPID;
     private houstingPrice!: number;
     private moneyPaidHousting!: number;
     paymentToComplete: number = 0;
@@ -29,6 +31,7 @@ export class CostHoustingComponent implements OnChanges, OnInit, DoCheck {
         this.completeHoustingPaymentPort = houstingService;
         this.paymentHoustingToComplete = completePaymentService;
         this.savePayment = completePaymentService;
+        this.finishProductsPayment = completePaymentService;
     }
     ngOnChanges() {
         if (this.housting) {
@@ -51,20 +54,23 @@ export class CostHoustingComponent implements OnChanges, OnInit, DoCheck {
         this.paymentHoustingToComplete.sendPaymentHoustingToComplete(this.paymentToComplete);
     }
     completeHoustingPayment() {
-        this.savePayment.savePayment$.subscribe((save: boolean) => {
+        this.savePayment.saveHoustingPayment$.subscribe(async (save: boolean) => {
             //complete and finish housting
             if (save) {
-                this.completeHoustingPaymentPort
+                const paymentCompleted = await this.completeHoustingPaymentPort
                     .updateMoneyPaid(this.housting.id, this.housting.client.id, this.roomId, this.paymentToComplete)
-                    .subscribe((response) => {
-                        //console.log(response);
-                    });
+                    .toPromise();
+                console.log('--------------------paymentCompleted', paymentCompleted);
 
-                this.completeHoustingPaymentPort
-                    .finishHousting(this.housting.id, this.housting.client.id, this.roomId)
-                    .subscribe((response) => {
-                        //console.log(response);
-                    });
+                if (paymentCompleted) {
+                    this.finishProductsPayment.finishProductsPayment(true);
+
+                    this.completeHoustingPaymentPort
+                        .finishHousting(this.housting.id, this.housting.client.id, this.roomId)
+                        .subscribe((response) => {
+                            console.log('--------------------finishHousting', response);
+                        });
+                }
             }
         });
     }

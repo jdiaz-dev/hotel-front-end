@@ -32,12 +32,14 @@ export class ProductSaledService
     ) {
         this.getCashIdForHoustingDomain = stateCashService;
     }
-    createProductSaled(productSaled: ProductAddedModel, houstingId: number) {
+    createProductSaled(_productsSaled: ProductAddedModel[], houstingId: number) {
         this.loadRequiredParamsForPath();
-        const body = JSON.stringify(productSaled);
+        const body = JSON.stringify(_productsSaled);
+        console.log(body);
+        const productsSaled = { productsSaled: _productsSaled };
         return this.http.post(
-            `${this.serverUrl}/${SERVER.PREFIX}/product-saled/${this.hotelId}/${this.cashId}/${houstingId}/${productSaled.productId}`,
-            body,
+            `${this.serverUrl}/${SERVER.PREFIX}/product-sales/${this.hotelId}/${this.cashId}/${houstingId}`,
+            productsSaled,
             {
                 headers: this.headers,
             },
@@ -46,16 +48,18 @@ export class ProductSaledService
     getProductSaled(houstingId: number) {
         this.loadRequiredParamsForPath();
         return this.http.get<IProductsSaled[]>(
-            `${this.serverUrl}/${SERVER.PREFIX}/product-saled/${this.hotelId}/${houstingId}`,
+            `${this.serverUrl}/${SERVER.PREFIX}/product-sales/${this.hotelId}/${houstingId}`,
             {
                 headers: this.headers,
             },
         );
     }
-    completeProductSaledPayment(houstingId: number, productSaledId: number) {
+    completeProductSaledPayment(houstingId: number, productSaledIds: number[]) {
         this.loadRequiredParamsForPath();
         return this.http.put(
-            `${this.serverUrl}/${SERVER.PREFIX}/product-saled/finish-payment/${this.hotelId}/${this.cashId}/${houstingId}/${productSaledId}`,
+            `${this.serverUrl}/${SERVER.PREFIX}/product-sales/finish-payment/${this.hotelId}/${
+                this.cashId
+            }/${houstingId}/${productSaledIds.toString()}`,
             '',
             {
                 headers: this.headers,

@@ -63,11 +63,11 @@ export class ProductsAddedComponent implements OnInit {
         if (this.productPayed !== undefined) {
             this.productsAdded = this.productsAdded.map((product: ProductAddedModel) => {
                 product.payed = this.productPayed;
-
-                this.productSaledService.createProductSaled(product, this.houstingId).subscribe((response) => {
-                    // console.log(response);
-                });
                 return product;
+            });
+
+            this.productSaledService.createProductSaled(this.productsAdded, this.houstingId).subscribe((response) => {
+                // console.log(response);
             });
         } else {
             this.markStateProductSaleDialog();

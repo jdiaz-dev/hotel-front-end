@@ -1,6 +1,6 @@
 import { Observable } from 'rxjs';
 
 export interface ISavePaymentsPID {
-    savePayment$: Observable<boolean>;
-    savePayment(save: boolean): void;
+    saveHoustingPayment$: Observable<boolean>;
+    saveHoustingPayment(save: boolean): void;
 }

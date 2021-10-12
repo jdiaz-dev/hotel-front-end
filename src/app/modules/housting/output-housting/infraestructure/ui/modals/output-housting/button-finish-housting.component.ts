@@ -87,7 +87,7 @@ export class ButtonFinishHoustingComponent implements OnChanges, OnInit, OnDestr
         this.paymentToComplete = this.houstingPayment + this.productsSaledPayment;
     }
     finishHousting() {
-        this.savePayments.savePayment(true);
+        this.savePayments.saveHoustingPayment(true);
         const toCompleteDialog: CustomMessage = {
             title: 'Finalizar hospedamiento',
             toCompleteDescription: 'finalizar este hospedamiento',
