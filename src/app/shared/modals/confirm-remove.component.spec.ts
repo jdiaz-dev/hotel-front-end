@@ -1,25 +1,24 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ConfirmRemoveComponent } from './confirm-remove.component';
+import { ConfirmComponent } from './confirm-remove.component';
 
-describe('ConfirmRemoveComponent', () => {
-  let component: ConfirmRemoveComponent;
-  let fixture: ComponentFixture<ConfirmRemoveComponent>;
+describe('ConfirmComponent', () => {
+    let component: ConfirmComponent;
+    let fixture: ComponentFixture<ConfirmComponent>;
 
-  beforeEach(async () => {
-    await TestBed.configureTestingModule({
-      declarations: [ConfirmRemoveComponent]
-    })
-      .compileComponents();
-  });
+    beforeEach(async () => {
+        await TestBed.configureTestingModule({
+            declarations: [ConfirmComponent],
+        }).compileComponents();
+    });
 
-  beforeEach(() => {
-    fixture = TestBed.createComponent(ConfirmRemoveComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
-  });
+    beforeEach(() => {
+        fixture = TestBed.createComponent(ConfirmComponent);
+        component = fixture.componentInstance;
+        fixture.detectChanges();
+    });
 
-  it('should create', () => {
-    expect(component).toBeTruthy();
-  });
+    it('should create', () => {
+        expect(component).toBeTruthy();
+    });
 });

@@ -1,18 +1,13 @@
 mat-card.housting-forms {
-  margin-top: 10px;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
+    margin-top: 10px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
 
-  app-form-client {
-    width: 50%;
-  }
-  div.app-data-housting-and-buttons {
-    width: 36%;
-
-    mat-card-actions {
-      display: flex;
-      justify-content: space-between;
+    app-form-client {
+        width: 50%;
     }
-  }
+    div.app-data-housting-and-buttons {
+        width: 36%;
+    }
 }

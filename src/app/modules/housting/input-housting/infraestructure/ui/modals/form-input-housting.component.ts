@@ -17,6 +17,8 @@ import { OnDestroy } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { IOkComponentConfig } from 'src/app/shared/interfaces/ok-component-config/ok-component-config.interface';
 import { RoomData } from './../../../../../configuration-hotel/rooms/infraestructure/interfaces/room.data';
+import { ConfirmComponent } from 'src/app/shared/modals/confirm-remove.component';
+import { ICustomMessage } from 'src/app/shared/modals/custom-message.interface';
 dayjs.extend(utc);
 dayjs.extend(localizedFormat);
 
@@ -66,7 +68,7 @@ export class FormInputHoustingComponent implements OnInit, OnDestroy {
 
     /* ============================= black box ============================= */
     //subscribe is repeated multiple times angular
-    async saveHousting() {
+    saveHousting() {
         console.log('executed save housting');
         this.clientSubscription = this.verifyClientSavedService.userSaved$.subscribe((userId: number) => {
             if (userId) {
@@ -75,18 +77,21 @@ export class FormInputHoustingComponent implements OnInit, OnDestroy {
                     .createHousting(this.houstingData.value, this.room.id, userId)
                     .subscribe((response) => {
                         console.log(response);
-                        this.openDialog();
                     });
             }
         });
     }
-    openDialog() {
-        const config: IOkComponentConfig = {
-            message: 'Un alojamiento ha sido añadido con éxito',
-            useMethodsOkComponent: true,
+    /* openDialog() {
+        const config: ICustomMessage = {
+            title: 'Crear hospedamiento',
+            toCompleteDescription: 'de crear este hospedamiento',
         };
-        let dialogRef = this.dialog.open(OkComponent, { data: config, width: '25%' });
-    }
+        let dialogRef = this.dialog.open(ConfirmComponent, { data: config, width: '25%' });
+        dialogRef.afterClosed().subscribe((result: boolean) => {
+            console.log('-----------------result', result);
+            if (result) this.saveHousting();
+        });
+    } */
     checkIfFormHoustingIsValid() {
         this.houstingData.statusChanges.subscribe((statusForm) => {
             if (statusForm == 'VALID') {

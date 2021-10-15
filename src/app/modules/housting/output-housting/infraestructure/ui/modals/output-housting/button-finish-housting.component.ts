@@ -8,8 +8,8 @@ import { IPaymentHoustingToCompletePID } from './interfaces-pid/payment-housting
 import { IPaymentProductSaledToCompletePID } from './interfaces-pid/payment-product-saled-to-complete';
 import { ISavePaymentsPID } from './interfaces-pid/save-payments';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
-import { CustomMessage } from 'src/app/shared/modals/custom-message.interface';
-import { ConfirmRemoveComponent } from 'src/app/shared/modals/confirm-remove.component';
+import { ICustomMessage } from 'src/app/shared/modals/custom-message.interface';
+import { ConfirmComponent } from 'src/app/shared/modals/confirm-remove.component';
 import { ReloadRoomsService } from 'src/app/modules/housting/reception/infraestructure/ui/services/reload-rooms.service';
 import { OutputHoustingContainerComponent } from './output-housting-container.component';
 
@@ -88,11 +88,11 @@ export class ButtonFinishHoustingComponent implements OnChanges, OnInit, OnDestr
     }
     finishHousting() {
         this.savePayments.saveHoustingPayment(true);
-        const toCompleteDialog: CustomMessage = {
+        const toCompleteDialog: ICustomMessage = {
             title: 'Finalizar hospedamiento',
             toCompleteDescription: 'finalizar este hospedamiento',
         };
-        let dialogRef = this.dialog.open(ConfirmRemoveComponent, { data: toCompleteDialog, width: '40%' });
+        let dialogRef = this.dialog.open(ConfirmComponent, { data: toCompleteDialog, width: '40%' });
         dialogRef.afterClosed().subscribe((result: boolean) => {
             if (result) {
                 this.reloadRoomsService.reloadRooms(true);

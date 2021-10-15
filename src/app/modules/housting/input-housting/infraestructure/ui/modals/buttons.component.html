@@ -1,0 +1,13 @@
+<mat-card-actions>
+    <button mat-raised-button color="warn" [mat-dialog-close]>Cancelar</button>
+    <div>
+        <button
+            mat-raised-button
+            color="primary"
+            (click)="openDialogToSaveHousting()"
+            [disabled]="!houstingFormValid || !clientFormValid"
+        >
+            Crear hospedamiento
+        </button>
+    </div>
+</mat-card-actions>

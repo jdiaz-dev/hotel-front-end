@@ -1,7 +1,7 @@
 import { Component, Input, OnInit, OnChanges } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { ConfirmRemoveComponent } from 'src/app/shared/modals/confirm-remove.component';
-import { CustomMessage } from 'src/app/shared/modals/custom-message.interface';
+import { ConfirmComponent } from 'src/app/shared/modals/confirm-remove.component';
+import { ICustomMessage } from 'src/app/shared/modals/custom-message.interface';
 import { CategoryData } from '../../interfaces/category-data.interface';
 import { RoomCategoriesPersitenceService } from '../../out/room-categories-persitence.service';
 import { CreateUpdateCategoryComponent } from '../modals/create-update-category.component';
@@ -34,11 +34,11 @@ export class CategoryCollectionComponent implements OnInit, OnChanges {
         });
     }
     removeCategoryDialog(categoryId: number) {
-        const toCompleteDialog: CustomMessage = {
+        const toCompleteDialog: ICustomMessage = {
             title: 'Eliminar categoría',
             toCompleteDescription: 'eliminar esta categoría',
         };
-        let dialogRef = this.dialog.open(ConfirmRemoveComponent, { data: toCompleteDialog, width: '40%' });
+        let dialogRef = this.dialog.open(ConfirmComponent, { data: toCompleteDialog, width: '40%' });
         dialogRef.afterClosed().subscribe((result: boolean) => {
             if (result) {
                 this.roomCategoriesPersitenceService.removeRoomCategory(categoryId).subscribe((response) => {

@@ -4,8 +4,8 @@ import { MatDialog } from '@angular/material/dialog';
 import { HotelLevelPersistenceService } from '../../out/hotel-level-persistence.service';
 import { LevelData } from '../../interfaces/level-data.interface';
 import { CreateAndUpdateLevelComponent } from '../modals/create-and-update-level.component';
-import { ConfirmRemoveComponent } from 'src/app/shared/modals/confirm-remove.component';
-import { CustomMessage } from 'src/app/shared/modals/custom-message.interface';
+import { ConfirmComponent } from 'src/app/shared/modals/confirm-remove.component';
+import { ICustomMessage } from 'src/app/shared/modals/custom-message.interface';
 
 @Component({
     selector: 'app-level-collection',
@@ -36,11 +36,11 @@ export class LevelCollectionComponent implements OnInit, OnChanges {
         });
     }
     removeLevelDialog(levelId: number) {
-        const toCompleteDialog: CustomMessage = {
+        const toCompleteDialog: ICustomMessage = {
             title: 'Eliminar nivel',
             toCompleteDescription: 'eliminar esta categoría',
         };
-        let dialogRef = this.dialog.open(ConfirmRemoveComponent, { data: toCompleteDialog, width: '40%' });
+        let dialogRef = this.dialog.open(ConfirmComponent, { data: toCompleteDialog, width: '40%' });
         dialogRef.afterClosed().subscribe((result: boolean) => {
             if (result) {
                 this.hotelLevelPersistenceService.removeLevel(levelId).subscribe((response) => {

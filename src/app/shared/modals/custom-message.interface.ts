@@ -1,4 +1,4 @@
-export interface CustomMessage {
-    title: string
-    toCompleteDescription: string
+export interface ICustomMessage {
+    title: string;
+    toCompleteDescription: string;
 }

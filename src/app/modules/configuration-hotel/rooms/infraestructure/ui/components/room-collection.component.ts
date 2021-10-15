@@ -1,7 +1,7 @@
 import { Component, Input, OnInit, OnChanges } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { ConfirmRemoveComponent } from 'src/app/shared/modals/confirm-remove.component';
-import { CustomMessage } from 'src/app/shared/modals/custom-message.interface';
+import { ConfirmComponent } from 'src/app/shared/modals/confirm-remove.component';
+import { ICustomMessage } from 'src/app/shared/modals/custom-message.interface';
 import { RoomData } from '../../interfaces/room.data';
 import { RoomsPersistenceService } from '../../out/rooms.service';
 import { CreateUpdateRoomComponent } from '../modals/create-update-room/create-update-room.component';
@@ -37,11 +37,11 @@ export class RoomCollectionComponent implements OnInit, OnChanges {
         });
     }
     removeRoomDialog(room: RoomData) {
-        const toCompleteDialog: CustomMessage = {
+        const toCompleteDialog: ICustomMessage = {
             title: 'Eliminar habitación',
             toCompleteDescription: 'eliminar esta habitación',
         };
-        let dialogRef = this.dialog.open(ConfirmRemoveComponent, { data: toCompleteDialog, width: '40%' });
+        let dialogRef = this.dialog.open(ConfirmComponent, { data: toCompleteDialog, width: '40%' });
         dialogRef.afterClosed().subscribe((result: boolean) => {
             if (result) {
                 this.roomsPersistenceService.removeRoom(room.level.id, room.id).subscribe((response) => {
