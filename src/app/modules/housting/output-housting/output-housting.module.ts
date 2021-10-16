@@ -6,7 +6,7 @@ import { OutputHoustingRoutingModule } from './output-housting-routing.module';
 import { OutputHoustingContainerComponent } from './infraestructure/ui/modals/output-housting/output-housting-container.component';
 import { DataHoustingComponent } from './infraestructure/ui/modals/output-housting/data-housting.component';
 import { ButtonFinishHoustingComponent } from './infraestructure/ui/modals/output-housting/button-finish-housting.component';
-import { ProductSaledReportComponent } from './infraestructure/ui/modals/output-housting/product-saled-report.component';
+import { ProductsSaledComponent } from './infraestructure/ui/modals/output-housting/products-saled.component';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { CostHoustingComponent } from './infraestructure/ui/modals/output-housting/cost-housting/cost-housting.component';
 import { InputLateAppliedComponent } from './infraestructure/ui/modals/output-housting/cost-housting/input-late-applied.component';
@@ -16,7 +16,7 @@ import { InputLateAppliedComponent } from './infraestructure/ui/modals/output-ho
         OutputHoustingContainerComponent,
         DataHoustingComponent,
         ButtonFinishHoustingComponent,
-        ProductSaledReportComponent,
+        ProductsSaledComponent,
         InputLateAppliedComponent,
         CostHoustingComponent,
     ],

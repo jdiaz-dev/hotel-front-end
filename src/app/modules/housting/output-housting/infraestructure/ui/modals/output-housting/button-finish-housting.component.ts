@@ -1,4 +1,4 @@
-import { Component, Input, OnChanges, OnDestroy, OnInit } from '@angular/core';
+import { Component, Input, OnChanges, OnDestroy, OnInit, Output, EventEmitter } from '@angular/core';
 import { IHoustingReport } from '../../../interfaces/houstig-report.interface';
 import { CompletePaymentService } from './complete-payment.service';
 import { OutputHoustingService } from '../../../out/output-housting.service';
@@ -10,7 +10,6 @@ import { ISavePaymentsPID } from './interfaces-pid/save-payments';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { ICustomMessage } from 'src/app/shared/modals/custom-message.interface';
 import { ConfirmComponent } from 'src/app/shared/modals/confirm-remove.component';
-import { ReloadRoomsService } from 'src/app/modules/housting/reception/infraestructure/ui/services/reload-rooms.service';
 import { OutputHoustingContainerComponent } from './output-housting-container.component';
 
 @Component({
@@ -20,6 +19,8 @@ import { OutputHoustingContainerComponent } from './output-housting-container.co
 })
 export class ButtonFinishHoustingComponent implements OnChanges, OnInit, OnDestroy {
     @Input('houstingId') houstingId!: number;
+    @Output() houstingFinishedConfirmed = new EventEmitter<boolean>();
+
     private paymentHoustingToComplete: IPaymentHoustingToCompletePID;
     private paymentProductSaledToComplete: IPaymentProductSaledToCompletePID;
     private savePayments: ISavePaymentsPID;
@@ -34,8 +35,6 @@ export class ButtonFinishHoustingComponent implements OnChanges, OnInit, OnDestr
 
     constructor(
         completePaymentService: CompletePaymentService,
-        private outputHoustingService: OutputHoustingService,
-        private reloadRoomsService: ReloadRoomsService,
         public dialogRef: MatDialogRef<OutputHoustingContainerComponent>,
         private dialog: MatDialog,
     ) {
@@ -47,7 +46,6 @@ export class ButtonFinishHoustingComponent implements OnChanges, OnInit, OnDestr
     ngOnInit(): void {
         this.obtainPaymentHoustingToComplete();
         this.obtainPaymentProductSaledToComplete();
-        this.reloadRoomsService.reloadRooms(false);
     }
     ngOnChanges(): void {
         //this.loadOutputHousting();
@@ -87,7 +85,6 @@ export class ButtonFinishHoustingComponent implements OnChanges, OnInit, OnDestr
         this.paymentToComplete = this.houstingPayment + this.productsSaledPayment;
     }
     finishHousting() {
-        this.savePayments.saveHoustingPayment(true);
         const toCompleteDialog: ICustomMessage = {
             title: 'Finalizar hospedamiento',
             toCompleteDescription: 'finalizar este hospedamiento',
@@ -95,8 +92,8 @@ export class ButtonFinishHoustingComponent implements OnChanges, OnInit, OnDestr
         let dialogRef = this.dialog.open(ConfirmComponent, { data: toCompleteDialog, width: '40%' });
         dialogRef.afterClosed().subscribe((result: boolean) => {
             if (result) {
-                this.reloadRoomsService.reloadRooms(true);
-                this.dialogRef.close();
+                this.houstingFinishedConfirmed.emit(true);
+                this.savePayments.saveHoustingPayment(true);
             }
         });
     }

@@ -1,4 +1,14 @@
-<div class="container-mode-reception">
+<div class="container-mode-reception" *ngIf="housting">
     <h2 class="title">PROCESO DE SALIDA</h2>
-    <app-data-housting [room]="room"></app-data-housting>
+    <app-data-housting [room]="room" [housting]="housting"></app-data-housting>
+
+    <app-cost-housting [roomId]="room.id" [housting]="housting"></app-cost-housting>
+
+    <div>
+        <app-products-saled [houstingId]="housting.id"></app-products-saled>
+        <app-button-finish-housting
+            [houstingId]="housting.id"
+            (houstingFinishedConfirmed)="createHoustinConfirmed($event)"
+        ></app-button-finish-housting>
+    </div>
 </div>

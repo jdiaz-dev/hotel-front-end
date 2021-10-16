@@ -9,10 +9,15 @@ import { FormInputHoustingComponent } from './infraestructure/ui/modals/form-inp
 import { SharedModule } from 'src/app/shared/shared.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ClientsModule } from '../../clients/clients.module';
-import { ButtonsComponent } from './infraestructure/ui/modals/buttons.component';
+import { ButtonCreateHoustingComponent } from './infraestructure/ui/modals/button-create-housting.component';
 
 @NgModule({
-    declarations: [DataRoomComponent, FormInputHoustingComponent, InputHoustingContainerComponent, ButtonsComponent],
+    declarations: [
+        DataRoomComponent,
+        FormInputHoustingComponent,
+        InputHoustingContainerComponent,
+        ButtonCreateHoustingComponent,
+    ],
     imports: [CommonModule, FormsModule, ReactiveFormsModule, ClientsModule, HoustingRoutingModule, SharedModule],
 })
 export class HoustingModule {}

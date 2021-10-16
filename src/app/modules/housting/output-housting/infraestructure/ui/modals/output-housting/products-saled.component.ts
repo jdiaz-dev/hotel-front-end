@@ -3,17 +3,17 @@ import { IProductsSaled } from 'src/app/modules/sales/product-sales/infraestruct
 import { ProductSaledService } from 'src/app/modules/sales/product-sales/infraestructure/out/product-sales.service';
 import { GetProductSalesForOutputHoustingDomainPort } from '../../../../application/ports/out/other-domain/get-product-sales-for-output-housting-domain.port';
 import { ICompleteProductSaledPaymentPort } from '../../../../application/ports/out/other-domain/complete-product-saled-payment';
-import { CompletePaymentService } from './../output-housting/complete-payment.service';
+import { CompletePaymentService } from './complete-payment.service';
 import { IPaymentProductSaledToCompletePID } from './interfaces-pid/payment-product-saled-to-complete';
 import { ISavePaymentsPID } from './interfaces-pid/save-payments';
 import { IFinishProductsPaymentPID } from './interfaces-pid/finish-products-payment';
 
 @Component({
-    selector: 'app-product-saled-report',
-    templateUrl: './product-saled-report.component.html',
-    styleUrls: ['./product-saled-report.component.scss'],
+    selector: 'app-products-saled',
+    templateUrl: './products-saled.component.html',
+    styleUrls: ['./products-saled.component.scss'],
 })
-export class ProductSaledReportComponent implements OnChanges, OnInit, DoCheck {
+export class ProductsSaledComponent implements OnChanges, OnInit, DoCheck {
     @Input('houstingId') houstingId!: number;
     private getProductSalesForOutputHoustingDomainPort: GetProductSalesForOutputHoustingDomainPort;
     private completeProductSaledPaymentPort: ICompleteProductSaledPaymentPort;

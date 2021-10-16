@@ -3,14 +3,14 @@ import { MatDialog } from '@angular/material/dialog';
 import { Subscription } from 'rxjs';
 import { ConfirmComponent } from 'src/app/shared/modals/confirm-remove.component';
 import { FormsValidForHoustingService } from '../services/communication/forms-valid-for-housting.service';
-import { ICustomMessage } from './../../../../../../shared/modals/custom-message.interface';
+import { ICustomMessage } from '../../../../../../shared/modals/custom-message.interface';
 
 @Component({
-    selector: 'app-buttons',
-    templateUrl: './buttons.component.html',
-    styleUrls: ['./buttons.component.scss'],
+    selector: 'app-button-create-housting',
+    templateUrl: './button-create-housting.component.html',
+    styleUrls: ['./button-create-housting.component.scss'],
 })
-export class ButtonsComponent implements OnInit {
+export class ButtonCreateHoustingComponent implements OnInit {
     @Output() confirmed = new EventEmitter<boolean>();
     clientFormValid!: boolean;
     houstingFormValid!: boolean;
@@ -50,7 +50,6 @@ export class ButtonsComponent implements OnInit {
         };
         let dialogRef = this.dialog.open(ConfirmComponent, { data: config, width: '25%' });
         dialogRef.afterClosed().subscribe((result: boolean) => {
-            console.log('-----------------result', result);
             if (result) this.confirmed.emit(true);
         });
     }
