@@ -1,4 +1,4 @@
-<div class="container-add-product">
+<!-- <div class="container-add-product">
   <button mat-raised-button color="primary" (click)="aggregateProductsDialog()">Agregar productos</button>
 
   <div class="input-state-sale">
@@ -6,63 +6,54 @@
       <mat-label >Estado de venta</mat-label>
       <mat-select [(value)]="productPayed">
         <mat-option value=0>Falta pagar</mat-option>
-        <mat-option value=1>Pagado</mat-option><!-- pagado = 1 || true -->
+        <mat-option value=1>Pagado</mat-option>
       </mat-select>
     </mat-form-field>
   </div>
 
   <button mat-raised-button color="warn" (click)="buyProducts()">Terminar venta</button>
-</div>
+</div> -->
 
 <table mat-table [dataSource]="productsAdded" class="table">
+    <div>
+        <ng-container matColumnDef="Amount">
+            <th mat-header-cell *matHeaderCellDef class="number number-room">Cantidad</th>
+            <td mat-cell *matCellDef="let element">{{ element.amount }}</td>
+        </ng-container>
 
-  <div>
-      <ng-container matColumnDef="Amount">
-          <th mat-header-cell *matHeaderCellDef class="number number-room"> Cantidad </th>
-          <td mat-cell *matCellDef="let element">{{element.amount}}</td>
-      </ng-container>
+        <ng-container matColumnDef="Name">
+            <th mat-header-cell *matHeaderCellDef class="name-room">Nombre</th>
+            <td mat-cell *matCellDef="let element">{{ element.name }}</td>
+        </ng-container>
 
-      <ng-container matColumnDef="Name">
-          <th mat-header-cell *matHeaderCellDef class="name-room"> Nombre </th>
-          <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+        <ng-container matColumnDef="Description">
+            <th mat-header-cell *matHeaderCellDef class="category">Descripción</th>
+            <td mat-cell *matCellDef="let element">{{ element.description }}</td>
+        </ng-container>
 
-      </ng-container>
+        <ng-container matColumnDef="Price">
+            <th mat-header-cell *matHeaderCellDef class="price">Precio</th>
+            <td mat-cell *matCellDef="let element">S/. {{ element.price }}</td>
+        </ng-container>
 
-      <ng-container matColumnDef="Description">
-          <th mat-header-cell *matHeaderCellDef class="category"> Descripción </th>
-          <td mat-cell *matCellDef="let element"> {{element.description}} </td>
+        <ng-container matColumnDef="TotalPrice">
+            <th mat-header-cell *matHeaderCellDef class="details">Precio total</th>
+            <td mat-cell *matCellDef="let element">S/. {{ element.amount * element.price }}</td>
+        </ng-container>
 
-      </ng-container>
+        <ng-container matColumnDef="RemoveButton">
+            <th mat-header-cell *matHeaderCellDef class="remove-buttons"></th>
+            <td mat-cell *matCellDef="let element">
+                <button mat-raised-button color="warn" (click)="removeProductAdded(element.productId)">Eliminar</button>
+            </td>
+        </ng-container>
+    </div>
 
-      <ng-container matColumnDef="Price">
-          <th mat-header-cell *matHeaderCellDef class="price"> Precio </th>
-          <td mat-cell *matCellDef="let element"> S/. {{element.price}}</td>
-
-      </ng-container>
-
-      <ng-container matColumnDef="TotalPrice">
-          <th mat-header-cell *matHeaderCellDef class="details"> Precio total </th>
-          <td mat-cell *matCellDef="let element">S/. {{element.amount * element.price}} </td>
-
-      </ng-container>
-
-
-      <ng-container matColumnDef="RemoveButton">
-          <th mat-header-cell *matHeaderCellDef class="remove-buttons"> </th>
-          <td mat-cell *matCellDef="let element"> <button mat-raised-button color="warn"
-                  (click)="removeProductAdded(element.productId)">Eliminar</button> </td>
-      </ng-container>
-
-  </div>
-
-  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-  <tr class="rowOpenerCategories" mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr class="rowOpenerCategories" mat-row *matRowDef="let row; columns: displayedColumns"></tr>
 </table>
 
-
 <div class="total-price-container" *ngIf="totalPrice > 0">
-  <div class="total-title">Total</div>
-  <div class="total-number">S/. {{totalPrice}}</div>
+    <div class="total-title">Total</div>
+    <div class="total-number">S/. {{ totalPrice }}</div>
 </div>
-
-

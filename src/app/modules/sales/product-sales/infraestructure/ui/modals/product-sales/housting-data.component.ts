@@ -4,7 +4,7 @@ import { HoustingService } from 'src/app/modules/housting/input-housting/infraes
 import { RoomData } from 'src/app/modules/configuration-hotel/rooms/infraestructure/interfaces/room.data';
 import { GetHoustingForProductSalesDomainPort } from '../../../../application/ports/out/other-domains/get-housting-for-product-sales-domain.port';
 import { IHoustingResponse } from '../../../../../../housting/input-housting/infraestructure/interfaces/housting-response.interface';
-import { HoustingIdServiceService } from './housting-id-service.service';
+import { HoustingIdService } from './services/housting-id.service';
 
 @Component({
     selector: 'app-housting-data',
@@ -16,7 +16,7 @@ export class HoustingDataComponent implements OnInit {
     private getHoustingForProductSalesDomainPort: GetHoustingForProductSalesDomainPort;
     houstingData!: IHoustingResponse;
 
-    constructor(private houstingIdServiceService: HoustingIdServiceService, houstingService: HoustingService) {
+    constructor(private houstingIdService: HoustingIdService, houstingService: HoustingService) {
         this.getHoustingForProductSalesDomainPort = houstingService;
     }
 
@@ -28,7 +28,7 @@ export class HoustingDataComponent implements OnInit {
             // console.log(response);
             this.houstingData = response;
 
-            this.houstingIdServiceService.sendProductId(this.houstingData.id);
+            this.houstingIdService.sendProductId(this.houstingData.id);
         });
     }
 }

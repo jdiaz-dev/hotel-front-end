@@ -1,0 +1,12 @@
+.container-buttons-and-dropdown {
+    background-color: rgb(20, 20, 172);
+    display: flex;
+    padding: 8px;
+    // justify-content: ;
+    app-add-products-button {
+        width: 18%;
+    }
+    app-finish-sale-button {
+        width: 82%;
+    }
+}

@@ -4,7 +4,7 @@ import { Subject } from 'rxjs';
 @Injectable({
     providedIn: 'root',
 })
-export class HoustingIdServiceService {
+export class HoustingIdService {
     private houstingIdSource = new Subject<number>();
     productId$ = this.houstingIdSource.asObservable();
 

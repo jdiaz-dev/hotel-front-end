@@ -1,53 +1,50 @@
-import { Component, Input, OnInit, ViewChild } from '@angular/core';
-import { MatDialog } from '@angular/material/dialog';
+import { Component, Input, OnInit, ViewChild, OnDestroy } from '@angular/core';
 import { MatTable } from '@angular/material/table';
 import { payed, ProductAddedModel } from '../../models/product-added.model';
-import { AvailableProductsComponent } from '../available-products/available-products.component';
 import { ProductSaledService } from './../../../out/product-sales.service';
-import { HoustingIdServiceService } from './housting-id-service.service';
-import { OkComponent } from './../../../../../../../shared/modals/ok.component';
-import { IOkComponentConfig } from 'src/app/shared/interfaces/ok-component-config/ok-component-config.interface';
+import { HoustingIdService } from './services/housting-id.service';
+import { ProductsChosenService } from './services/products-chosen.service';
+import { FinishSaleService } from './services/finish-sale.service';
+import { Subscription } from 'rxjs';
 
 @Component({
     selector: 'app-products-added',
     templateUrl: './products-added.component.html',
     styleUrls: ['./products-added.component.scss'],
 })
-export class ProductsAddedComponent implements OnInit {
+export class ProductsAddedComponent implements OnInit, OnDestroy {
     @ViewChild(MatTable) private table!: MatTable<ProductAddedModel>;
     productsAdded: ProductAddedModel[] = [];
     displayedColumns: string[] = ['Amount', 'Name', 'Description', 'Price', 'TotalPrice', 'RemoveButton'];
     totalPrice: number = 0;
     productPayed!: payed;
     houstingId!: number;
+    productsChosenSubs!: Subscription;
+    finishSaleSubs!: Subscription;
+    houstingIdSubs!: Subscription;
 
     constructor(
-        private dialog: MatDialog,
         private productSaledService: ProductSaledService,
-        private houstingIdServiceService: HoustingIdServiceService,
+        private houstingIdService: HoustingIdService,
+        private productsChosenService: ProductsChosenService,
+        private finishSaleService: FinishSaleService,
     ) {}
 
     ngOnInit(): void {
         this.loadHoustingId();
+        this.aggregateProductsDialog();
+        this.buyProducts();
+    }
+    ngOnDestroy() {
+        this.productsChosenSubs.unsubscribe();
+        this.finishSaleSubs.unsubscribe();
+        this.houstingIdSubs.unsubscribe();
     }
     aggregateProductsDialog() {
-        let availableProductsDialog = this.dialog.open(AvailableProductsComponent, {
-            width: '58%',
-            maxWidth: '100%',
-        });
-        availableProductsDialog.componentInstance.productAdded.subscribe((productData: ProductAddedModel) => {
-            this.productsAdded.push(productData);
+        this.productsChosenSubs = this.productsChosenService.productsChosen$.subscribe((product: ProductAddedModel) => {
+            this.productsAdded.push(product);
             this.table.renderRows();
             this.calculateTotalPrice();
-        });
-    }
-    markStateProductSaleDialog() {
-        const config: IOkComponentConfig = {
-            message: 'Porfavor selecciona el estado de la venta',
-            useMethodsOkComponent: false,
-        };
-        let okDialog = this.dialog.open(OkComponent, {
-            data: config,
         });
     }
     removeProductAdded(productId: number) {
@@ -59,22 +56,20 @@ export class ProductsAddedComponent implements OnInit {
             return total + product.price * product.amount;
         }, 0);
     }
-    buyProducts() {
-        if (this.productPayed !== undefined) {
-            this.productsAdded = this.productsAdded.map((product: ProductAddedModel) => {
-                product.payed = this.productPayed;
-                return product;
-            });
-
-            this.productSaledService.createProductSaled(this.productsAdded, this.houstingId).subscribe((response) => {
-                // console.log(response);
-            });
-        } else {
-            this.markStateProductSaleDialog();
-        }
+    private buyProducts() {
+        this.finishSaleSubs = this.finishSaleService.finishSale$.subscribe((finishSale: boolean) => {
+            console.log('---------------finishSale', finishSale);
+            if (finishSale) {
+                this.productSaledService
+                    .createProductSaled(this.productsAdded, this.houstingId)
+                    .subscribe((response) => {
+                        console.log(response);
+                    });
+            }
+        });
     }
     private loadHoustingId() {
-        this.houstingIdServiceService.productId$.subscribe((result: number) => {
+        this.houstingIdSubs = this.houstingIdService.productId$.subscribe((result: number) => {
             this.houstingId = result;
         });
     }

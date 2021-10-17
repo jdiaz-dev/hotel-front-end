@@ -1,0 +1,14 @@
+<div class="container">
+    <div class="input-state-sale">
+        <mat-form-field appearance="fill" style="height: 20px">
+            <mat-label>Estado de venta</mat-label>
+            <mat-select [(value)]="productPayed">
+                <mat-option value="0">Falta pagar</mat-option>
+                <mat-option value="1">Pagado</mat-option
+                ><!-- pagado = 1 || true -->
+            </mat-select>
+        </mat-form-field>
+    </div>
+
+    <button mat-raised-button color="warn" (click)="buyProducts()">Terminar venta</button>
+</div>

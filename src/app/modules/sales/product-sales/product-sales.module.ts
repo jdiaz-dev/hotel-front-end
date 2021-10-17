@@ -11,6 +11,8 @@ import { ProductsAddedComponent } from './infraestructure/ui/modals/product-sale
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FormAmountProductsComponent } from './infraestructure/ui/modals/available-products/form-amount-products.component';
 import { AggregateProductsButtonComponent } from './infraestructure/ui/modals/available-products/aggregate-products-button.component';
+import { AddProductsButtonComponent } from './infraestructure/ui/modals/product-sales/add-products-button.component';
+import { FinishSaleButtonComponent } from './infraestructure/ui/modals/product-sales/finish-sale-button.component';
 
 @NgModule({
     declarations: [
@@ -20,6 +22,8 @@ import { AggregateProductsButtonComponent } from './infraestructure/ui/modals/av
         ProductsAddedComponent,
         FormAmountProductsComponent,
         AggregateProductsButtonComponent,
+        AddProductsButtonComponent,
+        FinishSaleButtonComponent,
     ],
     imports: [CommonModule, ProductSalesRoutingModule, FormsModule, ReactiveFormsModule, SharedModule],
 })
