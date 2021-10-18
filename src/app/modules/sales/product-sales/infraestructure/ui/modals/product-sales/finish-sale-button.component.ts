@@ -35,7 +35,7 @@ export class FinishSaleButtonComponent implements OnInit {
         let dialogRef = this.dialog.open(ConfirmComponent, { data: config, width: '25%' });
         dialogRef.afterClosed().subscribe((result: boolean) => {
             if (result) {
-                this.finishSaleService.confirmFinishSale(result);
+                this.finishSaleService.confirmFinishSale(this.productPayed, result);
                 this.saleConfirmed.emit(true);
             }
         });

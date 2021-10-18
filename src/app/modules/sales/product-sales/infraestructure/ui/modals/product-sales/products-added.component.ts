@@ -57,16 +57,20 @@ export class ProductsAddedComponent implements OnInit, OnDestroy {
         }, 0);
     }
     private buyProducts() {
-        this.finishSaleSubs = this.finishSaleService.finishSale$.subscribe((finishSale: boolean) => {
-            console.log('---------------finishSale', finishSale);
-            if (finishSale) {
-                this.productSaledService
-                    .createProductSaled(this.productsAdded, this.houstingId)
-                    .subscribe((response) => {
-                        console.log(response);
-                    });
-            }
-        });
+        this.finishSaleSubs = this.finishSaleService.finishSale$.subscribe(
+            (statePayment: { payed: payed; finish: boolean }) => {
+                if (statePayment.finish) {
+                    this.productsAdded.map((product: ProductAddedModel) => (product.payed = statePayment.payed));
+                    console.log('------------productsAdded', this.productsAdded);
+
+                    this.productSaledService
+                        .createProductSaled(this.productsAdded, this.houstingId)
+                        .subscribe((response) => {
+                            console.log(response);
+                        });
+                }
+            },
+        );
     }
     private loadHoustingId() {
         this.houstingIdSubs = this.houstingIdService.productId$.subscribe((result: number) => {
