@@ -10,12 +10,17 @@ import { environment } from 'src/environments/environment';
 import { IProductsSaled } from '../interfaces/products-saled.interface';
 import { ProductAddedModel } from '../ui/models/product-added.model';
 import { GetCashIdForHoustingDomain } from './../../../../housting/input-housting/application/ports/out/other-domain/get-cash-id-for-housting-domain';
+import { IGetProductsSaledForDailyReportPort } from 'src/app/modules/reports/daily-report/application/ports/other-domains/get-product-saled-for-daily-report.port';
+import { Observable } from 'rxjs';
 
 @Injectable({
     providedIn: 'root',
 })
 export class ProductSaledService
-    implements GetProductSalesForOutputHoustingDomainPort, ICompleteProductSaledPaymentPort
+    implements
+        GetProductSalesForOutputHoustingDomainPort,
+        ICompleteProductSaledPaymentPort,
+        IGetProductsSaledForDailyReportPort
 {
     private getCashIdForHoustingDomain: GetCashIdForHoustingDomain;
     private serverUrl = environment.serverUrl;
@@ -53,6 +58,12 @@ export class ProductSaledService
                 headers: this.headers,
             },
         );
+    }
+    getProductsSaledForReport(): Observable<any> {
+        this.loadRequiredParamsForPath();
+        return this.http.get(`${this.serverUrl}/${SERVER.PREFIX}/product-sales/report/${this.hotelId}/${this.cashId}`, {
+            headers: this.headers,
+        });
     }
     completeProductSaledPayment(houstingId: number, productSaledIds: number[]) {
         this.loadRequiredParamsForPath();

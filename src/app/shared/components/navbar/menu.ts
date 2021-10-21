@@ -66,7 +66,16 @@ export const MENU: Menu[] = [
     },
     {
         name: 'Reportes',
-        children: [{ name: 'Reporte' }],
+        children: [
+            {
+                name: 'Reporte Diario',
+                url: '/menu/reportes/diario',
+            },
+            /* {
+                name: 'Reporte Mensual/Anual',
+                url: '/menu/reportes/mensual-anual',
+            }, */
+        ],
         icon: ICONS_SIDEBAR.REPORTS,
     },
 ];

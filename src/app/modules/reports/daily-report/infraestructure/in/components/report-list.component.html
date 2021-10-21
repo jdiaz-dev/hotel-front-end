@@ -1,0 +1,11 @@
+<nav mat-tab-nav-bar mat-align-tabs="end">
+    <a
+        mat-tab-link
+        *ngFor="let report of reportList"
+        (click)="activeLink = report.nameReport"
+        (click)="changeReport(report.id)"
+        [active]="activeLink == report.nameReport"
+    >
+        {{ report.nameReport }}
+    </a>
+</nav>
