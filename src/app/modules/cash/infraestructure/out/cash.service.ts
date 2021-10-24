@@ -9,29 +9,32 @@ import { CashData } from '../interfaces/cash-data';
 import { CashModel } from '../ui/models/cash.model';
 
 @Injectable({
-  providedIn: 'root'
+    providedIn: 'root',
 })
 export class CashService implements GetCashNotClosedForSharedDomain {
-  private serverUrl = environment.serverUrl
-  private headers!: HttpHeaders
-  private hotelId!: number
+    private serverUrl = environment.serverUrl;
+    private headers!: HttpHeaders;
+    private hotelId!: number;
 
-  constructor(
-    private http: HttpClient,
-    private stateUserService: StateUserService
-  ) { }
-  private loadRequiredProperties() {
-    this.headers = new HttpHeaders().set('Content-Type', 'application/json').set(AccessKeys.NAME_TOKEN, this.stateUserService.getToken())
-    this.hotelId = this.stateUserService.getHotelId()
-
-  }
-  createCash(hotelLevel: CashModel) {
-    this.loadRequiredProperties()
-    const body = JSON.stringify(hotelLevel);
-    return this.http.post(`${this.serverUrl}/${SERVER.PREFIX}/cash/${this.hotelId}`, body, { headers: this.headers })
-  }
-  getCashNotClosed() {
-    this.loadRequiredProperties()
-    return this.http.get<CashData>(`${this.serverUrl}/${SERVER.PREFIX}/cash/${this.stateUserService.getHotelId()}`, { headers: this.headers })
-  }
+    constructor(private http: HttpClient, private stateUserService: StateUserService) {}
+    private loadRequiredProperties() {
+        this.headers = new HttpHeaders()
+            .set('Content-Type', 'application/json')
+            .set(AccessKeys.NAME_TOKEN, this.stateUserService.getToken());
+        this.hotelId = this.stateUserService.getHotelId();
+    }
+    createCash(hotelLevel: CashModel) {
+        this.loadRequiredProperties();
+        const body = JSON.stringify(hotelLevel);
+        return this.http.post<CashData>(`${this.serverUrl}/${SERVER.PREFIX}/cash/${this.hotelId}`, body, {
+            headers: this.headers,
+        });
+    }
+    getCashNotClosed() {
+        this.loadRequiredProperties();
+        return this.http.get<CashData>(
+            `${this.serverUrl}/${SERVER.PREFIX}/cash/${this.stateUserService.getHotelId()}`,
+            { headers: this.headers },
+        );
+    }
 }

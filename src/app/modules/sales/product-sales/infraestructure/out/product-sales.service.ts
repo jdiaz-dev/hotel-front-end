@@ -10,8 +10,9 @@ import { environment } from 'src/environments/environment';
 import { IProductsSaled } from '../interfaces/products-saled.interface';
 import { ProductAddedModel } from '../ui/models/product-added.model';
 import { GetCashIdForHoustingDomain } from './../../../../housting/input-housting/application/ports/out/other-domain/get-cash-id-for-housting-domain';
-import { IGetProductsSaledForDailyReportPort } from 'src/app/modules/reports/daily-report/application/ports/other-domains/get-product-saled-for-daily-report.port';
+import { IGetProductsSaledForDailyReportPort } from 'src/app/modules/reports/daily-reports/application/ports/other-domains/get-product-saled-for-daily-report.port';
 import { Observable } from 'rxjs';
+import { ISaleReportResponse } from 'src/app/modules/reports/daily-reports/infraestructure/interfaces/sale-report';
 
 @Injectable({
     providedIn: 'root',
@@ -40,8 +41,8 @@ export class ProductSaledService
     createProductSaled(_productsSaled: ProductAddedModel[], houstingId: number) {
         this.loadRequiredParamsForPath();
         const body = JSON.stringify(_productsSaled);
-        console.log(body);
         const productsSaled = { productsSaled: _productsSaled };
+
         return this.http.post(
             `${this.serverUrl}/${SERVER.PREFIX}/product-sales/${this.hotelId}/${this.cashId}/${houstingId}`,
             productsSaled,
@@ -61,9 +62,12 @@ export class ProductSaledService
     }
     getProductsSaledForReport(): Observable<any> {
         this.loadRequiredParamsForPath();
-        return this.http.get(`${this.serverUrl}/${SERVER.PREFIX}/product-sales/report/${this.hotelId}/${this.cashId}`, {
-            headers: this.headers,
-        });
+        return this.http.get<ISaleReportResponse>(
+            `${this.serverUrl}/${SERVER.PREFIX}/product-sales/report/${this.hotelId}/${this.cashId}`,
+            {
+                headers: this.headers,
+            },
+        );
     }
     completeProductSaledPayment(houstingId: number, productSaledIds: number[]) {
         this.loadRequiredParamsForPath();

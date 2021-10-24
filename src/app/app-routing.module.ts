@@ -69,7 +69,9 @@ const routes: Routes = [
             {
                 path: 'reportes',
                 loadChildren: () =>
-                    import('./modules/reports/daily-report/reports-routing.module').then((m) => m.ReportsRoutingModule),
+                    import('./modules/reports/daily-reports/reports-routing.module').then(
+                        (m) => m.ReportsRoutingModule,
+                    ),
             },
         ],
     },

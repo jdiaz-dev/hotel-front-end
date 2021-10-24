@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ChangeReportService } from './change-report.service';
-import { IReport } from './report';
+import { IReportList } from '../../interfaces/report-list';
 
 @Component({
     selector: 'app-report-list',
@@ -8,7 +8,7 @@ import { IReport } from './report';
     styleUrls: ['./report-list.component.scss'],
 })
 export class ReportListComponent implements OnInit {
-    reportList: IReport[] = [
+    reportList: IReportList[] = [
         { id: 1, nameReport: 'Reporte de hospedamiento' },
         { id: 2, nameReport: 'Reporte de ventas' },
     ];

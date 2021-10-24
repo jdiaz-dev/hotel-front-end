@@ -3,15 +3,17 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { StateUserService } from 'src/app/shared/services/state-user.service';
 import { StateCashService } from 'src/app/shared/services/state-cash.service';
 import { SERVER } from 'src/app/shared/enums/server.enum';
-import { environment } from './../../../../../../environments/environment';
-import { GetCashIdForHoustingDomain } from './../../../../housting/input-housting/application/ports/out/other-domain/get-cash-id-for-housting-domain';
+import { environment } from '../../../../../../environments/environment';
+import { GetCashIdForHoustingDomain } from '../../../../housting/input-housting/application/ports/out/other-domain/get-cash-id-for-housting-domain';
 import { AccessKeys } from 'src/app/shared/enums/name-token';
-import { IGetHoustingReportPort } from '../../application/ports/self-domain/get-housting-report.port';
+import { IGetHoustingReportsForDailyReportPort } from '../../../daily-reports/application/ports/other-domains/get-housting-reports-for-daily-reports.port';
+import { IEndHoustingReportResponse } from '../interfaces/housting-report';
+import { IQueries } from 'src/app/shared/interfaces/queries/queries.interface';
 
 @Injectable({
     providedIn: 'root',
 })
-export class HoustingReportService implements IGetHoustingReportPort {
+export class HoustingReportService implements IGetHoustingReportsForDailyReportPort {
     private getCashIdForHoustingDomain: GetCashIdForHoustingDomain;
     private serverUrl = environment.serverUrl;
     private headers = new HttpHeaders()
@@ -27,11 +29,14 @@ export class HoustingReportService implements IGetHoustingReportPort {
     ) {
         this.getCashIdForHoustingDomain = stateCashService;
     }
-    getHoustingReport() {
+    getHoustingReport(queries: IQueries) {
         this.loadRequiredParamsForPath();
-        return this.http.get(`${this.serverUrl}/${SERVER.PREFIX}/housting-report/${this.hotelId}/${this.cashId}`, {
-            headers: this.headers,
-        });
+        return this.http.get<IEndHoustingReportResponse>(
+            `${this.serverUrl}/${SERVER.PREFIX}/housting-report/${this.hotelId}/${this.cashId}}?limit=${queries.limit}&offset=${queries.offset}`,
+            {
+                headers: this.headers,
+            },
+        );
     }
     private loadRequiredParamsForPath() {
         this.hotelId = this.stateUserService.getHotelId();

@@ -4,38 +4,42 @@
     <div class="input">
         <div class="">
             <mat-form-field [style.width.%]="100">
-                <input formControlName="name" matInput placeholder="Nombre de la habitación" [(ngModel)]="room.name"
-                    required>
+                <input
+                    formControlName="name"
+                    matInput
+                    placeholder="Número de la habitación"
+                    [(ngModel)]="room.name"
+                    required
+                />
                 <mat-error *ngIf="roomControl.name.touched && roomControl.name.errors?.required">
-                    El nombre para la habitación es obligatorio
-                </mat-error><br>
+                    Este campo es obligatorio </mat-error
+                ><br />
 
                 <mat-error *ngIf="roomControl.name.touched && roomControl.name.errors?.maxlength">
                     Este campo solo permite 20 caracteres
                 </mat-error>
 
                 <mat-error *ngIf="roomControl.name.touched && roomControl.name.errors?.pattern">
-                    El nombre de la habitación solo puede ser numérico
+                    Este campo solo puede ser numérico
                 </mat-error>
             </mat-form-field>
         </div>
-
     </div>
 
     <div class="input">
         <div class="">
             <mat-form-field [style.width.%]="100">
-                <input formControlName="price" matInput placeholder="Precio" [(ngModel)]="room.price" required>
+                <input formControlName="price" matInput placeholder="Precio" [(ngModel)]="room.price" required />
                 <mat-error *ngIf="roomControl.price.touched && roomControl.price.errors?.required">
-                    Ingresa un precio para la habitación
-                </mat-error><br>
+                    Este campo es obligatorio </mat-error
+                ><br />
 
                 <mat-error *ngIf="roomControl.price.touched && roomControl.price.errors?.maxlength">
-                    El precio no puede ser mayor a 4 dígitos
+                    Este campo no puede ser mayor a 4 dígitos
                 </mat-error>
 
                 <mat-error *ngIf="roomControl.price.touched && roomControl.price.errors?.pattern">
-                    El precio solo puede ser numérico y positivo
+                    Este campo solo puede ser numérico y positivo
                 </mat-error>
             </mat-form-field>
         </div>
@@ -44,11 +48,16 @@
     <div class="input">
         <div class="">
             <mat-form-field [style.width.%]="100">
-                <textarea formControlName="details" matInput placeholder="Detalles" [(ngModel)]="room.details"
-                    required></textarea>
+                <textarea
+                    formControlName="details"
+                    matInput
+                    placeholder="Detalles"
+                    [(ngModel)]="room.details"
+                    required
+                ></textarea>
                 <mat-error *ngIf="roomControl.details.touched && roomControl.details.errors?.required">
-                    Ingresa una descripción de la habitación
-                </mat-error><br>
+                    Este campo es obligatorio </mat-error
+                ><br />
 
                 <mat-error *ngIf="roomControl.details.touched && roomControl.details.errors?.maxLength">
                     Este campo solo permite máximo 200 caracteres
@@ -62,7 +71,7 @@
     </div>
 
     <!-- level and category -->
-    <ng-container *ngIf="data; then UPDATE_LEVEL else CREATE_LEVEL"></ng-container>
+    <ng-container *ngIf="data; then UPDATE_LEVEL; else CREATE_LEVEL"></ng-container>
     <ng-template #UPDATE_LEVEL>
         <app-list-levels [previousLevel]="data.level" (levelSelected)="addlevelSelected($event)"></app-list-levels>
 
@@ -78,7 +87,8 @@
 
     <div class="buttons buttons-dialog">
         <button mat-raised-button mat-dialog-close color="accent" class="cancel">Cancelar</button>
-        <button type="submit" mat-raised-button color="primary" [mat-dialog-close]="true"
-            [disabled]="roomData.invalid">Guardar</button>
+        <button type="submit" mat-raised-button color="primary" [mat-dialog-close]="true" [disabled]="roomData.invalid">
+            Guardar
+        </button>
     </div>
 </form>

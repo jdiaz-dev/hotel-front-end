@@ -9,6 +9,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { ImpossibleCreateCashComponent } from '../modals/impossible-create-cash.component';
 import { CONFIG } from 'src/config/config';
 import { Subscription } from 'rxjs';
+import { CashData } from './../../interfaces/cash-data';
 
 @Component({
     selector: 'app-create-cash',
@@ -36,12 +37,12 @@ export class CreateCashComponent implements OnInit, OnDestroy {
         });
     }
     ngOnDestroy() {
-        this.cashSubs.unsubscribe();
+        if (this.cashSubs) this.cashSubs.unsubscribe();
     }
     saveCash(form: any) {
         if (this.verifyIfThereIsAcashOpened()) {
-            this.cashSubs = this.cashService.createCash(this.cashData.value).subscribe((response) => {
-                console.log(response);
+            this.cashSubs = this.cashService.createCash(this.cashData.value).subscribe((response: CashData) => {
+                this.stateCashService.saveCashInLocalStorage(response);
             });
         }
     }
@@ -49,7 +50,7 @@ export class CreateCashComponent implements OnInit, OnDestroy {
         const cashOpened = this.stateCashService.getCashId();
         let createCash = true;
 
-        if (cashOpened !== NaN) {
+        if (cashOpened) {
             createCash = false;
             this.openDialogImpossibleCreateCash();
         }

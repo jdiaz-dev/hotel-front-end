@@ -1,0 +1,57 @@
+<table mat-table *ngIf="houstingReports" [dataSource]="houstingReports" class="table mat-elevation-z8">
+    <div>
+        <ng-container matColumnDef="N">
+            <th mat-header-cell *matHeaderCellDef class="number number-room">N°</th>
+            <td mat-cell *matCellDef="let element">0</td>
+        </ng-container>
+
+        <ng-container matColumnDef="Room">
+            <th mat-header-cell *matHeaderCellDef class="name-room">Habitacion</th>
+            <td mat-cell *matCellDef="let element">{{ element.housting.room.name }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="MoneyPaid">
+            <th mat-header-cell *matHeaderCellDef class="money-paid">Dinero pagado</th>
+            <td mat-cell *matCellDef="let element">{{ element.housting.moneyPaid }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="MoneyService">
+            <th mat-header-cell *matHeaderCellDef class="price">Servicio</th>
+            <td mat-cell *matCellDef="let element">S/. {{ element.saleReport.total }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="Total">
+            <th mat-header-cell *matHeaderCellDef class="total">Total</th>
+            <td mat-cell *matCellDef="let element">{{ element.total }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="EntryDate">
+            <th mat-header-cell *matHeaderCellDef class="entry-date">Fecha de entrada</th>
+            <td mat-cell *matCellDef="let element">{{ element.housting.entryDate }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="EntryTime">
+            <th mat-header-cell *matHeaderCellDef class="entry-time">Hora de entrada</th>
+            <td mat-cell *matCellDef="let element">{{ element.housting.entryTime }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="OutputDate">
+            <th mat-header-cell *matHeaderCellDef class="output-date">Fecha de salida</th>
+            <td mat-cell *matCellDef="let element">{{ element.housting.outputDate }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="OutputTime">
+            <th mat-header-cell *matHeaderCellDef class="output-time">Hora de salida</th>
+            <td mat-cell *matCellDef="let element">{{ element.housting.outputTime }}</td>
+        </ng-container>
+    </div>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr class="rowOpenerCategories" mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+</table>
+
+<app-paginator
+    [pageSize]="pageSizePaginator"
+    [length]="totalHoustingReports"
+    (nextPage)="loadNextHoustingReports($event)"
+></app-paginator>

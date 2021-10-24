@@ -6,9 +6,10 @@ import { environment } from 'src/environments/environment';
 import { LevelModel } from '../ui/models/level.model';
 import { StateUserService } from 'src/app/shared/services/state-user.service';
 import { AccessKeys } from 'src/app/shared/enums/name-token';
-import { LevelData } from '../interfaces/level-data.interface';
+import { ILevelsDataResponse } from '../interfaces/level-data.interface';
 import { SERVER } from 'src/app/shared/enums/server.enum';
 import { GetLevelsForReceptionDomain } from 'src/app/modules/housting/reception/application/ports/out/other-domains/get-levels-for-reception-domain.port';
+import { IQueries } from 'src/app/shared/interfaces/queries/queries.interface';
 
 @Injectable()
 export class HotelLevelPersistenceService implements GetLevelsForReceptionDomain {
@@ -25,10 +26,13 @@ export class HotelLevelPersistenceService implements GetLevelsForReceptionDomain
             headers: this.headers,
         });
     }
-    getHotelLevels() {
-        return this.http.get<LevelData[]>(`${this.serverUrl}/${SERVER.PREFIX}/levels/${this.hotelId}`, {
-            headers: this.headers,
-        });
+    getHotelLevels(queries: IQueries) {
+        return this.http.get<ILevelsDataResponse>(
+            `${this.serverUrl}/${SERVER.PREFIX}/levels/${this.hotelId}?limit=${queries.limit}&offset=${queries.offset}`,
+            {
+                headers: this.headers,
+            },
+        );
     }
     updateHotelLevel(hotelLevel: LevelModel, levelId: number) {
         const body = JSON.stringify(hotelLevel);

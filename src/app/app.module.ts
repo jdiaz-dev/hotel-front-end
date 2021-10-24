@@ -19,7 +19,8 @@ import { CashModule } from './modules/cash/cash.module';
 import { OutputHoustingModule } from './modules/housting/output-housting/output-housting.module';
 import { ProductsModule } from './modules/sales/products/products.module';
 import { ProductSalesModule } from './modules/sales/product-sales/product-sales.module';
-import { ReportsModule } from './modules/reports/daily-report/reports.module';
+import { ReportsModule } from './modules/reports/daily-reports/reports.module';
+import { HoustingReportModule } from './modules/reports/housting-report/housting-report.module';
 
 @NgModule({
     declarations: [AppComponent],
@@ -41,6 +42,7 @@ import { ReportsModule } from './modules/reports/daily-report/reports.module';
         ProductsModule,
         ProductSalesModule,
         ReportsModule,
+        HoustingReportModule,
     ],
     providers: [],
     bootstrap: [AppComponent],

@@ -2,31 +2,42 @@ import { Component, Input, OnInit, OnChanges } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 
 import { HotelLevelPersistenceService } from '../../out/hotel-level-persistence.service';
-import { LevelData } from '../../interfaces/level-data.interface';
+import { ILevelsDataResponse, LevelData } from '../../interfaces/level-data.interface';
 import { CreateAndUpdateLevelComponent } from '../modals/create-and-update-level.component';
 import { ConfirmComponent } from 'src/app/shared/modals/confirm-remove.component';
 import { ICustomMessage } from 'src/app/shared/modals/custom-message.interface';
+import { BasePaginator } from 'src/app/shared/components/paginator/base-paginator';
+import { IQueries } from 'src/app/shared/interfaces/queries/queries.interface';
 
 @Component({
     selector: 'app-level-collection',
     templateUrl: './level-collection.component.html',
     styleUrls: ['./level-collection.component.scss'],
 })
-export class LevelCollectionComponent implements OnInit, OnChanges {
+export class LevelCollectionComponent extends BasePaginator implements OnInit, OnChanges {
     @Input('reload') reloadThisComponent!: number;
     hotelLevels: LevelData[] = [];
     displayedColumns: string[] = ['Level', 'Name', 'EditButton', 'RemoveButton'];
+    totalLevels!: number;
 
-    constructor(private dialog: MatDialog, private hotelLevelPersistenceService: HotelLevelPersistenceService) {}
+    constructor(private dialog: MatDialog, private hotelLevelPersistenceService: HotelLevelPersistenceService) {
+        super();
+    }
     ngOnChanges() {
         if (this.reloadThisComponent) this.loadHotelLevels();
     }
     ngOnInit(): void {
         this.loadHotelLevels();
     }
-    loadHotelLevels() {
-        this.hotelLevelPersistenceService.getHotelLevels().subscribe((response: LevelData[]) => {
-            this.hotelLevels = response;
+    loadHotelLevels(offset?: number) {
+        let queries: IQueries = {
+            limit: 5,
+            offset: offset ? offset : 0,
+        };
+        this.hotelLevelPersistenceService.getHotelLevels(queries).subscribe((response: ILevelsDataResponse) => {
+            console.log('--------------levels', response);
+            this.totalLevels = response.count;
+            this.hotelLevels = response.rows;
         });
     }
     editLevelDiaglog(leveldata: LevelData) {
@@ -48,5 +59,8 @@ export class LevelCollectionComponent implements OnInit, OnChanges {
                 });
             }
         });
+    }
+    loadNextLevels(offset: number) {
+        this.loadHotelLevels(offset);
     }
 }

@@ -84,7 +84,6 @@ export class ListRoomsComponent extends ListRoomMyxin() implements OnInit, OnDes
 
     closeDialogHousting(currentDialogMode: any) {
         this.okService.activedOkButton$.subscribe((activedOkButton: boolean) => {
-            console.log(activedOkButton);
             currentDialogMode.close();
             this.loadRooms();
         });

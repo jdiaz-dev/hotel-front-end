@@ -1,0 +1,11 @@
+<ng-container *ngIf="currentReport == 2; then SALE_REPORT; else HOUSTING_REPORT"></ng-container>
+
+<div class="report">
+    <ng-template #HOUSTING_REPORT>
+        <app-housting-reports class="report"></app-housting-reports>
+    </ng-template>
+
+    <ng-template #SALE_REPORT>
+        <app-sale-reports class="report"></app-sale-reports>
+    </ng-template>
+</div>

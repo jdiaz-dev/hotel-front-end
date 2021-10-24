@@ -5,9 +5,10 @@ import { AccessKeys } from 'src/app/shared/enums/name-token';
 import { SERVER } from 'src/app/shared/enums/server.enum';
 import { StateUserService } from 'src/app/shared/services/state-user.service';
 import { environment } from 'src/environments/environment';
-import { RoomData } from '../interfaces/room.data';
+import { IRoomsDataResponse, RoomData } from '../interfaces/room.data';
 import { RoomModel } from '../ui/models/room.model';
 import { GetRoomsForReceptionDomainPort } from 'src/app/modules/housting/reception/application/ports/out/other-domains/get-rooms-for-reception-domain.port';
+import { IQueries } from 'src/app/shared/interfaces/queries/queries.interface';
 
 @Injectable({
     providedIn: 'root',
@@ -26,10 +27,13 @@ export class RoomsPersistenceService implements GetRoomsForReceptionDomainPort {
             headers: this.headers,
         });
     }
-    getALLRooms() {
-        return this.http.get<RoomData[]>(`${this.serverUrl}/${SERVER.PREFIX}/rooms/${this.hotelId}`, {
-            headers: this.headers,
-        });
+    getAllRooms(queries: IQueries) {
+        return this.http.get<IRoomsDataResponse>(
+            `${this.serverUrl}/${SERVER.PREFIX}/rooms/${this.hotelId}?limit=${queries.limit}&offset=${queries.offset}`,
+            {
+                headers: this.headers,
+            },
+        );
     }
     getRoomsByLevel(levelId: number, conditionId: number) {
         return this.http.get<RoomData[]>(

@@ -1,0 +1,51 @@
+<table mat-table *ngIf="saleReports" [dataSource]="saleReports" class="table mat-elevation-z8">
+    <div>
+        <ng-container matColumnDef="N">
+            <th mat-header-cell *matHeaderCellDef class="number number-room">N°</th>
+            <td mat-cell *matCellDef="let element">0</td>
+        </ng-container>
+
+        <ng-container matColumnDef="Room">
+            <th mat-header-cell *matHeaderCellDef class="name-room">Habitacion</th>
+            <td mat-cell *matCellDef="let element">{{ element.housting.room.name }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="Product">
+            <th mat-header-cell *matHeaderCellDef class="product">Producto</th>
+            <td mat-cell *matCellDef="let element">{{ element.product.name }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="Amount">
+            <th mat-header-cell *matHeaderCellDef class="amount">Cantidad</th>
+            <td mat-cell *matCellDef="let element">S/. {{ element.amount }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="Price">
+            <th mat-header-cell *matHeaderCellDef class="price">Precio</th>
+            <td mat-cell *matCellDef="let element">{{ element.product.price }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="Total">
+            <th mat-header-cell *matHeaderCellDef class="total">Total</th>
+            <td mat-cell *matCellDef="let element">{{ element.totalPrice }}</td>
+        </ng-container>
+        <ng-container matColumnDef="SaleDate">
+            <th mat-header-cell *matHeaderCellDef class="sale-date">Fecha de la venta</th>
+            <td mat-cell *matCellDef="let element"><!-- {{ element.housting.entryDate }} -->empty</td>
+        </ng-container>
+
+        <ng-container matColumnDef="SaleTime">
+            <th mat-header-cell *matHeaderCellDef class="sale-time">Hora de la venta</th>
+            <td mat-cell *matCellDef="let element"><!-- {{ element.housting.entryTime }} -->empty</td>
+        </ng-container>
+    </div>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr class="rowOpenerCategories" mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+</table>
+
+<app-paginator
+    [pageSize]="pageSizePaginator"
+    [length]="totalSaleReports"
+    (nextPage)="loadNextSaleReports($event)"
+></app-paginator>

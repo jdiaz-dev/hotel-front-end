@@ -15,56 +15,57 @@ import { IAmountProduct } from '../../../interfaces/amount-product.interface';
 import { DateService } from './../../../../../../../shared/services/date.service';
 
 @Component({
-  selector: 'app-available-products-container',
-  templateUrl: './available-products.component.html',
-  styleUrls: ['./available-products.component.scss'],
+    selector: 'app-available-products-container',
+    templateUrl: './available-products.component.html',
+    styleUrls: ['./available-products.component.scss'],
 })
 export class AvailableProductsComponent extends AvailableProductsMyxin() implements OnInit {
-  @Output() productAdded = new EventEmitter<ProductAddedModel>();
-  //@ViewChild(MatPaginator) paginator!: MatPaginator;
-  private getProductsForProductSalesDomainPort: GetProductsForProductSalesDomainPort;
+    @Output() productAdded = new EventEmitter<ProductAddedModel>();
+    //@ViewChild(MatPaginator) paginator!: MatPaginator;
+    private getProductsForProductSalesDomainPort: GetProductsForProductSalesDomainPort;
 
-  displayedColumns: string[] = ['Code', 'Name', 'Amount', 'Price', 'AggregateButton'];
-  totalProducts!: number;
-  amountProducstAdded = new FormControl('', Validators.pattern(REG_EXP.numeric));
+    displayedColumns: string[] = ['Code', 'Name', 'Amount', 'Price', 'AggregateButton'];
+    totalProducts!: number;
+    amountProducstAdded = new FormControl('', Validators.pattern(REG_EXP.numeric));
 
-  productList!: MatTableDataSource<ProductData>;
-  constructor(private readonly dateService: DateService, productsService: ProductsService) {
-    super();
-    this.getProductsForProductSalesDomainPort = productsService;
-  }
+    productList!: MatTableDataSource<ProductData>;
+    pageSize = 5;
+    constructor(private readonly dateService: DateService, productsService: ProductsService) {
+        super();
+        this.getProductsForProductSalesDomainPort = productsService;
+    }
 
-  ngOnInit(): void {
-    this.loadProducts();
-  }
-  loadProducts(offset?: number) {
-    let queries: IQueries = {
-      limit: 5,
-      offset: offset ? offset : 0,
-    };
+    ngOnInit(): void {
+        this.loadProducts();
+    }
+    loadProducts(offset?: number) {
+        let queries: IQueries = {
+            limit: 5,
+            offset: offset ? offset : 0,
+        };
 
-    this.getProductsForProductSalesDomainPort.getProducts(queries).subscribe((response: GetProductsResponse) => {
-      this.productList = new MatTableDataSource<ProductData>(this.addTotalToProductData(response.rows));
-      this.totalProducts = response.count;
-      // console.log(this.productList.filteredData);
-    });
-  }
-  loadNextProducts(offset: any) {
-    this.loadProducts(offset);
-  }
-  aggregateProduct(event: IAmountProduct) {
-    let product = this.productList.filteredData[event.indexArray];
+        this.getProductsForProductSalesDomainPort.getProducts(queries).subscribe((response: GetProductsResponse) => {
+            this.productList = new MatTableDataSource<ProductData>(this.addTotalToProductData(response.rows));
+            this.totalProducts = response.count;
+            // console.log(this.productList.filteredData);
+        });
+    }
+    aggregateProduct(event: IAmountProduct) {
+        let product = this.productList.filteredData[event.indexArray];
 
-    let productAdded = new ProductAddedModel(
-      event.id,
-      event.amount,
-      event.amount * product.price,
-      this.dateService.getCurrentDate(),
-      this.dateService.getCurrentTime(),
-      0,
-      product.price,
-      product.name,
-    );
-    this.productAdded.emit(productAdded);
-  }
+        let productAdded = new ProductAddedModel(
+            event.id,
+            event.amount,
+            event.amount * product.price,
+            this.dateService.getCurrentDate(),
+            this.dateService.getCurrentTime(),
+            0,
+            product.price,
+            product.name,
+        );
+        this.productAdded.emit(productAdded);
+    }
+    loadNextProducts(offset: any) {
+        this.loadProducts(offset);
+    }
 }

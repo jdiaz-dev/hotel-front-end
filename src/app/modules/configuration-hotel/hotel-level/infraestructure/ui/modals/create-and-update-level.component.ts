@@ -37,7 +37,7 @@ export class CreateAndUpdateLevelComponent implements OnInit, OnDestroy {
     }
     ngOnDestroy() {
         this.createHotelLevelSubs.unsubscribe();
-        this.updateHotelLevelSubs.unsubscribe();
+        if (this.updateHotelLevelSubs) this.updateHotelLevelSubs.unsubscribe();
     }
     paramsToUpdateLevel() {
         this.level = this.data !== null ? new LevelModel(this.data.number, this.data.name) : this.level;
