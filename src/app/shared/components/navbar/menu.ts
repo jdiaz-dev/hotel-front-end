@@ -18,11 +18,11 @@ export const MENU: Menu[] = [
         children: [
             {
                 name: 'Apertura de caja',
-                url: '/menu/caja/apertura-caja',
+                url: `/menu/caja/${CONFIG.CASH_MODE.OPEN_CASH}`,
             },
             {
                 name: 'Cierre de caja',
-                url: '/menu/caja/cierre-caja',
+                url: `/menu/caja/${CONFIG.CASH_MODE.CLOSE_CASH}`,
             },
         ],
         icon: ICONS_SIDEBAR.CASH,

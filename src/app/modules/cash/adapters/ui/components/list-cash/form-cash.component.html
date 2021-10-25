@@ -1,0 +1,82 @@
+<!-- <ng-container *ngIf="formCashMode == 'abrir-caja'; then OPEN_CASH; else CLOSE_CASH"></ng-container> -->
+<!-- <ng-container *ngIf="formCashMode == 'abrir-caja'; then OPEN_CASH_INPUT; else CLOSE_CASH_INPUT"></ng-container> -->
+
+<mat-card class="open-cash-card">
+    <mat-card-header>
+        <div *ngIf="formCashMode == 'abrir-caja'">APERTURA DE CAJA</div>
+        <div *ngIf="formCashMode == 'cerrar-caja'">CIERRE DE CAJA</div>
+    </mat-card-header>
+    <mat-card-content>
+        <form #formCash [formGroup]="cashData" class="form-container">
+            <div class="input">
+                <div class="date-and-time">
+                    <mat-form-field [style.width.%]="45">
+                        <input formControlName="date" matInput placeholder="Fecha" [(ngModel)]="cash.date" readonly />
+                    </mat-form-field>
+
+                    <mat-form-field class="time" [style.width.%]="45">
+                        <input formControlName="time" matInput placeholder="Hora" [(ngModel)]="cash.time" readonly />
+                    </mat-form-field>
+                </div>
+            </div>
+
+            <div class="input">
+                <div class="">
+                    <mat-form-field [style.width.%]="100">
+                        <input
+                            *ngIf="formCashMode == 'abrir-caja'"
+                            formControlName="openingMoney"
+                            matInput
+                            placeholder="Monto de apertura"
+                            [(ngModel)]="cash.openingMoney"
+                            required
+                        />
+                        <input
+                            *ngIf="formCashMode == 'cerrar-caja'"
+                            formControlName="openingMoney"
+                            matInput
+                            placeholder="Monto de cierre"
+                            [(ngModel)]="closingMoney"
+                            required
+                            readonly
+                        />
+                        <mat-error
+                            *ngIf="cashControl.openingMoney.touched && cashControl.openingMoney.errors?.required"
+                        >
+                            El monto para esta caja es requerido
+                        </mat-error>
+
+                        <mat-error *ngIf="cashControl.openingMoney.touched && cashControl.openingMoney.errors?.pattern">
+                            Este campo solo permite dígitos
+                        </mat-error>
+
+                        <mat-error
+                            *ngIf="cashControl.openingMoney.touched && cashControl.openingMoney.errors?.maxlength"
+                        >
+                            Este campo solo permite 5 caracteres
+                        </mat-error>
+                    </mat-form-field>
+                </div>
+            </div>
+
+            <div class="buttons buttons-card" *ngIf="formCashMode == 'abrir-caja'">
+                <!-- <button mat-raised-button color="accent" class="cancel">Cancelar</button> -->
+                <button
+                    type="submit"
+                    mat-raised-button
+                    color="primary"
+                    [disabled]="cashData.invalid"
+                    (click)="saveCash()"
+                >
+                    Guardar
+                </button>
+            </div>
+
+            <div class="buttons buttons-card-close" *ngIf="formCashMode == 'cerrar-caja'">
+                <button mat-raised-button color="accent" class="close" (click)="closeCash()" [disabled]="!closingMoney">
+                    Cerrar
+                </button>
+            </div>
+        </form>
+    </mat-card-content>
+</mat-card>

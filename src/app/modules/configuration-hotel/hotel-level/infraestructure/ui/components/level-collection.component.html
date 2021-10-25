@@ -1,35 +1,37 @@
-<table mat-table [dataSource]="hotelLevels" class="table mat-elevation-z8">
-    <div>
-        <ng-container matColumnDef="Level">
-            <th mat-header-cell *matHeaderCellDef class="number number-level">Nivel</th>
-            <td mat-cell *matCellDef="let element">{{ element.number }}</td>
-        </ng-container>
+<div class="mat-elevation-z8">
+    <table mat-table [dataSource]="hotelLevels" class="table">
+        <div>
+            <ng-container matColumnDef="Level">
+                <th mat-header-cell *matHeaderCellDef class="number number-level">Nivel</th>
+                <td mat-cell *matCellDef="let element">{{ element.number }}</td>
+            </ng-container>
 
-        <ng-container matColumnDef="Name">
-            <th mat-header-cell *matHeaderCellDef class="name-level">Nombre</th>
-            <td mat-cell *matCellDef="let element">{{ element.name }}</td>
-        </ng-container>
+            <ng-container matColumnDef="Name">
+                <th mat-header-cell *matHeaderCellDef class="name-level">Nombre</th>
+                <td mat-cell *matCellDef="let element">{{ element.name }}</td>
+            </ng-container>
 
-        <ng-container matColumnDef="EditButton">
-            <th mat-header-cell *matHeaderCellDef class="edit-buttons"></th>
-            <td mat-cell *matCellDef="let element" (click)="editLevelDiaglog(element)">
-                <button mat-raised-button>Editar</button>
-            </td>
-        </ng-container>
+            <ng-container matColumnDef="EditButton">
+                <th mat-header-cell *matHeaderCellDef class="edit-buttons"></th>
+                <td mat-cell *matCellDef="let element" (click)="editLevelDiaglog(element)">
+                    <button mat-raised-button>Editar</button>
+                </td>
+            </ng-container>
 
-        <ng-container matColumnDef="RemoveButton">
-            <th mat-header-cell *matHeaderCellDef class="remove-buttons"></th>
-            <td mat-cell *matCellDef="let element">
-                <button mat-raised-button (click)="removeLevelDialog(element.id)">Eliminar</button>
-            </td>
-        </ng-container>
-    </div>
+            <ng-container matColumnDef="RemoveButton">
+                <th mat-header-cell *matHeaderCellDef class="remove-buttons"></th>
+                <td mat-cell *matCellDef="let element">
+                    <button mat-raised-button (click)="removeLevelDialog(element.id)">Eliminar</button>
+                </td>
+            </ng-container>
+        </div>
 
-    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-    <tr class="rowOpenerCategories" mat-row *matRowDef="let row; columns: displayedColumns"></tr>
-</table>
-<app-paginator
-    [pageSize]="pageSizePaginator"
-    [length]="totalLevels"
-    (nextPage)="loadNextLevels($event)"
-></app-paginator>
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr class="rowOpenerCategories" mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+    </table>
+    <app-paginator
+        [pageSize]="pageSizePaginator"
+        [length]="totalLevels"
+        (nextPage)="loadNextLevels($event)"
+    ></app-paginator>
+</div>

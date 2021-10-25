@@ -4,6 +4,7 @@ import { IGetProductsSaledForDailyReportPort } from '../../../../application/por
 import { Subscription } from 'rxjs';
 import { ISaleReport, ISaleReportResponse } from '../../../interfaces/sale-report';
 import { BasePaginator } from 'src/app/shared/components/paginator/base-paginator';
+import { IQueries } from 'src/app/shared/interfaces/queries/queries.interface';
 
 @Component({
     selector: 'app-sale-reports',
@@ -28,13 +29,19 @@ export class SaleReportsComponent extends BasePaginator implements OnInit, OnDes
     ngOnDestroy(): void {
         this.getProductsSaled.unsubscribe();
     }
-    private loadProductSaledReport() {
+    private loadProductSaledReport(offset?: number) {
+        let queries: IQueries = {
+            limit: 5,
+            offset: offset ? offset : 0,
+        };
         this.getProductsSaled = this.getProductsSaledForDailyReportPort
-            .getProductsSaledForReport()
+            .getProductsSaledForReport(queries)
             .subscribe((response: ISaleReportResponse) => {
                 console.log(response);
                 this.saleReports = response.rows;
             });
     }
-    loadNextSaleReports(offset: number) {}
+    loadNextSaleReports(offset: number) {
+        this.loadProductSaledReport(offset);
+    }
 }

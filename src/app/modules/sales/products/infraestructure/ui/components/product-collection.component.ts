@@ -6,17 +6,22 @@ import { ProductsService } from '../../out/products.service';
 import { GetProductsResponse, ProductData } from '../../../../../../shared/interfaces/product/get-product-response';
 import { CreateUpdateProductComponent } from './../modals/create-update-product.component';
 import { IQueries } from 'src/app/shared/interfaces/queries/queries.interface';
+import { BasePaginator } from 'src/app/shared/components/paginator/base-paginator';
 
 @Component({
     selector: 'app-product-collection',
     templateUrl: './product-collection.component.html',
     styleUrls: ['./product-collection.component.scss'],
 })
-export class ProductCollectionComponent implements OnChanges, OnInit {
+export class ProductCollectionComponent extends BasePaginator implements OnChanges, OnInit {
     @Input('reload') reloadThisComponent!: number;
     products: ProductData[] = [];
     displayedColumns: string[] = ['Code', 'Name', 'Brand', 'Details', 'Price', 'EditButton', 'RemoveButton'];
-    constructor(private dialog: MatDialog, private productsService: ProductsService) {}
+    totalProducts!: number;
+
+    constructor(private dialog: MatDialog, private productsService: ProductsService) {
+        super();
+    }
 
     ngOnChanges() {
         if (this.reloadThisComponent) this.loadProducts();
@@ -24,10 +29,14 @@ export class ProductCollectionComponent implements OnChanges, OnInit {
     ngOnInit(): void {
         this.loadProducts();
     }
-    loadProducts() {
-        let queries: IQueries = { limit: 8, offset: 0 };
+    loadProducts(offset?: number) {
+        let queries: IQueries = {
+            limit: 5,
+            offset: offset ? offset : 0,
+        };
         this.productsService.getProducts(queries).subscribe((response: GetProductsResponse) => {
             //console.log(response);
+            this.totalProducts = response.count;
             this.products = response.rows;
         });
     }
@@ -57,5 +66,8 @@ export class ProductCollectionComponent implements OnChanges, OnInit {
                 });
             }
         });
+    }
+    loadNextProducts(offset: number) {
+        this.loadProducts(offset);
     }
 }

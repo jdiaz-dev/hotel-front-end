@@ -1,0 +1,60 @@
+<app-form-cash
+    *ngIf="cashesWithDailyReports"
+    [cashMode]="cashMode"
+    [closingMoney]="closingMoney"
+    (confirmCashClosed)="reloadCashesClosedList($event)"
+></app-form-cash>
+
+<div class="table mat-elevation-z8">
+    <table mat-table *ngIf="cashesWithDailyReports" [dataSource]="cashesWithDailyReports">
+        <div>
+            <ng-container matColumnDef="N">
+                <th mat-header-cell *matHeaderCellDef class="number number-room">N°</th>
+                <td mat-cell *matCellDef="let element">0</td>
+            </ng-container>
+
+            <ng-container matColumnDef="OpeningMoney">
+                <th mat-header-cell *matHeaderCellDef class="name-room">Monto de apertura</th>
+                <td mat-cell *matCellDef="let element">{{ element.openingMoney }}</td>
+            </ng-container>
+
+            <ng-container matColumnDef="MoneyHousting">
+                <th mat-header-cell *matHeaderCellDef class="name-room">Dinero por hospedamiento</th>
+                <td mat-cell *matCellDef="let element">{{ element.DailyReportModel.moneyHousting }}</td>
+            </ng-container>
+
+            <ng-container matColumnDef="MoneySales">
+                <th mat-header-cell *matHeaderCellDef class="name-room">Dinero por ventas</th>
+                <td mat-cell *matCellDef="let element">{{ element.DailyReportModel.moneySales }}</td>
+            </ng-container>
+
+            <ng-container matColumnDef="ClosingMoney">
+                <th mat-header-cell *matHeaderCellDef class="money-paid">Monto de cierre</th>
+                <td mat-cell *matCellDef="let element">{{ element.closingMoney }}</td>
+            </ng-container>
+
+            <ng-container matColumnDef="OpeningDate">
+                <th mat-header-cell *matHeaderCellDef class="price">Fecha de apertura</th>
+                <td mat-cell *matCellDef="let element">{{ element.createdAt }}</td>
+            </ng-container>
+
+            <ng-container matColumnDef="ClosingDate">
+                <th mat-header-cell *matHeaderCellDef class="total">Fecha de cierre</th>
+                <td mat-cell *matCellDef="let element">{{ element.updatedAt }}</td>
+            </ng-container>
+
+            <ng-container matColumnDef="Closed">
+                <th mat-header-cell *matHeaderCellDef class="total">Estado</th>
+                <td mat-cell *matCellDef="let element">{{ element.closed }}</td>
+            </ng-container>
+        </div>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr class="rowOpenerCategories" mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+    </table>
+    <app-paginator
+        [pageSize]="pageSizePaginator"
+        [length]="totalCashes"
+        (nextPage)="loadNextCashes($event)"
+    ></app-paginator>
+</div>

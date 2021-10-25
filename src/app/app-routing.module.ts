@@ -26,7 +26,7 @@ const routes: Routes = [
 
             //cashes
             {
-                path: 'caja',
+                path: 'caja/:mode',
                 loadChildren: () => import('./modules/cash/cash-routing.module').then((m) => m.CashRoutingModule),
             },
 

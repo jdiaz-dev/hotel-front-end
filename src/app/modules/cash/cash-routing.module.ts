@@ -1,14 +1,11 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { CashContainerComponent } from './infraestructure/ui/components/cash-container.component';
+import { CashContainerComponent } from './adapters/ui/components/cash-container.component';
 
-const routes: Routes = [
-  { path: 'apertura-caja', component: CashContainerComponent },
-  { path: 'cierre-caja', component: CashContainerComponent }
-];
+const routes: Routes = [{ path: '', component: CashContainerComponent }];
 
 @NgModule({
-  imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule]
+    imports: [RouterModule.forChild(routes)],
+    exports: [RouterModule],
 })
-export class CashRoutingModule { }
+export class CashRoutingModule {}

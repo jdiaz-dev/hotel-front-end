@@ -1,0 +1,9 @@
+<ng-container *ngIf="cashMode == 'abrir-caja'; then OPEN_CASH; else CLOSE_CASH"></ng-container>
+
+<ng-template #OPEN_CASH>
+    <app-cashes-opened-list [cashMode]="cashMode"></app-cashes-opened-list>
+</ng-template>
+
+<ng-template #CLOSE_CASH>
+    <app-cashes-closed-list [cashMode]="cashMode"></app-cashes-closed-list>
+</ng-template>

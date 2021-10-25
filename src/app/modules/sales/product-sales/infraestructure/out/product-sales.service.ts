@@ -13,6 +13,7 @@ import { GetCashIdForHoustingDomain } from './../../../../housting/input-houstin
 import { IGetProductsSaledForDailyReportPort } from 'src/app/modules/reports/daily-reports/application/ports/other-domains/get-product-saled-for-daily-report.port';
 import { Observable } from 'rxjs';
 import { ISaleReportResponse } from 'src/app/modules/reports/daily-reports/infraestructure/interfaces/sale-report';
+import { IQueries } from 'src/app/shared/interfaces/queries/queries.interface';
 
 @Injectable({
     providedIn: 'root',
@@ -60,10 +61,10 @@ export class ProductSaledService
             },
         );
     }
-    getProductsSaledForReport(): Observable<any> {
+    getProductsSaledForReport(queries: IQueries): Observable<any> {
         this.loadRequiredParamsForPath();
         return this.http.get<ISaleReportResponse>(
-            `${this.serverUrl}/${SERVER.PREFIX}/product-sales/report/${this.hotelId}/${this.cashId}`,
+            `${this.serverUrl}/${SERVER.PREFIX}/product-sales/report/${this.hotelId}/${this.cashId}?limit=${queries.limit}&offset=${queries.offset}`,
             {
                 headers: this.headers,
             },
