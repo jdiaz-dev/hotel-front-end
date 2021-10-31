@@ -26,5 +26,9 @@ export const CONFIG: Iconfig = {
             ID: 3,
             NAME: 'ocupado',
         },
+        CLEANING: {
+            ID: 4,
+            NAME: 'limpieza',
+        },
     },
 };

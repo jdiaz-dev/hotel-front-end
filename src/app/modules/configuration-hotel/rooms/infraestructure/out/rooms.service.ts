@@ -9,11 +9,15 @@ import { IRoomsDataResponse, RoomData } from '../interfaces/room.data';
 import { RoomModel } from '../ui/models/room.model';
 import { GetRoomsForReceptionDomainPort } from 'src/app/modules/housting/reception/application/ports/out/other-domains/get-rooms-for-reception-domain.port';
 import { IQueries } from 'src/app/shared/interfaces/queries/queries.interface';
+import { CONFIG } from 'src/config/config';
+import { IUpdateRoomConditionFromReceptionDomain } from 'src/app/modules/housting/reception/application/ports/in/other-domains/update-room-condition-from-reception';
 
 @Injectable({
     providedIn: 'root',
 })
-export class RoomsPersistenceService implements GetRoomsForReceptionDomainPort {
+export class RoomsPersistenceService
+    implements GetRoomsForReceptionDomainPort, IUpdateRoomConditionFromReceptionDomain
+{
     private serverUrl = environment.serverUrl;
     private headers = new HttpHeaders()
         .set('Content-Type', 'application/json')
@@ -55,4 +59,15 @@ export class RoomsPersistenceService implements GetRoomsForReceptionDomainPort {
             headers: this.headers,
         });
     }
+    updateTheRoomCondition(roomId: number) {
+        const roomCleanId: number = CONFIG.CONDITIONS.FREE.ID;
+        console.log(this.headers);
+        return this.http.put(`${this.serverUrl}/${SERVER.PREFIX}/rooms/${this.hotelId}/${roomId}/${roomCleanId}`, '', {
+            headers: this.headers,
+        });
+    }
+    /* private loadRequiredParamsForPath() {
+        this.hotelId = this.stateUserService.getHotelId();
+        this.cashId = this.getCashIdForHoustingDomain.getCashId();
+    } */
 }

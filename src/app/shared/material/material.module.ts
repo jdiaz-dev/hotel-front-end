@@ -13,32 +13,31 @@ import { MatListModule } from '@angular/material/list';
 import { MatTableModule } from '@angular/material/table';
 import { MatCardModule } from '@angular/material/card';
 import { MatTabsModule } from '@angular/material/tabs';
-import {
-  MatPaginatorIntl,
-  MatPaginatorModule,
-} from '@angular/material/paginator';
+import { MatPaginatorIntl, MatPaginatorModule } from '@angular/material/paginator';
 import { PaginatorIntlService } from './services/paginator-intl.service';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
 
 const MaterialModules = [
-  MatSidenavModule,
-  MatTreeModule,
-  MatIconModule,
-  MatDialogModule,
-  MatFormFieldModule,
-  MatSelectModule,
-  MatInputModule,
-  MatButtonModule,
-  MatListModule,
-  MatDividerModule,
-  MatTableModule,
-  MatCardModule,
-  MatTabsModule,
-  MatPaginatorModule,
+    MatSidenavModule,
+    MatTreeModule,
+    MatIconModule,
+    MatDialogModule,
+    MatFormFieldModule,
+    MatSelectModule,
+    MatInputModule,
+    MatButtonModule,
+    MatListModule,
+    MatDividerModule,
+    MatTableModule,
+    MatCardModule,
+    MatTabsModule,
+    MatPaginatorModule,
+    MatAutocompleteModule,
 ];
 
 @NgModule({
-  exports: [MaterialModules],
-  imports: [MaterialModules],
-  providers: [{ provide: MatPaginatorIntl, useClass: PaginatorIntlService }],
+    exports: [MaterialModules],
+    imports: [MaterialModules],
+    providers: [{ provide: MatPaginatorIntl, useClass: PaginatorIntlService }],
 })
 export class MaterialModule {}

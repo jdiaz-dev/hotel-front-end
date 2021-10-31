@@ -23,5 +23,6 @@ export interface Iconfig {
     CONDITIONS: {
         FREE: ICondition;
         BUSY: ICondition;
+        CLEANING: ICondition;
     };
 }

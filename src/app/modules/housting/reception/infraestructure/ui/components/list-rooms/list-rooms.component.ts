@@ -4,14 +4,16 @@ import { ActivatedRoute, Params } from '@angular/router';
 import { RoomData } from 'src/app/modules/configuration-hotel/rooms/infraestructure/interfaces/room.data';
 import { RoomsPersistenceService } from 'src/app/modules/configuration-hotel/rooms/infraestructure/out/rooms.service';
 import { OkService } from 'src/app/shared/services/communication/ok.service';
-import { GetRoomsForReceptionDomainPort } from '../../../application/ports/out/other-domains/get-rooms-for-reception-domain.port';
-import { LevelAndRoomCommunicationService } from '../services/level-and-room-communication.service';
-import { ReceptionModeService } from '../services/reception-mode.service';
+import { GetRoomsForReceptionDomainPort } from '../../../../application/ports/out/other-domains/get-rooms-for-reception-domain.port';
+import { LevelAndRoomCommunicationService } from '../../services/level-and-room-communication.service';
+import { ReceptionModeService } from '../../services/reception-mode.service';
 import { CONFIG } from 'src/config/config';
 import { Subscription } from 'rxjs';
-import { ListRoomMyxin } from './list-room.myxin';
-import { MatDialogRef } from '@angular/material/dialog';
-import { ReloadRoomsService } from '../services/reload-rooms.service';
+import { ListRoomMyxin } from './../list-room.myxin';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { ReloadRoomsService } from '../../services/reload-rooms.service';
+import { ICustomMessage } from 'src/app/shared/modals/custom-message.interface';
+import { ConfirmComponent } from 'src/app/shared/modals/confirm-remove.component';
 
 @Component({
     selector: 'app-list-rooms',
@@ -25,8 +27,9 @@ export class ListRoomsComponent extends ListRoomMyxin() implements OnInit, OnDes
     private currentLevel!: number;
     private subscriptionReloadRooms!: Subscription;
     roomList: RoomData[] = [];
-    roomBusy: string = CONFIG.CONDITIONS.BUSY.NAME;
     roomFree: string = CONFIG.CONDITIONS.FREE.NAME;
+    roomBusy: string = CONFIG.CONDITIONS.BUSY.NAME;
+    roomCleaning: string = CONFIG.CONDITIONS.CLEANING.NAME;
 
     constructor(
         private readonly levelAndRoomCommunicationService: LevelAndRoomCommunicationService,
@@ -35,6 +38,7 @@ export class ListRoomsComponent extends ListRoomMyxin() implements OnInit, OnDes
         private readonly reloadRoomsService: ReloadRoomsService,
         public activatedRoute: ActivatedRoute,
         roomsPersistenceService: RoomsPersistenceService,
+        private dialog: MatDialog,
     ) {
         super();
         this.getRoomsForReceptionDomainPort = roomsPersistenceService;
@@ -65,7 +69,7 @@ export class ListRoomsComponent extends ListRoomMyxin() implements OnInit, OnDes
         this.getRoomsForReceptionDomainPort
             .getRoomsByLevel(this.currentLevel, this.conditionRooms(this.receptionMode))
             .subscribe((response: RoomData[]) => {
-                // console.log(response);
+                console.log(response);
                 this.roomList = response;
             });
     }
@@ -87,5 +91,8 @@ export class ListRoomsComponent extends ListRoomMyxin() implements OnInit, OnDes
             currentDialogMode.close();
             this.loadRooms();
         });
+    }
+    roomCleanedConfirmed(event: boolean) {
+        if (event) this.loadRooms();
     }
 }

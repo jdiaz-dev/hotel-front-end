@@ -1,0 +1,62 @@
+div.container-rooms {
+    width: 99%;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, 25%);
+    grid-template-rows: 1fr;
+    text-align: center;
+
+    mat-card.card {
+        margin: 5px;
+        cursor: pointer;
+
+        div.room-image {
+            display: inline-flex;
+            height: 85%;
+            flex-direction: row;
+            text-align: center;
+
+            div.bed-svg {
+                width: 65%;
+                svg {
+                    width: 100%;
+                }
+            }
+            div.info-room {
+                width: 35%;
+                height: 100%;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+
+                div.number-bed {
+                    font-size: 300%;
+                    font-weight: bold;
+                    margin-bottom: 15px;
+                }
+                div.category-bed {
+                    font-weight: 500;
+                }
+            }
+        }
+        mat-card-content {
+            display: flex;
+            div.room-condition {
+                width: 90%;
+                font-size: 1.3em;
+            }
+
+            div.icon {
+                margin-top: -5px;
+                svg.icon-state {
+                    padding: 3px;
+                    color: rgb(245, 241, 241);
+                    background-color: rgb(5, 78, 5);
+                    border-radius: 10px;
+                }
+                /* svg.icon-state:hover {
+                    transform: scale(1.1);
+                } */
+            }
+        }
+    }
+}

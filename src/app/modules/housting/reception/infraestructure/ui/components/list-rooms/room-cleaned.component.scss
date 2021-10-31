@@ -1,0 +1,12 @@
+div.icon {
+    margin-top: -5px;
+    svg.icon-state {
+        padding: 3px;
+        color: rgb(245, 241, 241);
+        background-color: rgb(5, 78, 5);
+        border-radius: 10px;
+    }
+    svg.icon-state:hover {
+        transform: scale(1.1);
+    }
+}

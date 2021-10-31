@@ -8,7 +8,6 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { HotelLevelModule } from './modules/configuration-hotel/hotel-level/hotel-level.module';
 import { SharedModule } from './shared/shared.module';
-import { NavbarComponent } from './shared/components/navbar/navbar.component';
 import { RoomCategoriesModule } from './modules/configuration-hotel/room-categories/room-categories.module';
 import { CoreModule } from './core/core.module';
 import { RoomsModule } from './modules/configuration-hotel/rooms/rooms.module';
@@ -52,3 +51,5 @@ export class AppModule {}
 //icons-bed-hotel https://icon-sets.iconify.design/ion/bed/
 
 //command to run angular project : npm run nghm -- serve
+
+//run to production npm run start --configuration production
