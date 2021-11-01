@@ -36,7 +36,7 @@ export class ProductsService implements GetProductsForProductSalesDomainPort {
         return this.http.get<GetProductsResponse>(
             `${this.serverUrl}/${SERVER.PREFIX}/products/${this.stateUserService.getHotelId()}?limit=${
                 queries.limit
-            }&offset=${queries.offset}`,
+            }&offset=${queries.offset}&searchText=${queries.searchText}`,
             { headers: this.headers },
         );
     }

@@ -5,6 +5,11 @@ import { NavbarComponent } from './shared/components/navbar/navbar.component';
 
 const routes: Routes = [
     {
+        path: '',
+        loadChildren: () => import('./core/core-routing.module').then((m) => m.CoreRoutingModule),
+    },
+
+    {
         path: 'menu',
         component: NavbarComponent,
         children: [
@@ -81,6 +86,10 @@ const routes: Routes = [
                     import('./modules/clients/clients-routing.module').then((m) => m.ClientsRoutingModule),
             },
         ],
+    },
+    {
+        path: '**',
+        loadChildren: () => import('./core/core-routing.module').then((m) => m.CoreRoutingModule),
     },
 ];
 

@@ -1,10 +1,12 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
+import { IGetClientsRequest } from 'src/app/modules/clients/application/ports/in/get-clients.request';
 import { BasePaginator } from 'src/app/shared/components/paginator/base-paginator';
+import { IQueries } from 'src/app/shared/interfaces/queries/queries.interface';
+import { ClientsService } from '../../../out/clients.service';
 import { IDataClient, IDataClientsResponse } from '../../interfaces/data-clients-response';
-import { IClientsFilteredDip } from '../dip/clients-filtered';
-import { INewPageDataDip } from '../dip/new-page-data';
-import { ClientListService } from './client-list.service';
+import { IKeywordToSearchDip } from '../../../../../../shared/components/searcher/dip/keyword-to-search';
+import { SearcherService } from '../../../../../../shared/components/searcher/searcher.service';
 
 @Component({
     selector: 'app-client-collection',
@@ -12,35 +14,49 @@ import { ClientListService } from './client-list.service';
     styleUrls: ['./client-collection.component.scss'],
 })
 export class ClientCollectionComponent extends BasePaginator implements OnInit, OnDestroy {
-    private clientsFilteredDip: IClientsFilteredDip;
-    private newPageDataDip: INewPageDataDip;
+    private getClientsRequest: IGetClientsRequest;
+    private keywordToSearchDip: IKeywordToSearchDip;
+    private theKeyword!: string;
 
     clientList!: IDataClient[];
-    displayedColumns: string[] = ['Names', 'Surnames', 'DNI', 'Cellphone'];
+    displayedColumns: string[] = ['Id', 'Names', 'Surnames', 'DNI', 'Cellphone'];
     totalClients!: number;
-    clientsFilteredSubs!: Subscription;
+    keywordToSearchSubs!: Subscription;
 
-    constructor(clientListService: ClientListService) {
+    constructor(clientsService: ClientsService, searcherService: SearcherService) {
         super();
-        this.clientsFilteredDip = clientListService;
-        this.newPageDataDip = clientListService;
+        this.getClientsRequest = clientsService;
+        this.keywordToSearchDip = searcherService;
     }
 
     ngOnInit(): void {
-        this.clientsToRender();
+        this.theKeyword = '';
+        this.obtainKeyword();
     }
     ngOnDestroy(): void {
-        if (this.clientsFilteredSubs) this.clientsFilteredSubs.unsubscribe();
+        if (this.keywordToSearchSubs) this.keywordToSearchSubs.unsubscribe();
     }
-    private clientsToRender() {
-        this.clientsFilteredSubs = this.clientsFilteredDip.clientsFiltered$.subscribe(
-            (result: IDataClientsResponse) => {
-                this.clientList = result.rows;
-                this.totalClients = result.count;
-            },
-        );
-    }
+
     loadNextClients(offset: number) {
-        this.newPageDataDip.newPageData(offset);
+        this.loadClients(offset);
+    }
+    private obtainKeyword() {
+        this.keywordToSearchSubs = this.keywordToSearchDip.keywordToSearch$.subscribe((keyword: string) => {
+            this.theKeyword = keyword;
+            this.loadClients();
+        });
+    }
+    private async loadClients(offset?: number) {
+        const queries: IQueries = {
+            limit: 5,
+            offset: offset ? offset : 0,
+            searchText: this.theKeyword,
+        };
+        const clients: IDataClientsResponse = await this.getClientsRequest.getClients(queries).toPromise();
+        this.clientList = clients.rows;
+        if (clients) {
+            this.clientList = clients.rows;
+            this.totalClients = clients.count;
+        }
     }
 }

@@ -8,10 +8,12 @@ import { OkComponent } from './modals/ok.component';
 import { PaginatorComponent } from './components/paginator/paginator.component';
 import { SafeHtmlPipe } from './components/navbar/safe-html.pipe';
 import { NavbarComponent } from './components/navbar/navbar.component';
+import { SearcherComponent } from './components/searcher/searcher.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
-    declarations: [NavbarComponent, ConfirmComponent, OkComponent, PaginatorComponent, SafeHtmlPipe],
-    imports: [CommonModule, MaterialModule, RouterModule],
-    exports: [MaterialModule, ConfirmComponent, PaginatorComponent],
+    declarations: [NavbarComponent, ConfirmComponent, OkComponent, PaginatorComponent, SearcherComponent, SafeHtmlPipe],
+    imports: [CommonModule, ReactiveFormsModule, MaterialModule, RouterModule],
+    exports: [MaterialModule, ConfirmComponent, PaginatorComponent, SearcherComponent],
 })
 export class SharedModule {}

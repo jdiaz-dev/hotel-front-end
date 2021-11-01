@@ -51,7 +51,6 @@ export class HoustingReportsComponent extends BasePaginator implements OnInit, O
         this.getHoustingReportSubs = this.getHoustingReportsForDailyReport
             .getHoustingReport(queries)
             .subscribe((response: IEndHoustingReportResponse) => {
-                console.log(response);
                 this.totalHoustingReports = response.count;
                 this.houstingReports = response.rows;
                 console.log(this.houstingReports);

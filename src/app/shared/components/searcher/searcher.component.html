@@ -19,13 +19,13 @@
  -->
 
 <form [formGroup]="formGroupKeyword">
-    <mat-form-field>
+    <mat-form-field style="width: 100%">
         <mat-label> Buscar </mat-label>
 
         <input formControlName="keyword" matInput type="text" [matAutocomplete]="auto" />
         <mat-autocomplete #auto="matAutocomplete">
-            <mat-option *ngFor="let client of clientsFiltered" [value]="client.names">
-                {{ client.names }}
+            <mat-option *ngFor="let element of dataFiltered" (click)="dataSelected(element)">
+                {{ element.dni }} / {{ element.names }} {{ element.surnames }}
             </mat-option>
         </mat-autocomplete>
     </mat-form-field>

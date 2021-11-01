@@ -1,26 +1,29 @@
+<app-searcher></app-searcher>
+
 <div class="container-form">
     <form #formRoom [formGroup]="clientData" class="form-container">
         <mat-card-title>Datos del cliente</mat-card-title>
 
-        <div class="box-input">
-            <div class="">
-                <mat-form-field [style.width.%]="100">
-                    <input formControlName="dni" matInput placeholder="DNI" [(ngModel)]="client.dni" />
-                    <mat-error *ngIf="clientControl.dni.touched && clientControl.dni.errors?.pattern">
-                        El DNI solo puede ser numérico.
-                    </mat-error>
-                    <mat-error *ngIf="clientControl.dni.touched && clientControl.dni.errors?.maxlength">
-                        El DNI solo puede tener 8 dígitos.
-                    </mat-error>
-                </mat-form-field>
+        <div class="box-dni-and-cellphone">
+            <mat-form-field [style.width.%]="45">
+                <input formControlName="dni" matInput placeholder="DNI" [(ngModel)]="client.dni" />
+                <mat-error *ngIf="clientControl.dni.touched && clientControl.dni.errors?.pattern">
+                    Este campo solo puede ser numérico
+                </mat-error>
+                <mat-error *ngIf="clientControl.dni.touched && clientControl.dni.errors?.maxlength">
+                    Este campo no puede ser mayor a 8 dígitos
+                </mat-error>
+            </mat-form-field>
 
-                <!-- autocomplete -->
-                <!-- <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
-                    <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
-                      {{option}}
-                    </mat-option>
-                  </mat-autocomplete> -->
-            </div>
+            <mat-form-field [style.width.%]="45">
+                <input formControlName="cellphone" matInput placeholder="Celular" [(ngModel)]="client.cellphone" />
+                <mat-error *ngIf="clientControl.cellphone.touched && clientControl.cellphone.errors?.pattern">
+                    Este campo solo puede ser numérico
+                </mat-error>
+                <mat-error *ngIf="clientControl.cellphone.touched && clientControl.cellphone.errors?.maxlength">
+                    Este campo no puede ser mayor a 15 dígitos
+                </mat-error>
+            </mat-form-field>
         </div>
 
         <div class="box-input">

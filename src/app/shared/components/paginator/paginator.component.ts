@@ -1,4 +1,5 @@
-import { Component, Output, EventEmitter, Input, OnChanges, OnDestroy } from '@angular/core';
+import { Component, Output, EventEmitter, Input, OnChanges, OnDestroy, ViewChild } from '@angular/core';
+import { MatPaginator } from '@angular/material/paginator';
 
 @Component({
     selector: 'app-paginator',
@@ -8,17 +9,21 @@ import { Component, Output, EventEmitter, Input, OnChanges, OnDestroy } from '@a
 export class PaginatorComponent implements OnChanges, OnDestroy {
     @Input('length') length!: number;
     @Output() nextPage = new EventEmitter<number>();
-    // @Input('pageSize') pageSizeeeeee!: number;
+    @ViewChild('paginator', { static: true }) paginator!: MatPaginator;
     @Input('pageSize') pageSize!: number;
     pageSizeOptions: number[] = [5, 10, 25, 100];
     offset = 0;
     currentPage = 1;
     constructor() {}
 
-    ngOnChanges(): void {}
+    ngOnChanges(): void {
+        console.log(this.pageSize);
+        this.paginator.pageIndex = 0;
+    }
     ngOnDestroy(): void {
         this.offset = 0;
     }
+
     changePage(event: any) {
         this.determineCurrentPage(event);
         this.nextPage.emit(this.offset);
