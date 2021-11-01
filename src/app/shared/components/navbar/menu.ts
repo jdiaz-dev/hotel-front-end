@@ -61,7 +61,7 @@ export const MENU: Menu[] = [
     },
     {
         name: 'Clientes',
-        children: [],
+        url: `/menu/clientes/`,
         icon: ICONS_SIDEBAR.CLIENTS,
     },
     {

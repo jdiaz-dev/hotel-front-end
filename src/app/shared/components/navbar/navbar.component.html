@@ -1,6 +1,10 @@
 <mat-drawer-container class="example-container">
     <mat-drawer mode="side" opened>
-        <div [innerHtml]="iconHotel | safeHtml"></div>
+        <div class="container-icon-hotel">
+            <div class="icon-hotel" [innerHtml]="iconHotel | safeHtml"></div>
+            <div class="name-hotel">HOTEL</div>
+        </div>
+
         <mat-tree [dataSource]="dataSource" [treeControl]="treeControl" class="example-tree">
             <!-- leaves -->
             <mat-tree-node class="leaves" *matTreeNodeDef="let node" matTreeNodeToggle routerLink="{{ node.url }}">

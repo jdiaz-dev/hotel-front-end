@@ -6,6 +6,7 @@ import { ClientModel } from '../../models/client.model';
 import { ClientsService } from '../../../out/clients.service';
 import { VerifyClientSavedService } from 'src/app/modules/housting/input-housting/infraestructure/ui/services/communication/verify-client-saved.service';
 import { Subscription } from 'rxjs';
+import { IGetClientsRequest } from 'src/app/modules/clients/application/ports/in/get-clients.request';
 
 @Component({
     selector: 'app-form-client',

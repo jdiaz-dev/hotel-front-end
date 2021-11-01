@@ -1,0 +1,33 @@
+<div class="mat-elevation-z8">
+    <table mat-table [dataSource]="clientList" class="table">
+        <div>
+            <ng-container matColumnDef="Surnames">
+                <th mat-header-cell *matHeaderCellDef class="name-level">Apellidos</th>
+                <td mat-cell *matCellDef="let element">{{ element.surnames }}</td>
+            </ng-container>
+
+            <ng-container matColumnDef="Names">
+                <th mat-header-cell *matHeaderCellDef class="number number-level">Nombres</th>
+                <td mat-cell *matCellDef="let element">{{ element.names }}</td>
+            </ng-container>
+
+            <ng-container matColumnDef="DNI">
+                <th mat-header-cell *matHeaderCellDef class="name-level">DNI</th>
+                <td mat-cell *matCellDef="let element">{{ element.dni }}</td>
+            </ng-container>
+
+            <ng-container matColumnDef="Cellphone">
+                <th mat-header-cell *matHeaderCellDef class="name-level">Celular</th>
+                <td mat-cell *matCellDef="let element">{{ element.cellphone }}</td>
+            </ng-container>
+        </div>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr class="" mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+    </table>
+    <app-paginator
+        [pageSize]="pageSizePaginator"
+        [length]="totalClients"
+        (nextPage)="loadNextClients($event)"
+    ></app-paginator>
+</div>

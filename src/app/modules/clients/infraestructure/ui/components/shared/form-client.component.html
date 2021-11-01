@@ -5,23 +5,28 @@
         <div class="box-input">
             <div class="">
                 <mat-form-field [style.width.%]="100">
-                    <input formControlName="dni" matInput placeholder="DNI" [(ngModel)]="client.dni">
+                    <input formControlName="dni" matInput placeholder="DNI" [(ngModel)]="client.dni" />
                     <mat-error *ngIf="clientControl.dni.touched && clientControl.dni.errors?.pattern">
                         El DNI solo puede ser numérico.
                     </mat-error>
                     <mat-error *ngIf="clientControl.dni.touched && clientControl.dni.errors?.maxlength">
                         El DNI solo puede tener 8 dígitos.
                     </mat-error>
-
                 </mat-form-field>
-            </div>
 
+                <!-- autocomplete -->
+                <!-- <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
+                    <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
+                      {{option}}
+                    </mat-option>
+                  </mat-autocomplete> -->
+            </div>
         </div>
 
         <div class="box-input">
             <div class="">
                 <mat-form-field [style.width.%]="100">
-                    <input formControlName="names" matInput placeholder="Nombres" [(ngModel)]="client.names" required>
+                    <input formControlName="names" matInput placeholder="Nombres" [(ngModel)]="client.names" required />
 
                     <mat-error *ngIf="clientControl.names.touched && clientControl.names.errors?.required">
                         El nombre es obligatorio
@@ -41,8 +46,13 @@
         <div class="box-input">
             <div class="">
                 <mat-form-field [style.width.%]="100">
-                    <input formControlName="surnames" matInput placeholder="Apellidos" [(ngModel)]="client.surnames"
-                        required>
+                    <input
+                        formControlName="surnames"
+                        matInput
+                        placeholder="Apellidos"
+                        [(ngModel)]="client.surnames"
+                        required
+                    />
 
                     <mat-error *ngIf="clientControl.surnames.touched && clientControl.surnames.errors?.required">
                         Los apellidos son obligatorios.
@@ -62,8 +72,13 @@
         <div class="box-input">
             <div class="">
                 <mat-form-field [style.width.%]="100">
-                    <input formControlName="visitReason" matInput placeholder="Razón de visita"
-                        [(ngModel)]="client.visitReason" required>
+                    <input
+                        formControlName="visitReason"
+                        matInput
+                        placeholder="Razón de visita"
+                        [(ngModel)]="client.visitReason"
+                        required
+                    />
 
                     <mat-error *ngIf="clientControl.visitReason.touched && clientControl.visitReason.errors?.pattern">
                         Este campo solo puede ser alfanumérico.
@@ -75,6 +90,5 @@
                 </mat-form-field>
             </div>
         </div>
-
     </form>
 </div>

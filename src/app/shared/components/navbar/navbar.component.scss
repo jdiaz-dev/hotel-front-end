@@ -7,21 +7,40 @@ mat-drawer-container {
 
     mat-drawer {
         width: 20%;
-        //background-color: #18191a;
+        background-color: #404952;
 
+        div.container-icon-hotel {
+            display: flex;
+            justify-content: space-between;
+            color: rgb(243, 236, 236);
+            // background-color: rgb(70, 69, 69);
+            height: 55px;
+
+            div.icon-hotel {
+                width: 40%;
+            }
+            div.name-hotel {
+                width: 60%;
+                height: 55px;
+                line-height: 55px;
+                font-size: 28px;
+                font-weight: 800;
+            }
+        }
         mat-tree {
-            //background-color: #18191a;
+            background-color: #404952;
 
-            .leaves:hover {
-                background-color: purple;
-                cursor: pointer;
+            .leaves {
+                // padding-left: 19px;
+
+                mat-icon {
+                    margin-right: 6px;
+                }
             }
 
             div.mat-tree-node {
-                cursor: pointer;
-
                 mat-icon.mat-icon-send {
-                    margin-left: 5px;
+                    // margin-left: 18px;
                 }
                 div.node-name {
                     width: 72%;
@@ -30,6 +49,20 @@ mat-drawer-container {
             }
             div.mat-tree-node:hover {
                 background-color: rgb(8, 8, 204);
+            }
+            .leaves,
+            div.mat-tree-node {
+                width: 90%;
+                margin: 0 auto;
+                color: aliceblue;
+                padding: 4px;
+                border-radius: 5px;
+                cursor: pointer;
+            }
+            .leaves:hover,
+            div.mat-tree-node:hover {
+                color: #254552;
+                background-color: #f6f7fb;
             }
         }
     }

@@ -73,6 +73,13 @@ const routes: Routes = [
                         (m) => m.ReportsRoutingModule,
                     ),
             },
+
+            //clients
+            {
+                path: 'clientes',
+                loadChildren: () =>
+                    import('./modules/clients/clients-routing.module').then((m) => m.ClientsRoutingModule),
+            },
         ],
     },
 ];
