@@ -33,7 +33,7 @@ export class RoomsPersistenceService
     }
     getAllRooms(queries: IQueries) {
         return this.http.get<IRoomsDataResponse>(
-            `${this.serverUrl}/${SERVER.PREFIX}/rooms/${this.hotelId}?limit=${queries.limit}&offset=${queries.offset}`,
+            `${this.serverUrl}/${SERVER.PREFIX}/rooms/${this.hotelId}?limit=${queries.limit}&offset=${queries.offset}&searchText=${queries.searchText}`,
             {
                 headers: this.headers,
             },

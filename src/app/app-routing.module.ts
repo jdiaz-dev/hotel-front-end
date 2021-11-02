@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
 import { NavbarComponent } from './shared/components/navbar/navbar.component';
+import { AuthGuard } from './shared/guards/auth.guard';
 
 const routes: Routes = [
     {
@@ -20,6 +21,7 @@ const routes: Routes = [
                     import('./modules/housting/reception/reception-routing.module').then(
                         (m) => m.ReceptionRoutingModule,
                     ),
+                canActivate: [AuthGuard],
             },
             {
                 path: 'salida/:mode',
@@ -27,12 +29,14 @@ const routes: Routes = [
                     import('./modules/housting/reception/reception-routing.module').then(
                         (m) => m.ReceptionRoutingModule,
                     ),
+                canActivate: [AuthGuard],
             },
 
             //cashes
             {
                 path: 'caja/:mode',
                 loadChildren: () => import('./modules/cash/cash-routing.module').then((m) => m.CashRoutingModule),
+                canActivate: [AuthGuard],
             },
 
             //point of sale
@@ -40,6 +44,7 @@ const routes: Routes = [
                 path: 'productos',
                 loadChildren: () =>
                     import('./modules/sales/products/products-routing.module').then((m) => m.ProductsRoutingModule),
+                canActivate: [AuthGuard],
             },
             {
                 path: 'venta/:mode',
@@ -47,6 +52,7 @@ const routes: Routes = [
                     import('./modules/housting/reception/reception-routing.module').then(
                         (m) => m.ReceptionRoutingModule,
                     ),
+                canActivate: [AuthGuard],
             },
 
             //configuration hotel
@@ -56,6 +62,7 @@ const routes: Routes = [
                     import('./modules/configuration-hotel/hotel-level/hotel-level-routing.module').then(
                         (m) => m.HotelLevelRoutingModule,
                     ),
+                canActivate: [AuthGuard],
             },
             {
                 path: 'categorias-habitaciones',
@@ -63,6 +70,7 @@ const routes: Routes = [
                     import('./modules/configuration-hotel/room-categories/room-categories-routing.module').then(
                         (m) => m.RoomCategoriesRoutingModule,
                     ),
+                canActivate: [AuthGuard],
             },
             {
                 path: 'habitaciones',
@@ -70,6 +78,7 @@ const routes: Routes = [
                     import('./modules/configuration-hotel/rooms/rooms-routing.module').then(
                         (m) => m.RoomsRoutingModule,
                     ),
+                canActivate: [AuthGuard],
             },
             {
                 path: 'reportes',
@@ -77,6 +86,7 @@ const routes: Routes = [
                     import('./modules/reports/daily-reports/reports-routing.module').then(
                         (m) => m.ReportsRoutingModule,
                     ),
+                canActivate: [AuthGuard],
             },
 
             //clients
@@ -84,6 +94,7 @@ const routes: Routes = [
                 path: 'clientes',
                 loadChildren: () =>
                     import('./modules/clients/clients-routing.module').then((m) => m.ClientsRoutingModule),
+                canActivate: [AuthGuard],
             },
         ],
     },

@@ -8,6 +8,8 @@ import { CreateUpdateRoomComponent } from '../modals/create-update-room/create-u
 import { Subscription } from 'rxjs';
 import { BasePaginator } from 'src/app/shared/components/paginator/base-paginator';
 import { IQueries } from 'src/app/shared/interfaces/queries/queries.interface';
+import { IKeywordToSearchDip } from 'src/app/shared/components/searcher/dip/keyword-to-search';
+import { SearcherService } from 'src/app/shared/components/searcher/searcher.service';
 
 @Component({
     selector: 'app-room-collection',
@@ -15,35 +17,48 @@ import { IQueries } from 'src/app/shared/interfaces/queries/queries.interface';
     styleUrls: ['./room-collection.component.scss'],
 })
 export class RoomCollectionComponent extends BasePaginator implements OnInit, OnChanges, OnDestroy {
+    private keywordToSearchDip: IKeywordToSearchDip;
+    private theKeyword!: string;
     @Input('reload') reloadThisComponent!: number;
     rooms!: RoomData[];
-    displayedColumns: string[] = ['N', 'Name', 'Category', 'Price', 'Details', 'EditButton', 'RemoveButton'];
+    displayedColumns: string[] = ['N', 'Name', 'Category', 'Price', 'Details', 'Nivel', 'EditButton', 'RemoveButton'];
     totalRooms!: number;
+
     getAllRoomsSubs!: Subscription;
     removeRoomSubs!: Subscription;
+    keywordToSearchSubs!: Subscription;
 
-    constructor(private dialog: MatDialog, private readonly roomsPersistenceService: RoomsPersistenceService) {
+    constructor(
+        private dialog: MatDialog,
+        private readonly roomsPersistenceService: RoomsPersistenceService,
+        searcherService: SearcherService,
+    ) {
         super();
+        this.keywordToSearchDip = searcherService;
     }
     ngOnChanges() {
         if (this.reloadThisComponent) this.loadRooms();
     }
     ngOnInit(): void {
+        this.theKeyword = '';
         this.loadRooms();
+        this.obtainKeyword();
     }
     ngOnDestroy() {
-        this.getAllRoomsSubs.unsubscribe();
+        if (this.getAllRoomsSubs) this.getAllRoomsSubs.unsubscribe();
         if (this.removeRoomSubs) this.removeRoomSubs.unsubscribe();
+        if (this.keywordToSearchSubs) this.keywordToSearchSubs.unsubscribe();
     }
     loadRooms(offset?: number) {
         let queries: IQueries = {
             limit: 5,
             offset: offset ? offset : 0,
+            searchText: this.theKeyword,
         };
         this.getAllRoomsSubs = this.roomsPersistenceService
             .getAllRooms(queries)
             .subscribe((response: IRoomsDataResponse) => {
-                // console.log('-------------all rooms',response);
+                console.log('-------------all rooms', response);
                 this.totalRooms = response.count;
                 this.rooms = response.rows;
             });
@@ -74,5 +89,11 @@ export class RoomCollectionComponent extends BasePaginator implements OnInit, On
     }
     loadNextRooms(offset: number) {
         this.loadRooms(offset);
+    }
+    private obtainKeyword() {
+        this.keywordToSearchSubs = this.keywordToSearchDip.keywordToSearch$.subscribe((keyword: string) => {
+            this.theKeyword = keyword;
+            this.loadRooms();
+        });
     }
 }

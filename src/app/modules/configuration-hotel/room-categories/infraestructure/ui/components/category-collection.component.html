@@ -1,4 +1,4 @@
-<table mat-table [dataSource]="roomCategories" class="table mat-elevation-z8">
+<table mat-table [dataSource]="roomCategories" class="table mat-elevation-z9">
     <div>
         <ng-container matColumnDef="N">
             <th mat-header-cell *matHeaderCellDef class="number number-category">N°</th>
@@ -18,14 +18,16 @@
         <ng-container matColumnDef="EditButton">
             <th mat-header-cell *matHeaderCellDef class="edit-buttons"></th>
             <td mat-cell *matCellDef="let element" (click)="editCategoryDiaglog(element)">
-                <button mat-raised-button color="primary">Editar</button>
+                <button mat-raised-button class="edit-button">Editar</button>
             </td>
         </ng-container>
 
         <ng-container matColumnDef="RemoveButton">
             <th mat-header-cell *matHeaderCellDef class="remove-buttons"></th>
             <td mat-cell *matCellDef="let element">
-                <button mat-raised-button color="warn" (click)="removeCategoryDialog(element.id)">Eliminar</button>
+                <button mat-raised-button class="delete-button" (click)="removeCategoryDialog(element.id)">
+                    Eliminar
+                </button>
             </td>
         </ng-container>
     </div>

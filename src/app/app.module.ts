@@ -20,6 +20,7 @@ import { ProductsModule } from './modules/sales/products/products.module';
 import { ProductSalesModule } from './modules/sales/product-sales/product-sales.module';
 import { ReportsModule } from './modules/reports/daily-reports/reports.module';
 import { HoustingReportModule } from './modules/reports/housting-report/housting-report.module';
+import { CookieService } from 'ngx-cookie-service';
 
 @NgModule({
     declarations: [AppComponent],
@@ -43,7 +44,7 @@ import { HoustingReportModule } from './modules/reports/housting-report/housting
         ReportsModule,
         HoustingReportModule,
     ],
-    providers: [],
+    providers: [CookieService],
     bootstrap: [AppComponent],
 })
 export class AppModule {}

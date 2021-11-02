@@ -17,7 +17,6 @@ export class PaginatorComponent implements OnChanges, OnDestroy {
     constructor() {}
 
     ngOnChanges(): void {
-        console.log(this.pageSize);
         this.paginator.pageIndex = 0;
     }
     ngOnDestroy(): void {

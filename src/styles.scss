@@ -44,6 +44,25 @@ div.discount-and-price {
     justify-content: space-between;
 }
 
+//create button
+.create-button {
+    background-color: #006363;
+    color: rgb(243, 237, 237);
+}
+//edit button
+.edit-button,
+.delete-button {
+    color: rgb(243, 237, 237);
+    width: 85px;
+}
+.edit-button {
+    background-color: #e6aa2a;
+}
+//delete-button
+.delete-button {
+    background-color: rgb(27, 27, 133);
+}
+
 /* buttons of dialog */
 .buttons-dialog,
 .buttons-card {

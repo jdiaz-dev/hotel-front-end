@@ -1,14 +1,20 @@
 table.table {
-  .number {
-    width: 8%;
-  }
-  .name-room {
-    width: 12%;
-  }
-  .category {
-    width: 12%;
-  }
-  .price {
-    width: 12%;
-  }
+    .number {
+        width: 8%;
+    }
+    .name-room {
+        width: 10%;
+    }
+    .category {
+        width: 12%;
+    }
+    .price {
+        width: 14%;
+    }
+    .details {
+        width: 22%;
+        td {
+            padding-left: 25px;
+        }
+    }
 }
