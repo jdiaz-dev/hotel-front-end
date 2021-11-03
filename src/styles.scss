@@ -45,13 +45,16 @@ div.discount-and-price {
 }
 
 //create button
-.create-button {
+.create-button,
+.finish-button,
+.accept-button {
     background-color: #006363;
     color: rgb(243, 237, 237);
 }
 //edit button
 .edit-button,
-.delete-button {
+.aggregate-button,
+.ok-button {
     color: rgb(243, 237, 237);
     width: 85px;
 }
@@ -60,6 +63,12 @@ div.discount-and-price {
 }
 //delete-button
 .delete-button {
+    background-color: rgb(27, 27, 133);
+}
+
+//aggregate-button
+.aggregate-button,
+.ok-button {
     background-color: rgb(27, 27, 133);
 }
 

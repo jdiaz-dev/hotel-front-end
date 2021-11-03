@@ -1,8 +1,9 @@
 .container-buttons-and-dropdown {
-    background-color: rgb(20, 20, 172);
+    background-color: #e1e3e4;
+    // border-radius: 5px;
     display: flex;
     padding: 8px;
-    // justify-content: ;
+    margin-top: 6px;
     app-add-products-button {
         width: 18%;
     }

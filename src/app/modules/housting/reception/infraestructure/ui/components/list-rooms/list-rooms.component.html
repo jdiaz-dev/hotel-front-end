@@ -80,7 +80,7 @@
         <mat-card-content>
             <div class="room-condition">{{ room.condition.nameCondition }}</div>
 
-            <div
+            <!-- <div
                 class="icon"
                 *ngIf="room.condition.nameCondition == roomFree || room.condition.nameCondition == roomBusy"
             >
@@ -100,7 +100,7 @@
                         fill="currentColor"
                     />
                 </svg>
-            </div>
+            </div> -->
 
             <app-room-cleaned
                 [roomConditionId]="room.condition.id"

@@ -43,9 +43,7 @@
             <ng-container matColumnDef="RemoveButton">
                 <th mat-header-cell *matHeaderCellDef class="remove-buttons"></th>
                 <td mat-cell *matCellDef="let element">
-                    <button mat-raised-button class="delete-button" (click)="removeRoomDialog(element)">
-                        Eliminar
-                    </button>
+                    <button mat-raised-button color="warn" (click)="removeRoomDialog(element)">Eliminar</button>
                 </td>
             </ng-container>
         </div>

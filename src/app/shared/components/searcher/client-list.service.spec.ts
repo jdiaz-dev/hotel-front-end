@@ -1,6 +1,6 @@
 import { TestBed } from '@angular/core/testing';
 
-import { SearcherService } from './client-list.service';
+import { SearcherService } from './searcher.service';
 
 describe('SearcherService', () => {
     let service: SearcherService;

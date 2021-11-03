@@ -2,9 +2,9 @@
     <h2 class="title">Venta de productos</h2>
     <app-housting-data [room]="room"></app-housting-data>
 
-    <div class="container-buttons-and-dropdown">
+    <mat-card class="container-buttons-and-dropdown mat-elevation-z9">
         <app-add-products-button></app-add-products-button>
         <app-finish-sale-button (saleConfirmed)="saveProductsConfirmed($event)"></app-finish-sale-button>
-    </div>
+    </mat-card>
     <app-products-added></app-products-added>
 </div>
