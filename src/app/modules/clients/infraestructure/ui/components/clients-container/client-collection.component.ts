@@ -19,7 +19,7 @@ export class ClientCollectionComponent extends BasePaginator implements OnInit, 
     private theKeyword!: string;
 
     clientList!: IDataClient[];
-    displayedColumns: string[] = ['Id', 'Names', 'Surnames', 'DNI', 'Cellphone'];
+    displayedColumns: string[] = ['N', 'Names', 'Surnames', 'DNI', 'Cellphone'];
     totalClients!: number;
     keywordToSearchSubs!: Subscription;
 

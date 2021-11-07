@@ -11,7 +11,6 @@ import { IGetCashWithDailyReportQuery } from '../../application/ports/in/get-cas
 import { CashData } from '../interfaces/cash-data';
 import { ICashWithDailyReportResponse } from '../interfaces/cash-with-daily-report-response';
 import { CashModel } from '../ui/models/cash.model';
-import { StateCashService } from 'src/app/shared/services/state-cash.service';
 import { ICashClosed } from '../interfaces/cash-close';
 import { IQueries } from 'src/app/shared/interfaces/queries/queries.interface';
 

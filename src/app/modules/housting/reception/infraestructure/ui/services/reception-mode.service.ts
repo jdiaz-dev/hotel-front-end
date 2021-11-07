@@ -8,10 +8,62 @@ import { CONFIG } from 'src/config/config';
 
 import { ProductSalesContainerComponent } from 'src/app/modules/sales/product-sales/infraestructure/ui/modals/product-sales/product-sales-container.component';
 import { IConfigDialog } from '../interfaces/config-dialog';
+import { StateCashService } from 'src/app/shared/services/state-cash.service';
+import { IOkComponentConfig } from 'src/app/shared/interfaces/ok-component-config/ok-component-config.interface';
+import { OkComponent } from 'src/app/shared/modals/ok.component';
 
 @Injectable()
 export class ReceptionModeService {
-    constructor(private dialog: MatDialog, private overlay: Overlay) {}
+    constructor(private dialog: MatDialog, private stateCash: StateCashService, private overlay: Overlay) {}
+
+    activateReceptionMode(receptionMode: string, room: RoomData) {
+        let modeReceptionDialog;
+
+        if (receptionMode === CONFIG.RECEPTION_MODE.INPUT_HOUSTING && !this.stateCash.getCashId()) {
+            this.openDialogMessage();
+        } else if (receptionMode === CONFIG.RECEPTION_MODE.INPUT_HOUSTING) {
+            modeReceptionDialog = this.openInputHoustingDialog(room);
+        } else if (receptionMode === CONFIG.RECEPTION_MODE.OUTPUT_HOUSTING) {
+            modeReceptionDialog = this.openOutputHoustingDialog(room);
+        } else if (receptionMode === CONFIG.RECEPTION_MODE.PRODUCT_SALES) {
+            modeReceptionDialog = this.openProductSalesDialog(room);
+        }
+        return modeReceptionDialog;
+    }
+    private openInputHoustingDialog(room: RoomData) {
+        const configDialog: IConfigDialog = { width: '72%', height: '470px' };
+        const conditionRoom = CONFIG.CONDITIONS.FREE.NAME;
+        const modeReceptionDialog = this.displayDialogReception(
+            room,
+            conditionRoom,
+            InputHoustingContainerComponent,
+            configDialog,
+        );
+        return modeReceptionDialog;
+    }
+    private openOutputHoustingDialog(room: RoomData) {
+        console.log('-----------------------output room', room);
+        const configDialog: IConfigDialog = { width: '80%', height: '500px' };
+        const conditionRoom = CONFIG.CONDITIONS.BUSY.NAME;
+        const modeReceptionDialog = this.displayDialogReception(
+            room,
+            conditionRoom,
+            OutputHoustingContainerComponent,
+            configDialog,
+        );
+        return modeReceptionDialog;
+    }
+    private openProductSalesDialog(room: RoomData) {
+        const configDialog: IConfigDialog = { width: '75%', height: '420px' };
+        const conditionRoom = CONFIG.CONDITIONS.BUSY.NAME;
+        const modeReceptionDialog = this.displayDialogReception(
+            room,
+            conditionRoom,
+            ProductSalesContainerComponent,
+            configDialog,
+        );
+        return modeReceptionDialog;
+    }
     private displayDialogReception(
         room: RoomData,
         conditionRoom: string,
@@ -31,36 +83,11 @@ export class ReceptionModeService {
         }
         return modeReceptionDialog;
     }
-    activateReceptionMode(receptionMode: string, room: RoomData) {
-        let modeReceptionDialog, conditionRoom, configDialog: IConfigDialog;
-        if (receptionMode === CONFIG.RECEPTION_MODE.INPUT_HOUSTING) {
-            configDialog = { width: '72%', height: '470px' };
-            conditionRoom = CONFIG.CONDITIONS.FREE.NAME;
-            modeReceptionDialog = this.displayDialogReception(
-                room,
-                conditionRoom,
-                InputHoustingContainerComponent,
-                configDialog,
-            );
-        } else if (receptionMode === CONFIG.RECEPTION_MODE.OUTPUT_HOUSTING) {
-            configDialog = { width: '80%', height: '500px' };
-            conditionRoom = CONFIG.CONDITIONS.BUSY.NAME;
-            modeReceptionDialog = this.displayDialogReception(
-                room,
-                conditionRoom,
-                OutputHoustingContainerComponent,
-                configDialog,
-            );
-        } else if (receptionMode === CONFIG.RECEPTION_MODE.PRODUCT_SALES) {
-            configDialog = { width: '75%', height: '420px' };
-            conditionRoom = CONFIG.CONDITIONS.BUSY.NAME;
-            modeReceptionDialog = this.displayDialogReception(
-                room,
-                conditionRoom,
-                ProductSalesContainerComponent,
-                configDialog,
-            );
-        }
-        return modeReceptionDialog;
+    private openDialogMessage() {
+        const config: IOkComponentConfig = {
+            message: 'Necesitas crear una caja para alquilar una habitacion',
+            useMethodsOkComponent: true,
+        };
+        this.dialog.open(OkComponent, { data: config, width: '25%' });
     }
 }

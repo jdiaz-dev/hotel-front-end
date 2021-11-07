@@ -15,7 +15,7 @@ import { Subscription } from 'rxjs';
 export class CategoryCollectionComponent implements OnInit, OnChanges, OnDestroy {
     @Input('reload') reloadThisComponent!: number;
     roomCategories: CategoryData[] = [];
-    displayedColumns: string[] = ['N', 'Category', 'Price', 'EditButton', 'RemoveButton'];
+    displayedColumns: string[] = ['Category', 'Price', 'EditButton', 'RemoveButton'];
     getRoomCategoriesSubs!: Subscription;
 
     constructor(private dialog: MatDialog, private roomCategoriesPersitenceService: RoomCategoriesPersitenceService) {}

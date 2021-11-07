@@ -47,9 +47,7 @@ export class ButtonFinishHoustingComponent implements OnChanges, OnInit, OnDestr
         this.obtainPaymentHoustingToComplete();
         this.obtainPaymentProductSaledToComplete();
     }
-    ngOnChanges(): void {
-        //this.loadOutputHousting();
-    }
+    ngOnChanges(): void {}
     ngOnDestroy(): void {
         this.subcriptionHousting.unsubscribe();
         this.subscritpionProductsSaled.unsubscribe();

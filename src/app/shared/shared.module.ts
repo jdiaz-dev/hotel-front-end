@@ -10,10 +10,11 @@ import { SafeHtmlPipe } from './components/navbar/safe-html.pipe';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { SearcherComponent } from './components/searcher/searcher.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { CoreModule } from '../core/core.module';
 
 @NgModule({
     declarations: [NavbarComponent, ConfirmComponent, OkComponent, PaginatorComponent, SearcherComponent, SafeHtmlPipe],
-    imports: [CommonModule, ReactiveFormsModule, MaterialModule, RouterModule],
+    imports: [CommonModule, ReactiveFormsModule, MaterialModule, RouterModule, CoreModule],
     exports: [MaterialModule, ConfirmComponent, PaginatorComponent, SearcherComponent],
 })
 export class SharedModule {}

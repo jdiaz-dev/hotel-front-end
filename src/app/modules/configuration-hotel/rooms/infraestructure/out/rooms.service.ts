@@ -66,8 +66,4 @@ export class RoomsPersistenceService
             headers: this.headers,
         });
     }
-    /* private loadRequiredParamsForPath() {
-        this.hotelId = this.stateUserService.getHotelId();
-        this.cashId = this.getCashIdForHoustingDomain.getCashId();
-    } */
 }

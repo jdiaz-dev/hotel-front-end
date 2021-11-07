@@ -12,13 +12,9 @@ import { FormsValidForHoustingService } from '../services/communication/forms-va
 import { DateService } from 'src/app/shared/services/date.service';
 import { VerifyClientSavedService } from '../services/communication/verify-client-saved.service';
 import { MatDialog } from '@angular/material/dialog';
-import { OkComponent } from 'src/app/shared/modals/ok.component';
 import { OnDestroy } from '@angular/core';
 import { Subscription } from 'rxjs';
-import { IOkComponentConfig } from 'src/app/shared/interfaces/ok-component-config/ok-component-config.interface';
 import { RoomData } from './../../../../../configuration-hotel/rooms/infraestructure/interfaces/room.data';
-import { ConfirmComponent } from 'src/app/shared/modals/confirm-remove.component';
-import { ICustomMessage } from 'src/app/shared/modals/custom-message.interface';
 dayjs.extend(utc);
 dayjs.extend(localizedFormat);
 
@@ -81,17 +77,6 @@ export class FormInputHoustingComponent implements OnInit, OnDestroy {
             }
         });
     }
-    /* openDialog() {
-        const config: ICustomMessage = {
-            title: 'Crear hospedamiento',
-            toCompleteDescription: 'de crear este hospedamiento',
-        };
-        let dialogRef = this.dialog.open(ConfirmComponent, { data: config, width: '25%' });
-        dialogRef.afterClosed().subscribe((result: boolean) => {
-            console.log('-----------------result', result);
-            if (result) this.saveHousting();
-        });
-    } */
     checkIfFormHoustingIsValid() {
         this.houstingData.statusChanges.subscribe((statusForm) => {
             if (statusForm == 'VALID') {

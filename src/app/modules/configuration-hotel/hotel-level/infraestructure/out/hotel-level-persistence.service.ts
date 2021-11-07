@@ -1,7 +1,5 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Observable } from 'rxjs';
-
 import { environment } from 'src/environments/environment';
 import { LevelModel } from '../ui/models/level.model';
 import { StateUserService } from 'src/app/shared/services/state-user.service';

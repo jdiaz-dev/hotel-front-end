@@ -41,8 +41,8 @@ export class CreateUpdateCategoryComponent implements OnInit, OnDestroy {
         this.roomCategoryControl;
     }
     ngOnDestroy() {
-        this.createRoomCategorySubs.unsubscribe();
-        this.updateRoomCategorySubs.unsubscribe();
+        if (this.createRoomCategorySubs) this.createRoomCategorySubs.unsubscribe();
+        if (this.updateRoomCategorySubs) this.updateRoomCategorySubs.unsubscribe();
     }
     paramsToUpdateCategory() {
         this.roomCategory =

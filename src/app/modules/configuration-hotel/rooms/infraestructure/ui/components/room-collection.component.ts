@@ -21,7 +21,7 @@ export class RoomCollectionComponent extends BasePaginator implements OnInit, On
     private theKeyword!: string;
     @Input('reload') reloadThisComponent!: number;
     rooms!: RoomData[];
-    displayedColumns: string[] = ['N', 'Name', 'Category', 'Price', 'Details', 'Nivel', 'EditButton', 'RemoveButton'];
+    displayedColumns: string[] = ['Name', 'Category', 'Price', 'Details', 'Nivel', 'EditButton', 'RemoveButton'];
     totalRooms!: number;
 
     getAllRoomsSubs!: Subscription;

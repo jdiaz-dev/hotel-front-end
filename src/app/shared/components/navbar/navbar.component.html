@@ -21,11 +21,6 @@
                         {{ node.name }}
                     </div>
 
-                    <!-- <button mat-icon-button  >
-                        
-
-                    </button> -->
-
                     <mat-icon class="mat-icon-rtl-mirror">
                         {{ treeControl.isExpanded(node) ? 'expand_more' : 'chevron_left' }}
                     </mat-icon>
@@ -41,6 +36,12 @@
     </mat-drawer>
 
     <mat-drawer-content>
-        <router-outlet></router-outlet>
+        <div class="header">
+            <div class="div-helper"></div>
+            <app-user-logout class="logout-button"></app-user-logout>
+        </div>
+        <div class="container-application">
+            <router-outlet></router-outlet>
+        </div>
     </mat-drawer-content>
 </mat-drawer-container>

@@ -1,0 +1,42 @@
+div.container-image {
+    width: 100%;
+    height: 55px;
+    display: flex;
+    justify-content: flex-end;
+
+    svg {
+        margin: 0px;
+        cursor: pointer;
+        position: absolute;
+        z-index: 2;
+    }
+    div.back {
+        width: 48px;
+        height: 48px;
+        background-color: white;
+        position: absolute;
+        margin-top: 5.5px;
+        margin-right: 5.5px;
+        border-radius: 50%;
+        z-index: 1;
+    }
+}
+
+div.button-close-session {
+    display: flex;
+    align-items: center;
+    height: 43px;
+    text-align: center;
+    margin-top: 3px;
+    border-radius: 4px;
+    visibility: hidden;
+    cursor: pointer;
+    color: white;
+    justify-content: center;
+}
+div.button-close-session:hover {
+    background-color: rgb(31, 31, 160);
+}
+div.showButton {
+    visibility: visible;
+}

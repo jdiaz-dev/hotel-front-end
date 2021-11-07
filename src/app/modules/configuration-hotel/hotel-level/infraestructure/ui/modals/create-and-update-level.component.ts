@@ -55,7 +55,9 @@ export class CreateAndUpdateLevelComponent implements OnInit, OnDestroy {
     }
     createLevel(data: LevelModel) {
         this.createHotelLevelSubs = this.hotelLevelPersistence.createHotelLevel(data).subscribe(
-            (response: any) => {},
+            (response) => {
+                console.log(response);
+            },
             (error) => {
                 console.log(error);
             },

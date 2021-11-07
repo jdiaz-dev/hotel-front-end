@@ -33,13 +33,4 @@ export class ClientsService implements IGetClientsRequest {
             { headers: this.headers },
         );
     }
-    /* 
-  updateMoneyPaid(hotelLevel: LevelModel, levelId: number) {
-    const body = JSON.stringify(hotelLevel);
-
-    return this.http.put(`${this.serverUrl}/${SERVER.PREFIX}/levels/${this.hotelId}/${levelId}`, body, { headers: this.headers })
-  }
-  updateFinish(levelId: number) {
-    return this.http.delete(`${this.serverUrl}/${SERVER.PREFIX}/levels/${this.hotelId}/${levelId}`, { headers: this.headers })
-  } */
 }
