@@ -8,9 +8,10 @@ import { SharedModule } from 'src/app/shared/shared.module';
 import { LevelAndRoomCommunicationService } from './infraestructure/ui/services/level-and-room-communication.service';
 import { RoomCleanedComponent } from './infraestructure/ui/components/list-rooms/room-cleaned.component';
 import { ListRoomsComponent } from './infraestructure/ui/components/list-rooms/list-rooms.component';
+import { RoomConditionsReportComponent } from './infraestructure/ui/components/room-conditions-report.component';
 
 @NgModule({
-    declarations: [ReceptionContainerComponent, ListLevelsComponent, ListRoomsComponent, RoomCleanedComponent],
+    declarations: [ReceptionContainerComponent, ListLevelsComponent, ListRoomsComponent, RoomCleanedComponent, RoomConditionsReportComponent],
     imports: [CommonModule, ReceptionRoutingModule, SharedModule],
     providers: [LevelAndRoomCommunicationService],
     exports: [],

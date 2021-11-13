@@ -1,0 +1,14 @@
+<div class="container" *ngIf="roomConditionsReport">
+    <mat-card class="mat-elevation-z2" style="color: rgb(160, 160, 14)">
+        <div class="room-condition">En limpieza</div>
+        <div class="condition-value">{{ roomConditionsReport.cleaning }}</div>
+    </mat-card>
+    <mat-card class="mat-elevation-z2" style="color: blue">
+        <div class="room-condition">Ocupado</div>
+        <div class="condition-value">{{ roomConditionsReport.busy }}</div>
+    </mat-card>
+    <mat-card class="mat-elevation-z2">
+        <div class="room-condition" style="color: green">Libre</div>
+        <div class="condition-value">{{ roomConditionsReport.free }}</div>
+    </mat-card>
+</div>

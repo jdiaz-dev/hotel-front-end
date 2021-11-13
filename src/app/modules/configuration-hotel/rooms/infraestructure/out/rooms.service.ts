@@ -11,12 +11,17 @@ import { GetRoomsForReceptionDomainPort } from 'src/app/modules/housting/recepti
 import { IQueries } from 'src/app/shared/interfaces/queries/queries.interface';
 import { CONFIG } from 'src/config/config';
 import { IUpdateRoomConditionFromReceptionDomain } from 'src/app/modules/housting/reception/application/ports/in/other-domains/update-room-condition-from-reception';
+import { IGetRoomConditionsReportForReceptionDomain } from 'src/app/modules/housting/reception/application/ports/in/other-domains/get-room-conditions-report-for-reception';
+import { IRoomConditionsReport } from 'src/app/modules/configuration-hotel/rooms/infraestructure/interfaces/room-conditions-report';
 
 @Injectable({
     providedIn: 'root',
 })
 export class RoomsPersistenceService
-    implements GetRoomsForReceptionDomainPort, IUpdateRoomConditionFromReceptionDomain
+    implements
+        GetRoomsForReceptionDomainPort,
+        IUpdateRoomConditionFromReceptionDomain,
+        IGetRoomConditionsReportForReceptionDomain
 {
     private serverUrl = environment.serverUrl;
     private headers = new HttpHeaders()
@@ -41,9 +46,14 @@ export class RoomsPersistenceService
     }
     getRoomsByLevel(levelId: number, conditionId: number) {
         return this.http.get<RoomData[]>(
-            `${this.serverUrl}/${SERVER.PREFIX}/rooms/${this.hotelId}/${levelId}?conditionId=${conditionId}`,
+            `${this.serverUrl}/${SERVER.PREFIX}/rooms/${this.hotelId}/levels/${levelId}?conditionId=${conditionId}`,
             { headers: this.headers },
         );
+    }
+    getRoomConditionReport() {
+        return this.http.get<IRoomConditionsReport>(`${this.serverUrl}/${SERVER.PREFIX}/rooms/${this.hotelId}/report`, {
+            headers: this.headers,
+        });
     }
     updateRoom(room: RoomModel, levelId: number, categoryId: number, roomId: number) {
         const body = JSON.stringify(room);

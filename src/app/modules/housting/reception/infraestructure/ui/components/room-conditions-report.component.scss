@@ -1,0 +1,17 @@
+.container {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 5px;
+    mat-card {
+        width: 27%;
+        display: flex;
+        justify-content: space-between;
+
+        div.room-condition {
+            width: 90%;
+        }
+        div.condition-value {
+            width: 10%;
+        }
+    }
+}

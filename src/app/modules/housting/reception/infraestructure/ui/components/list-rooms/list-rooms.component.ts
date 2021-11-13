@@ -14,6 +14,7 @@ import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { ReloadRoomsService } from '../../services/reload-rooms.service';
 import { ICustomMessage } from 'src/app/shared/modals/custom-message.interface';
 import { ConfirmComponent } from 'src/app/shared/modals/confirm-remove.component';
+import { ReloadRoomConditionsService } from '../../services/reload-room-conditions.service';
 
 @Component({
     selector: 'app-list-rooms',
@@ -36,6 +37,7 @@ export class ListRoomsComponent extends ListRoomMyxin() implements OnInit, OnDes
         private readonly okService: OkService,
         private readonly receptionModeService: ReceptionModeService,
         private readonly reloadRoomsService: ReloadRoomsService,
+        private readonly reloadRoomConditionsService: ReloadRoomConditionsService,
         public activatedRoute: ActivatedRoute,
         roomsPersistenceService: RoomsPersistenceService,
         private dialog: MatDialog,
@@ -90,6 +92,7 @@ export class ListRoomsComponent extends ListRoomMyxin() implements OnInit, OnDes
         this.okService.activedOkButton$.subscribe((activedOkButton: boolean) => {
             currentDialogMode.close();
             this.loadRooms();
+            this.reloadRoomConditionsService.reloadRoomConditions(true);
         });
     }
     roomCleanedConfirmed(event: boolean) {
