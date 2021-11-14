@@ -1,7 +1,7 @@
 <div class="container-rooms">
     <mat-card class="card mat-elevation-z9" *ngFor="let room of roomList" (click)="openModeReception(room)">
         <div class="room-image">
-            <div class="bed-svg" *ngIf="room.condition.nameCondition == roomBusy">
+            <div class="bed-svg" *ngIf="room.condition.id == roomBusy">
                 <svg
                     xmlns="http://www.w3.org/2000/svg"
                     xmlns:xlink="http://www.w3.org/1999/xlink"
@@ -30,7 +30,7 @@
                 </svg>
             </div>
 
-            <div class="bed-svg" *ngIf="room.condition.nameCondition == roomFree">
+            <div class="bed-svg" *ngIf="room.condition.id == roomFree">
                 <svg
                     xmlns="http://www.w3.org/2000/svg"
                     xmlns:xlink="http://www.w3.org/1999/xlink"
@@ -52,7 +52,7 @@
                 </svg>
             </div>
 
-            <div class="bed-svg" *ngIf="room.condition.nameCondition == roomCleaning">
+            <div class="bed-svg" *ngIf="room.condition.id == roomCleaning">
                 <svg
                     xmlns="http://www.w3.org/2000/svg"
                     xmlns:xlink="http://www.w3.org/1999/xlink"

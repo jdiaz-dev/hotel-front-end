@@ -65,14 +65,12 @@ export class FormInputHoustingComponent implements OnInit, OnDestroy {
     /* ============================= black box ============================= */
     //subscribe is repeated multiple times angular
     saveHousting() {
-        console.log('executed save housting');
         this.clientSubscription = this.verifyClientSavedService.userSaved$.subscribe((userId: number) => {
             if (userId) {
-                console.log(userId);
                 this.houstingService
                     .createHousting(this.houstingData.value, this.room.id, userId)
                     .subscribe((response) => {
-                        console.log(response);
+                        // console.log(response);
                     });
             }
         });

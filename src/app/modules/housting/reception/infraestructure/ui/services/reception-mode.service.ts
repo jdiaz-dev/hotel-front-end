@@ -24,10 +24,12 @@ export class ReceptionModeService {
         } else if (receptionMode === CONFIG.RECEPTION_MODE.INPUT_HOUSTING) {
             modeReceptionDialog = this.openInputHoustingDialog(room);
         } else if (receptionMode === CONFIG.RECEPTION_MODE.OUTPUT_HOUSTING) {
+            console.log(receptionMode, CONFIG.RECEPTION_MODE.OUTPUT_HOUSTING);
             modeReceptionDialog = this.openOutputHoustingDialog(room);
         } else if (receptionMode === CONFIG.RECEPTION_MODE.PRODUCT_SALES) {
             modeReceptionDialog = this.openProductSalesDialog(room);
         }
+
         return modeReceptionDialog;
     }
     private openInputHoustingDialog(room: RoomData) {
@@ -42,7 +44,6 @@ export class ReceptionModeService {
         return modeReceptionDialog;
     }
     private openOutputHoustingDialog(room: RoomData) {
-        console.log('-----------------------output room', room);
         const configDialog: IConfigDialog = { width: '80%', height: '500px' };
         const conditionRoom = CONFIG.CONDITIONS.BUSY.NAME;
         const modeReceptionDialog = this.displayDialogReception(

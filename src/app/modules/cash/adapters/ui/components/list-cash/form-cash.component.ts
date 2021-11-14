@@ -39,9 +39,7 @@ export class FormCashComponent implements OnInit, OnDestroy {
     ) {
         this.closeCashRequest = cashService;
     }
-    ngOnChanges() {
-        console.log(this.closingMoney);
-    }
+    ngOnChanges() {}
     ngOnInit(): void {
         this.cashData = this.formBuilder.group({
             openingMoney: ['', [Validators.required, Validators.maxLength(5), Validators.pattern(REG_EXP.numeric)]],

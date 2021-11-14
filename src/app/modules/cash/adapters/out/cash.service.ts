@@ -49,7 +49,6 @@ export class CashService implements GetCashNotClosedForSharedDomain, IGetCashWit
     }
     closeTheCash(cashId: number): Observable<ICashClosed> {
         this.loadRequiredProperties();
-        console.log(this.headers);
         return this.http.patch<ICashClosed>(
             `${this.serverUrl}/${SERVER.PREFIX}/cash/${this.stateUserService.getHotelId()}/${cashId}`,
             '',

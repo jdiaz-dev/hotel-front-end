@@ -104,10 +104,8 @@ export class FormClientComponent implements OnInit, OnDestroy {
     }
     private obtainDataSelected() {
         this.dataSelectedSubs = this.dataSelectedDip.dataSelected$.subscribe((data: any) => {
-            console.log(data);
             this.client = new ClientModel(data.dni, data.cellphone, data.names, data.surnames, '', data.id);
             this.clientId = data.id;
-            console.log(this.client);
         });
     }
 }

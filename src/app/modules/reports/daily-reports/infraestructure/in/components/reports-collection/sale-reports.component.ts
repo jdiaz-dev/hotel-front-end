@@ -37,7 +37,7 @@ export class SaleReportsComponent extends BasePaginator implements OnInit, OnDes
         this.getProductsSaled = this.getProductsSaledForDailyReportPort
             .getProductsSaledForReport(queries)
             .subscribe((response: ISaleReportResponse) => {
-                console.log(response);
+                // console.log(response);
                 this.saleReports = response.rows;
             });
     }

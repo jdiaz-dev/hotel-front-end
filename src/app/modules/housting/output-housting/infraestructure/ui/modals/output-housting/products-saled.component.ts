@@ -58,7 +58,7 @@ export class ProductsSaledComponent implements OnChanges, OnInit, DoCheck {
                 this.completeProductSaledPaymentPort
                     .completeProductSaledPayment(this.houstingId, productsSaledIds)
                     .subscribe((response) => {
-                        console.log('-----------------complemente payment products saled', response);
+                        // console.log('-----------------complemente payment products saled', response);
                     });
             }
         });

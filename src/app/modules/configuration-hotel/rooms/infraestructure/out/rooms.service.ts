@@ -24,19 +24,22 @@ export class RoomsPersistenceService
         IGetRoomConditionsReportForReceptionDomain
 {
     private serverUrl = environment.serverUrl;
-    private headers = new HttpHeaders()
-        .set('Content-Type', 'application/json')
-        .set(AccessKeys.NAME_TOKEN, this.stateUserService.getToken());
-    private hotelId: number = this.stateUserService.getHotelId();
+    private headers!: HttpHeaders;
+    private hotelId!: number;
 
     constructor(private http: HttpClient, private stateUserService: StateUserService) {}
     createRoom(room: RoomModel) {
+        this.loadRequiredProperties();
         const body = JSON.stringify(room);
+        console.log(this.hotelId);
+        console.log(body);
+        console.log(this.headers);
         return this.http.post(`${this.serverUrl}/${SERVER.PREFIX}/rooms/${this.hotelId}`, body, {
             headers: this.headers,
         });
     }
     getAllRooms(queries: IQueries) {
+        this.loadRequiredProperties();
         return this.http.get<IRoomsDataResponse>(
             `${this.serverUrl}/${SERVER.PREFIX}/rooms/${this.hotelId}?limit=${queries.limit}&offset=${queries.offset}&searchText=${queries.searchText}`,
             {
@@ -45,17 +48,20 @@ export class RoomsPersistenceService
         );
     }
     getRoomsByLevel(levelId: number, conditionId: number) {
+        this.loadRequiredProperties();
         return this.http.get<RoomData[]>(
             `${this.serverUrl}/${SERVER.PREFIX}/rooms/${this.hotelId}/levels/${levelId}?conditionId=${conditionId}`,
             { headers: this.headers },
         );
     }
     getRoomConditionReport() {
+        this.loadRequiredProperties();
         return this.http.get<IRoomConditionsReport>(`${this.serverUrl}/${SERVER.PREFIX}/rooms/${this.hotelId}/report`, {
             headers: this.headers,
         });
     }
     updateRoom(room: RoomModel, levelId: number, categoryId: number, roomId: number) {
+        this.loadRequiredProperties();
         const body = JSON.stringify(room);
 
         return this.http.put(
@@ -65,15 +71,23 @@ export class RoomsPersistenceService
         );
     }
     removeRoom(levelId: number, roomId: number) {
+        this.loadRequiredProperties();
         return this.http.delete(`${this.serverUrl}/${SERVER.PREFIX}/rooms/${this.hotelId}/${levelId}/${roomId}`, {
             headers: this.headers,
         });
     }
     updateTheRoomCondition(roomId: number) {
+        this.loadRequiredProperties();
         const roomCleanId: number = CONFIG.CONDITIONS.FREE.ID;
         console.log(this.headers);
         return this.http.put(`${this.serverUrl}/${SERVER.PREFIX}/rooms/${this.hotelId}/${roomId}/${roomCleanId}`, '', {
             headers: this.headers,
         });
+    }
+    private loadRequiredProperties() {
+        this.headers = new HttpHeaders()
+            .set('Content-Type', 'application/json')
+            .set(AccessKeys.NAME_TOKEN, this.stateUserService.getToken());
+        this.hotelId = this.stateUserService.getHotelId();
     }
 }

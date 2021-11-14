@@ -12,19 +12,19 @@ import { IQueries } from 'src/app/shared/interfaces/queries/queries.interface';
 @Injectable()
 export class HotelLevelPersistenceService implements GetLevelsForReceptionDomain {
     private serverUrl = environment.serverUrl;
-    private headers = new HttpHeaders()
-        .set('Content-Type', 'application/json')
-        .set(AccessKeys.NAME_TOKEN, this.stateUserService.getToken());
-    private hotelId: number = this.stateUserService.getHotelId();
+    private headers!: HttpHeaders;
+    private hotelId!: number;
 
     constructor(private http: HttpClient, private stateUserService: StateUserService) {}
     createHotelLevel(hotelLevel: LevelModel) {
+        this.loadRequiredProperties();
         const body = JSON.stringify(hotelLevel);
         return this.http.post(`${this.serverUrl}/${SERVER.PREFIX}/levels/${this.hotelId}`, body, {
             headers: this.headers,
         });
     }
     getHotelLevels(queries: IQueries) {
+        this.loadRequiredProperties();
         return this.http.get<ILevelsDataResponse>(
             `${this.serverUrl}/${SERVER.PREFIX}/levels/${this.hotelId}?limit=${queries.limit}&offset=${queries.offset}`,
             {
@@ -33,6 +33,7 @@ export class HotelLevelPersistenceService implements GetLevelsForReceptionDomain
         );
     }
     updateHotelLevel(hotelLevel: LevelModel, levelId: number) {
+        this.loadRequiredProperties();
         const body = JSON.stringify(hotelLevel);
 
         return this.http.put(`${this.serverUrl}/${SERVER.PREFIX}/levels/${this.hotelId}/${levelId}`, body, {
@@ -40,8 +41,15 @@ export class HotelLevelPersistenceService implements GetLevelsForReceptionDomain
         });
     }
     removeLevel(levelId: number) {
+        this.loadRequiredProperties();
         return this.http.delete(`${this.serverUrl}/${SERVER.PREFIX}/levels/${this.hotelId}/${levelId}`, {
             headers: this.headers,
         });
+    }
+    private loadRequiredProperties() {
+        this.headers = new HttpHeaders()
+            .set('Content-Type', 'application/json')
+            .set(AccessKeys.NAME_TOKEN, this.stateUserService.getToken());
+        this.hotelId = this.stateUserService.getHotelId();
     }
 }

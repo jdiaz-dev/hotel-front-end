@@ -9,7 +9,7 @@ import { LevelAndRoomCommunicationService } from '../../services/level-and-room-
 import { ReceptionModeService } from '../../services/reception-mode.service';
 import { CONFIG } from 'src/config/config';
 import { Subscription } from 'rxjs';
-import { ListRoomMyxin } from './../list-room.myxin';
+import { ListRoomMyxin } from './list-room.myxin';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { ReloadRoomsService } from '../../services/reload-rooms.service';
 import { ICustomMessage } from 'src/app/shared/modals/custom-message.interface';
@@ -28,9 +28,9 @@ export class ListRoomsComponent extends ListRoomMyxin() implements OnInit, OnDes
     private currentLevel!: number;
     private subscriptionReloadRooms!: Subscription;
     roomList: RoomData[] = [];
-    roomFree: string = CONFIG.CONDITIONS.FREE.NAME;
-    roomBusy: string = CONFIG.CONDITIONS.BUSY.NAME;
-    roomCleaning: string = CONFIG.CONDITIONS.CLEANING.NAME;
+    roomFree: number = CONFIG.CONDITIONS.FREE.ID;
+    roomBusy: number = CONFIG.CONDITIONS.BUSY.ID;
+    roomCleaning: number = CONFIG.CONDITIONS.CLEANING.ID;
 
     constructor(
         private readonly levelAndRoomCommunicationService: LevelAndRoomCommunicationService,
@@ -51,8 +51,8 @@ export class ListRoomsComponent extends ListRoomMyxin() implements OnInit, OnDes
         this.reloadRooms();
     }
     ngOnDestroy(): void {
-        this.communicationSubscription.unsubscribe();
-        this.subscriptionReloadRooms.unsubscribe();
+        // this.communicationSubscription.unsubscribe();
+        // this.subscriptionReloadRooms.unsubscribe();
     }
     private reloadRooms() {
         this.subscriptionReloadRooms = this.reloadRoomsService.reloadRooms$.subscribe((result: boolean) => {
@@ -85,6 +85,8 @@ export class ListRoomsComponent extends ListRoomMyxin() implements OnInit, OnDes
             this.receptionMode,
             room,
         );
+
+        console.log(dialogRef);
         if (dialogRef !== undefined) this.closeDialogHousting(dialogRef);
     }
 

@@ -66,7 +66,7 @@ export class ProductsAddedComponent implements OnInit, OnDestroy {
                     this.productSaledService
                         .createProductSaled(this.productsAdded, this.houstingId)
                         .subscribe((response) => {
-                            console.log(response);
+                            // console.log(response);
                         });
                 }
             },

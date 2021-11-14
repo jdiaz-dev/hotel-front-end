@@ -23,11 +23,11 @@ export const CONFIG: Iconfig = {
             NAME: 'libre',
         },
         BUSY: {
-            ID: 3,
+            ID: 2,
             NAME: 'ocupado',
         },
         CLEANING: {
-            ID: 4,
+            ID: 3,
             NAME: 'limpieza',
         },
     },

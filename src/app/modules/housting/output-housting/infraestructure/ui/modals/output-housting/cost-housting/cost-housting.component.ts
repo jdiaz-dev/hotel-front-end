@@ -60,7 +60,7 @@ export class CostHoustingComponent implements OnChanges, OnInit, DoCheck {
                 const paymentCompleted = await this.completeHoustingPaymentPort
                     .updateMoneyPaid(this.housting.id, this.housting.client.id, this.roomId, this.paymentToComplete)
                     .toPromise();
-                console.log('--------------------paymentCompleted', paymentCompleted);
+                // console.log('--------------------paymentCompleted', paymentCompleted);
 
                 if (paymentCompleted) {
                     this.finishProductsPayment.finishProductsPayment(true);
@@ -68,7 +68,7 @@ export class CostHoustingComponent implements OnChanges, OnInit, DoCheck {
                     this.completeHoustingPaymentPort
                         .finishHousting(this.housting.id, this.housting.client.id, this.roomId)
                         .subscribe((response) => {
-                            console.log('--------------------finishHousting', response);
+                            // console.log('--------------------finishHousting', response);
                         });
                 }
             }

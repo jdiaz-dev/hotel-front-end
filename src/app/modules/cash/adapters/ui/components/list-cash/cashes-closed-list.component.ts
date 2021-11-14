@@ -47,7 +47,7 @@ export class CashesClosedListComponent extends BasePaginator implements OnInit {
         this.getCashWithDailyReport
             .getTheCashWithDailyReport(queries)
             .subscribe((response: ICashWithDailyReportResponse) => {
-                console.log(response);
+                // console.log(response);
                 this.totalCashes = response.count;
                 this.cashesWithDailyReports = response.rows;
 
@@ -60,7 +60,6 @@ export class CashesClosedListComponent extends BasePaginator implements OnInit {
         if (event) this.loadCashWithDailyReport();
     }
     loadNextCashes(offset: number) {
-        console.log(offset);
         this.loadCashWithDailyReport(offset);
     }
 }

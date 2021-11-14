@@ -21,7 +21,6 @@ export class ReportListComponent implements OnInit {
     }
 
     changeReport(reportId: number) {
-        // console.log('-----------reportId', reportId);
         this.changeReportService.changeReport(reportId);
     }
 }

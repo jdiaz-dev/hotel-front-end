@@ -34,7 +34,7 @@ export class ListLevelsComponent implements OnInit {
     }
     private loadLevels() {
         this.hotelLevelPersistenceService.getHotelLevels(QUERIES).subscribe((response: ILevelsDataResponse) => {
-            console.log(response);
+            // console.log(response);
             this.levels = response.rows;
         });
     }

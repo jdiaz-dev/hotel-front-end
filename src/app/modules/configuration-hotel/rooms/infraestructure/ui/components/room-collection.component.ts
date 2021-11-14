@@ -58,7 +58,6 @@ export class RoomCollectionComponent extends BasePaginator implements OnInit, On
         this.getAllRoomsSubs = this.roomsPersistenceService
             .getAllRooms(queries)
             .subscribe((response: IRoomsDataResponse) => {
-                console.log('-------------all rooms', response);
                 this.totalRooms = response.count;
                 this.rooms = response.rows;
             });

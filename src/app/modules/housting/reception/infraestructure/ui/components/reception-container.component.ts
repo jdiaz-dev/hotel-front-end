@@ -16,12 +16,10 @@ export class ReceptionContainerComponent implements OnInit {
     constructor(public router: Router) {}
 
     ngOnInit(): void {
-        console.log(this.router.url);
         this.checkCurrentModeReception();
     }
     checkCurrentModeReception() {
         const currentUrl = this.router.url.split('/')[3];
-        console.log(currentUrl);
         if (currentUrl === CONFIG.RECEPTION_MODE.INPUT_HOUSTING) {
             this.titleReception = 'Entrada de hospedamiento';
         } else if (currentUrl === CONFIG.RECEPTION_MODE.OUTPUT_HOUSTING) {

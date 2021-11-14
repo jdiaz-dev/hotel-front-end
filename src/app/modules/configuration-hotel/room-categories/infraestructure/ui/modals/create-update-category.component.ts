@@ -7,20 +7,17 @@ import { RoomCategoryModel } from '../models/room-category.model';
 import { CategoryData } from '../../interfaces/category-data.interface';
 import { REG_EXP } from '../../../../../../shared/consts/reg-exp.enum';
 import { RoomCategoriesPersitenceService } from '../../out/room-categories-persitence.service';
-import { Subscription } from 'rxjs';
 
 @Component({
     selector: 'app-create-update-category',
     templateUrl: './create-update-category.component.html',
     styleUrls: ['./create-update-category.component.scss'],
 })
-export class CreateUpdateCategoryComponent implements OnInit, OnDestroy {
+export class CreateUpdateCategoryComponent implements OnInit {
     action: string = 'create';
     roomCategoryData!: FormGroup;
     roomCategory: RoomCategoryModel = new RoomCategoryModel('', null);
     categoryId: number = NaN;
-    createRoomCategorySubs!: Subscription;
-    updateRoomCategorySubs!: Subscription;
 
     constructor(
         private roomCategoriesPersitence: RoomCategoriesPersitenceService,
@@ -40,10 +37,7 @@ export class CreateUpdateCategoryComponent implements OnInit, OnDestroy {
         });
         this.roomCategoryControl;
     }
-    ngOnDestroy() {
-        if (this.createRoomCategorySubs) this.createRoomCategorySubs.unsubscribe();
-        if (this.updateRoomCategorySubs) this.updateRoomCategorySubs.unsubscribe();
-    }
+
     paramsToUpdateCategory() {
         this.roomCategory =
             this.data !== null ? new RoomCategoryModel(this.data.category, this.data.price) : this.roomCategory;
@@ -60,7 +54,7 @@ export class CreateUpdateCategoryComponent implements OnInit, OnDestroy {
         }
     }
     createOpener(data: RoomCategoryModel) {
-        this.createRoomCategorySubs = this.roomCategoriesPersitence.createRoomCategory(data).subscribe(
+        this.roomCategoriesPersitence.createRoomCategory(data).subscribe(
             (response: any) => {
                 //console.log(response)
             },
@@ -70,7 +64,7 @@ export class CreateUpdateCategoryComponent implements OnInit, OnDestroy {
         );
     }
     updateOpener(data: RoomCategoryModel) {
-        this.updateRoomCategorySubs = this.roomCategoriesPersitence.updateRoomCategory(data, this.categoryId).subscribe(
+        this.roomCategoriesPersitence.updateRoomCategory(data, this.categoryId).subscribe(
             (response: any) => {
                 //console.log(response)
             },

@@ -22,7 +22,6 @@ export class ClientsService implements IGetClientsRequest {
     constructor(private http: HttpClient, private stateUserService: StateUserService) {}
     createClient(client: ClientModel) {
         const body = JSON.stringify(client);
-        console.log(body);
         return this.http.post(`${this.serverUrl}/${SERVER.PREFIX}/clients/${this.hotelId}`, body, {
             headers: this.headers,
         });

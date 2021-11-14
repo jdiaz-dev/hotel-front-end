@@ -30,7 +30,6 @@ export class ReportCollectionComponent implements OnInit, AfterViewInit, OnDestr
     }
     loadCurrentReport() {
         this.changeReportSubs = this.changeReportService.changeReport$.subscribe((reportId: number) => {
-            console.log('-----------reportId', reportId);
             this.currentReport = reportId;
         });
     }
