@@ -1,17 +1,19 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { IRoomConditionsReport } from 'src/app/modules/configuration-hotel/rooms/infraestructure/interfaces/room-conditions-report';
 import { RoomsPersistenceService } from 'src/app/modules/configuration-hotel/rooms/infraestructure/out/rooms.service';
 import { IGetRoomConditionsReportForReceptionDomain } from '../../../application/ports/in/other-domains/get-room-conditions-report-for-reception';
 import { ReloadRoomConditionsService } from '../services/reload-room-conditions.service';
+import { Subscription } from 'rxjs';
 
 @Component({
     selector: 'app-room-conditions-report',
     templateUrl: './room-conditions-report.component.html',
     styleUrls: ['./room-conditions-report.component.scss'],
 })
-export class RoomConditionsReportComponent implements OnInit {
+export class RoomConditionsReportComponent implements OnInit, OnDestroy {
     private getRoomConditionsReportForReception: IGetRoomConditionsReportForReceptionDomain;
     roomConditionsReport!: IRoomConditionsReport;
+    getRoomConditionsReportSubs!: Subscription;
 
     constructor(
         private readonly reloadRoomConditionsService: ReloadRoomConditionsService,
@@ -25,11 +27,14 @@ export class RoomConditionsReportComponent implements OnInit {
         this.loadRoomConditionsReport();
         this.reloadRoomConditions();
     }
+    ngOnDestroy() {
+        //if (this.getRoomConditionsReportSubs) this.getRoomConditionsReportSubs.unsubscribe();
+    }
     loadRoomConditionsReport() {
-        this.getRoomConditionsReportForReception
+        this.getRoomConditionsReportSubs = this.getRoomConditionsReportForReception
             .getRoomConditionReport()
             .subscribe((response: IRoomConditionsReport) => {
-                console.log(response);
+                //console.log(response);
                 this.roomConditionsReport = response;
             });
     }

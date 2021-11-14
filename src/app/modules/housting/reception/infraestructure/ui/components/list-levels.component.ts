@@ -29,6 +29,7 @@ export class ListLevelsComponent implements OnInit {
     }
     loadHotelLevels() {
         this.getLevelsForReceptionDomain.getHotelLevels(QUERIES).subscribe((response: ILevelsDataResponse) => {
+            // console.log(response);
             this.hotelLevels = response.rows;
             this.activeLink = this.hotelLevels[0].name;
             this.changeRoomsOfLevel(this.hotelLevels[0].id);

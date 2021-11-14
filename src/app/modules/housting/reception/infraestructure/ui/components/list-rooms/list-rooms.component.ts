@@ -26,7 +26,7 @@ export class ListRoomsComponent extends ListRoomMyxin() implements OnInit, OnDes
     private receptionMode!: string;
     private communicationSubscription!: Subscription;
     private currentLevel!: number;
-    private subscriptionReloadRooms!: Subscription;
+    private roomsSubscription!: Subscription;
     roomList: RoomData[] = [];
     roomFree: number = CONFIG.CONDITIONS.FREE.ID;
     roomBusy: number = CONFIG.CONDITIONS.BUSY.ID;
@@ -51,27 +51,29 @@ export class ListRoomsComponent extends ListRoomMyxin() implements OnInit, OnDes
         this.reloadRooms();
     }
     ngOnDestroy(): void {
-        // this.communicationSubscription.unsubscribe();
-        // this.subscriptionReloadRooms.unsubscribe();
+        this.communicationSubscription.unsubscribe();
+        this.roomsSubscription.unsubscribe();
     }
+    ngAfterViewChecked() {}
     private reloadRooms() {
-        this.subscriptionReloadRooms = this.reloadRoomsService.reloadRooms$.subscribe((result: boolean) => {
+        this.reloadRoomsService.reloadRooms$.subscribe((result: boolean) => {
             if (result) this.loadRooms();
         });
     }
     private loadCurrentLevel() {
         this.communicationSubscription = this.levelAndRoomCommunicationService.renderOtherRooms$.subscribe(
             (levelId: number) => {
+                //console.log(levelId);
                 this.currentLevel = levelId;
                 this.loadRooms();
             },
         );
     }
     private loadRooms() {
-        this.getRoomsForReceptionDomainPort
+        this.roomsSubscription = this.getRoomsForReceptionDomainPort
             .getRoomsByLevel(this.currentLevel, this.conditionRooms(this.receptionMode))
             .subscribe((response: RoomData[]) => {
-                console.log(response);
+                //console.log(response);
                 this.roomList = response;
             });
     }
