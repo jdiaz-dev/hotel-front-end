@@ -5,6 +5,10 @@ export interface ICashesWithDailyReports {
     openingMoney: number;
     closingMoney: number;
     closed: boolean;
+    openingDate: string;
+    openingTime: string;
+    closingDate: string;
+    closingTime: string;
     DailyReportModel: {
         id: number;
         moneyHousting: number;

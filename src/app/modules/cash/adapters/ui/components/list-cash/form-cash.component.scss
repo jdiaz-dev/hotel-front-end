@@ -8,9 +8,9 @@ mat-card {
     }
 
     mat-card-content form div.buttons {
-        justify-content: space-between;
-    }
-    mat-card-content form div.buttons-card-close {
         justify-content: center;
+        button {
+            width: 100%;
+        }
     }
 }

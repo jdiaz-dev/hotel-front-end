@@ -2,35 +2,76 @@
     <mat-card>
         <div class="container-data-room">
             <div class="box-data-1">
-                <p>Nombre habitación: {{ room.name }}</p>
-                <p>Categoría: {{ room.category.category }}</p>
+                <p>
+                    <span class="description">Nombre habitación: </span>
+                    <span>{{ room.name }}</span>
+                </p>
+                <p>
+                    <span class="description">Categoría: </span>
+                    <span>{{ room.category.category }}</span>
+                </p>
             </div>
             <div class="box-data-2">
-                <p>Detalles: {{ room.details }}</p>
-                <p>Condición: {{ room.condition.nameCondition }}</p>
+                <p>
+                    <span class="description">Detalles: </span>
+                    <span>{{ room.details }}</span>
+                </p>
+                <p>
+                    <span class="description">Condición: </span>
+                    <span>
+                        {{ room.condition.nameCondition }}
+                    </span>
+                </p>
             </div>
 
             <div>
-                <div>Precio: S/. {{ room.price }}</div>
+                <p>
+                    <span class="description">Precio: </span>
+                    <span>S/. {{ room.price }}</span>
+                </p>
             </div>
         </div>
 
         <div class="container-data-room">
             <div class="box-data-1">
-                <p>Nombre del cliente: {{ housting.client.names }}</p>
-                <p>Apellidos del cliente: {{ housting.client.surnames }}</p>
+                <p>
+                    <span class="description"> Nombre del cliente: </span>
+                    <span>
+                        {{ housting.client.names }}
+                    </span>
+                </p>
+                <p>
+                    <span class="description">Apellidos del cliente: </span>
+                    <span>{{ housting.client.surnames }}</span>
+                </p>
             </div>
             <div class="box-data-2">
-                <p>DNI: {{ housting.client.dni }}</p>
-                <p>Razón de visita: {{ housting.client.visitReason }}</p>
+                <p>
+                    <span class="description"> DNI: </span>
+                    <span>{{ housting.client.dni }}</span>
+                </p>
+                <p>
+                    <span class="description">
+                        <span>Razón de visita: </span>
+                    </span>
+                    <span>
+                        {{ housting.client.visitReason }}
+                    </span>
+                </p>
             </div>
         </div>
 
         <div class="container-data-room">
             <div class="box-data-1">
-                <p>Fecha de entrada: {{ housting.entryDate }}</p>
-                <p>Hora de entrada: {{ housting.entryTime }}</p>
-                <p>Tiempo de hospedamiento: 000000000</p>
+                <p>
+                    <span class="description">Fecha de entrada: </span>
+                    <span>{{ housting.entryDate }}</span>
+                </p>
+                <p>
+                    <span class="description">Hora de entrada: </span>
+                    <span>{{ housting.entryTime }}</span>
+                </p>
+                <!-- <p>Tiempo de hospedamiento: 000000000</p> -->
             </div>
         </div>
     </mat-card>

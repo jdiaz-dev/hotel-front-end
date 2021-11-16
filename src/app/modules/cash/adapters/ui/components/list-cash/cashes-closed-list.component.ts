@@ -25,7 +25,9 @@ export class CashesClosedListComponent extends BasePaginator implements OnInit {
         'MoneySales',
         'ClosingMoney',
         'OpeningDate',
+        'OpeningTime',
         'ClosingDate',
+        'ClosingTime',
         'Closed',
     ];
 
@@ -47,7 +49,7 @@ export class CashesClosedListComponent extends BasePaginator implements OnInit {
         this.getCashWithDailyReport
             .getTheCashWithDailyReport(queries)
             .subscribe((response: ICashWithDailyReportResponse) => {
-                // console.log(response);
+                console.log(response);
                 this.totalCashes = response.count;
                 this.cashesWithDailyReports = response.rows;
 

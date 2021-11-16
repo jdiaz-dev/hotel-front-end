@@ -90,7 +90,7 @@ export class FormCashComponent implements OnInit, OnDestroy {
             title: 'Cerrar caja',
             toCompleteDescription: 'cerrar esta caja',
         };
-        let dialogRef = this.dialog.open(ConfirmComponent, { data: toCompleteDialog, width: '40%' });
+        let dialogRef = this.dialog.open(ConfirmComponent, { data: toCompleteDialog, width: '25%' });
         dialogRef.afterClosed().subscribe((result: boolean) => {
             if (result) {
                 this.closeCashRequest

@@ -1,4 +1,8 @@
 mat-card {
     display: flex;
     justify-content: space-between;
+
+    span.description {
+        font-weight: 550;
+    }
 }

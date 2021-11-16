@@ -4,3 +4,14 @@ table {
         width: 7%;
     }
 }
+span {
+    padding: 6px;
+    border-radius: 4px;
+    color: white;
+}
+span.open {
+    background-color: rgb(24, 24, 177);
+}
+span.closed {
+    background-color: rgb(27, 100, 12);
+}

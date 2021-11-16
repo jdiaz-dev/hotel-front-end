@@ -33,7 +33,7 @@ export class ReceptionModeService {
         return modeReceptionDialog;
     }
     private openInputHoustingDialog(room: RoomData) {
-        const configDialog: IConfigDialog = { width: '72%', height: '470px' };
+        const configDialog: IConfigDialog = { width: '72%', height: '510px' };
         const conditionRoom = CONFIG.CONDITIONS.FREE.NAME;
         const modeReceptionDialog = this.displayDialogReception(
             room,
@@ -44,7 +44,7 @@ export class ReceptionModeService {
         return modeReceptionDialog;
     }
     private openOutputHoustingDialog(room: RoomData) {
-        const configDialog: IConfigDialog = { width: '80%', height: '500px' };
+        const configDialog: IConfigDialog = { width: '80%', height: '540px' };
         const conditionRoom = CONFIG.CONDITIONS.BUSY.NAME;
         const modeReceptionDialog = this.displayDialogReception(
             room,

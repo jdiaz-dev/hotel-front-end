@@ -59,7 +59,7 @@
                 </div>
             </div>
 
-            <div class="buttons buttons-card" *ngIf="formCashMode == 'abrir-caja'">
+            <div class="buttons buttons-card-open" *ngIf="formCashMode == 'abrir-caja'">
                 <!-- <button mat-raised-button color="accent" class="cancel">Cancelar</button> -->
                 <button
                     type="submit"
@@ -68,7 +68,7 @@
                     [disabled]="cashData.invalid"
                     (click)="saveCash()"
                 >
-                    Guardar
+                    Abrir
                 </button>
             </div>
 
