@@ -52,7 +52,8 @@ export class ProductsSaledComponent implements OnChanges, OnInit, DoCheck {
     }
     completeProductSaledPayment() {
         this.finishProductsPayment.finishProductsPayment$.subscribe((save: boolean) => {
-            if (save && !this.productsSaled[0].payed) {
+            console.log('---------------this.productsSaled[0]', this.productsSaled[0]);
+            if (save && this.productsSaled[0] && !this.productsSaled[0].payed) {
                 const productsSaledIds = this.productsSaled.map((productSaled) => productSaled.id);
 
                 this.completeProductSaledPaymentPort

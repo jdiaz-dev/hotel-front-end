@@ -18,6 +18,8 @@ export class PaginatorComponent implements OnChanges, OnDestroy {
 
     ngOnChanges(): void {
         this.paginator.pageIndex = 0;
+        this.currentPage = 1;
+        this.offset = 0;
     }
     ngOnDestroy(): void {
         this.offset = 0;

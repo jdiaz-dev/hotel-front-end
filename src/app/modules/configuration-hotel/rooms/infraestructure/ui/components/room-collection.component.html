@@ -48,6 +48,7 @@
     </table>
 
     <app-paginator
+        *ngIf="totalRooms != 0"
         [pageSize]="pageSizePaginator"
         [length]="totalRooms"
         (nextPage)="loadNextRooms($event)"

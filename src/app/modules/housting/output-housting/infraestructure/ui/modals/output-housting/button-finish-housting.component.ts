@@ -55,7 +55,6 @@ export class ButtonFinishHoustingComponent implements OnChanges, OnInit, OnDestr
     private obtainPaymentHoustingToComplete() {
         this.subcriptionHousting = this.paymentHoustingToComplete.paymentHoustingToComplete$.subscribe(
             (houstingPayment: number) => {
-                // console.log(houstingPayment);
                 this.houstingPayment = houstingPayment;
                 this.calculatePaymentToComplete();
             },
@@ -89,6 +88,7 @@ export class ButtonFinishHoustingComponent implements OnChanges, OnInit, OnDestr
         };
         let dialogRef = this.dialog.open(ConfirmComponent, { data: toCompleteDialog, width: '40%' });
         dialogRef.afterClosed().subscribe((result: boolean) => {
+            console.log('-------------result', result);
             if (result) {
                 this.houstingFinishedConfirmed.emit(true);
                 this.savePayments.saveHoustingPayment(true);
