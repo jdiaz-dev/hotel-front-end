@@ -4,7 +4,7 @@
 
 export const environment = {
     production: false,
-    // serverUrl: 'http://ec2-3-142-84-175.us-east-2.compute.amazonaws.com:3000',
+    // serverUrl: 'https://hexagonal-architecture-nodejs-hotel-production.up.railway.app',
     serverUrl: 'http://localhost:3000',
 };
 
